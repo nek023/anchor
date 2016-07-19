@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "anchor",
+  "description": "",
+  "version": "0.0.1",
+  "commands": {
+    "toggle-anchor": {
+      "description": "Toggle anchor",
+      "suggested_key": {
+        "default": "Ctrl+Shift+S"
+      }
+    },
+    "toggle-anchor-with-bookmark-mode": {
+      "description": "Toggle anchor (bookmark)"
+    },
+    "toggle-anchor-with-history-mode": {
+      "description": "Toggle anchor (history)"
+    }
+  },
+  "background": {
+    "scripts": ["build/background.js"]
+  },
+  "permissions": [
+    "chrome://favicon/*",
+    "tabs",
+    "bookmarks",
+    "history",
+    "system.display"
+  ]
+}

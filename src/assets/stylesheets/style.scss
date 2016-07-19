@@ -1,0 +1,126 @@
+$item-height: 46px;
+$item-margin: 2px;
+$number-of-items: 9;
+$item-list-height: ($item-height + $item-margin) * $number-of-items;
+
+$background-color: #fafafa;
+
+$search-box-border-color: #cccccc;
+
+$item-title-color: #333333;
+$item-url-color: #9999aa;
+
+$selected-item-background-color: #0067FF;
+$selected-item-title-color: #fafafa;
+$selected-item-url-color: mix(#fafafa, $selected-item-background-color, 75%);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+}
+
+.app {
+  padding: 8px;
+}
+
+.search-input {
+  width: 100%;
+  height: 40px;
+  margin: 0;
+  padding: 5px;
+  font-size: 26px;
+  border-radius: 4px;
+  border: 1px solid $search-box-border-color;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.item-list {
+  width: 100%;
+  height: $item-list-height;
+  padding: 0;
+  margin: 8px 0 0;
+  display: block;
+  list-style: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.item {
+  width: 100%;
+  height: $item-height;
+  padding: 3px;
+  margin-bottom: $item-margin;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+
+  .item-left {
+    width: 30px;
+    min-width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .favicon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .item-body {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+
+    .item-title {
+      color: $item-title-color;
+      font-size: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .item-url {
+      margin-top: 2px;
+      color: $item-url-color;
+      font-size: 13px;
+      font-weight: lighter;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+  }
+
+  .item-right {
+    width: 38px;
+    min-width: 38px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.item.selected {
+  background-color: $selected-item-background-color;
+
+  .item-title {
+    color: $selected-item-title-color;
+  }
+
+  .item-url {
+    color: $selected-item-url-color;
+  }
+}
