@@ -1,6 +1,9 @@
+import DisplayManager from './display_manager';
+
 export default class WindowManager {
   constructor() {
     this.window = null;
+    this.displayManager = new DisplayManager();
 
     chrome.windows.onRemoved.addListener(
       this.handleWindowRemoval.bind(this)
@@ -24,8 +27,8 @@ export default class WindowManager {
   showWindow() {
     if (this.isWindowVisible()) return;
 
-    chrome.system.display.getInfo(displays => {
-      const display = displays.filter(d => { return d.isPrimary; })[0];
+    chrome.windows.getCurrent(window => {
+      const display = this.displayManager.displayContainsWindow(window);
       const width = 600;
       const height = 496 + 22;
       const left = display.bounds.left + Math.round((display.bounds.width - width) * 0.5);
