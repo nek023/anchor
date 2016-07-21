@@ -76,6 +76,18 @@ export default class App extends Component {
     });
   }
 
+  selectNextResult() {
+    const index = this.state.selectedRowIndex;
+    if (index >= this.state.results.length - 1) return;
+    this.setState({ selectedRowIndex: index + 1 });
+  }
+
+  selectPreviousResult() {
+    const index = this.state.selectedRowIndex;
+    if (index <= 0) return;
+    this.setState({ selectedRowIndex: index - 1 });
+  }
+
   handleKeyDown(event) {
     switch (event.keyCode) {
     case KeyCode.RETURN: {
@@ -93,17 +105,27 @@ export default class App extends Component {
 
     case KeyCode.UP: {
       event.preventDefault();
-      const index = this.state.selectedRowIndex;
-      if (index <= 0) return;
-      this.setState({ selectedRowIndex: index - 1 });
+      this.selectPreviousResult();
       break;
     }
 
     case KeyCode.DOWN: {
       event.preventDefault();
-      const index = this.state.selectedRowIndex;
-      if (index >= this.state.results.length - 1) return;
-      this.setState({ selectedRowIndex: index + 1 });
+      this. selectNextResult();
+      break;
+    }
+
+    case KeyCode.N: {
+      if (!event.ctrlKey) return;
+      event.preventDefault();
+      this.selectNextResult();
+      break;
+    }
+
+    case KeyCode.P: {
+      if (!event.ctrlKey) return;
+      event.preventDefault();
+      this.selectPreviousResult();
       break;
     }
 
