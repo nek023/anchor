@@ -8,7 +8,7 @@ export default class HistoryManager extends EventEmitter {
 
     const days = 30;
     const microsecondsBack = 1000 * 60 * 60 * 24 * days;
-    this.startTime = (new Date).getTime() - microsecondsBack;
+    this.startTime = Date.now() - microsecondsBack;
 
     const updateItems = this.updateItems.bind(this);
     updateItems();
