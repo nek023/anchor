@@ -7,7 +7,8 @@
     "toggle-anchor": {
       "description": "Toggle anchor",
       "suggested_key": {
-        "default": "Ctrl+Shift+S"
+        "default": "Ctrl+S",
+        "mac": "MacCtrl+S"
       }
     },
     "toggle-anchor-with-bookmark-mode": {
