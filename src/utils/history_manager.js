@@ -6,6 +6,10 @@ export default class HistoryManager extends EventEmitter {
     super();
     this.items = [];
 
+    const days = 30;
+    const microsecondsBack = 1000 * 60 * 60 * 24 * days;
+    this.startTime = (new Date).getTime() - microsecondsBack;
+
     const updateItems = this.updateItems.bind(this);
     updateItems();
     chrome.history.onVisited.addListener(updateItems);
@@ -19,7 +23,8 @@ export default class HistoryManager extends EventEmitter {
   updateItems() {
     chrome.history.search({
       text: '',
-      maxResults: MAX_HISTORY_RESULTS
+      maxResults: MAX_HISTORY_RESULTS,
+      startTime: this.startTime
     }, items => {
       this.items = items.map(item => {
         return {
