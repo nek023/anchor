@@ -1,15 +1,28 @@
 import { Command, Message } from './constants';
+import DisplayManager from './utils/display_manager';
 import WindowManager from './utils/window_manager';
 import ItemManager from './utils/item_manager';
 
-const windowManager = new WindowManager();
+const appUrl = chrome.runtime.getURL('index.html');
+
+const displayManager = new DisplayManager();
+const windowManager = new WindowManager(appUrl);
 const itemManager = new ItemManager();
 
-function toggleWindow() {
-  if (windowManager.isWindowVisible()) {
+function showWindowOnCurrentDisplay() {
+  if (windowManager.isWindowVisible() && windowManager.isWindowFocused()) {
     windowManager.closeWindow();
   } else {
-    windowManager.showWindow();
+    chrome.windows.getCurrent(window => {
+      const display = displayManager.displayContainsWindow(window);
+      if (display == null) return;
+
+      const width = 600;
+      const height = 496 + 22;
+      const left = display.bounds.left + Math.round((display.bounds.width - width) * 0.5);
+      const top = display.bounds.top + Math.round((display.bounds.height - height) * 0.5);
+      windowManager.showWindow(left, top, width, height);
+    });
   }
 }
 
@@ -24,17 +37,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.commands.onCommand.addListener(command => {
   switch(command) {
   case Command.TOGGLE_ANCHOR:
-    toggleWindow();
+    showWindowOnCurrentDisplay();
     break;
 
   case Command.TOGGLE_ANCHOR_WITH_BOOKMARK_MODE:
     // TODO: Set 'b:' as initial query
-    toggleWindow();
+    showWindowOnCurrentDisplay();
     break;
 
   case Command.TOGGLE_ANCHOR_WITH_HISTORY_MODE:
     // TODO: Set 'h:' as initial query
-    toggleWindow();
+    showWindowOnCurrentDisplay();
     break;
 
   default:

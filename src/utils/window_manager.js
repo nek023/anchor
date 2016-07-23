@@ -1,12 +1,14 @@
-import DisplayManager from './display_manager';
-
 export default class WindowManager {
-  constructor() {
+  constructor(url) {
+    this.url = url;
     this.window = null;
-    this.displayManager = new DisplayManager();
 
     chrome.windows.onRemoved.addListener(
       this.handleWindowRemoval.bind(this)
+    );
+
+    chrome.windows.onFocusChanged.addListener(
+      this.handleFocusChanges.bind(this)
     );
   }
 
@@ -18,23 +20,36 @@ export default class WindowManager {
     return (this.window != null);
   }
 
+  isWindowFocused() {
+    return this.window.focused;
+  }
+
   handleWindowRemoval(windowId) {
     if (windowId == this.window.id) {
       this.window = null;
     }
   }
 
-  showWindow() {
-    if (this.isWindowVisible()) return;
+  handleFocusChanges(windowId) {
+    if (windowId == this.window.id) {
+      this.window.focused = true;
+    } else {
+      this.window.focused = false;
+    }
+  }
 
-    chrome.windows.getCurrent(window => {
-      const display = this.displayManager.displayContainsWindow(window);
-      const width = 600;
-      const height = 496 + 22;
-      const left = display.bounds.left + Math.round((display.bounds.width - width) * 0.5);
-      const top = display.bounds.top + Math.round((display.bounds.height - height) * 0.5);
+  showWindow(left, top, width, height) {
+    if (this.isWindowVisible()) {
+      chrome.windows.update(this.window.id, {
+        left: left,
+        top: top,
+        width: width,
+        height: height,
+        focused: true
+      });
+    } else {
       chrome.windows.create({
-        url: chrome.runtime.getURL('index.html'),
+        url: this.url,
         left: left,
         top: top,
         width: width,
@@ -44,12 +59,14 @@ export default class WindowManager {
       }, window => {
         this.window = window;
       });
-    });
+    }
   }
 
   closeWindow() {
     if (!this.isWindowVisible()) return;
 
-    chrome.windows.remove(this.window.id);
+    chrome.windows.remove(this.window.id, () => {
+      this.window = null;
+    });
   }
 }
