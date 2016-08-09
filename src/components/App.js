@@ -153,7 +153,7 @@ export default class App extends Component {
     return (
       <div className='app'>
         <SearchField value={query}
-          onChange={this.handleSearchFieldChange} />
+          onValueChanged={this.handleSearchFieldChange} />
         <ResultList results={results}
           selectedRowIndex={selectedRowIndex}
           onMouseEnterRow={this.handleMouseEnterRow}

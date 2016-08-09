@@ -7,7 +7,7 @@ export default class SearchField extends Component {
   }
 
   handleChange(event) {
-    this.props.onChange(event.target.value);
+    this.props.onValueChanged(event.target.value);
   }
 
   handleBlur() {
@@ -27,6 +27,6 @@ export default class SearchField extends Component {
 }
 
 SearchField.propTypes = {
-  value:    PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  value:          PropTypes.string.isRequired,
+  onValueChanged: PropTypes.func.isRequired
 };
