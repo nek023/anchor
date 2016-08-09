@@ -1,12 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent, PropTypes } from 'react';
 import Result from '../models/Result';
 
-export default class ResultRow extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
-  }
-
+export default class ResultRow extends PureComponent {
   render() {
     const { result, selected } = this.props;
     const favIconUrl = result.item.getFavIconUrl();

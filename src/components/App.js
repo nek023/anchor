@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent } from 'react';
 import { MAX_RESULTS, ItemType, KeyCode, Message } from '../constants';
 import SearchField from './SearchField';
 import ResultList from './ResultList';
 import Result from '../models/Result';
 import Item from '../models/Item';
 
-export default class App extends Component {
+export default class App extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -27,10 +26,6 @@ export default class App extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.keyDownListener);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
   }
 
   updateItems() {

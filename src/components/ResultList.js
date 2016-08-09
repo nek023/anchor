@@ -1,13 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
-import shallowCompare from 'react-addons-shallow-compare';
 import ResultRow from './ResultRow';
 
-export default class ResultList extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
-  }
-
+export default class ResultList extends PureComponent {
   componentDidUpdate() {
     this.scrollComponentToVisible(this.refs.selected);
   }

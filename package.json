@@ -35,8 +35,7 @@
     "babel-polyfill": "^6.7.4",
     "fuse.js": "^2.2.0",
     "immutable": "^3.8.1",
-    "react": "^15.2.1",
-    "react-addons-shallow-compare": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
   }
 }
