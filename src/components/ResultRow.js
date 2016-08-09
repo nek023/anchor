@@ -3,24 +3,8 @@ import shallowCompare from 'react-addons-shallow-compare';
 import Result from '../models/Result';
 
 export default class ResultRow extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
-  }
-
-  handleMouseEnter() {
-    this.props.onMouseEnter(this.props.result.index);
-  }
-
-  handleClick() {
-    const onSelect = this.props.onSelect;
-    if (onSelect) onSelect(this.props.result);
   }
 
   render() {
@@ -29,9 +13,7 @@ export default class ResultRow extends Component {
     const listClassName = selected ? 'item selected' : 'item';
 
     return (
-      <li className={listClassName}
-        onMouseEnter={this.handleMouseEnter}
-        onClick={this.handleClick}>
+      <li className={listClassName}>
         <div className='item-left'>
           <img className='favicon' src={favIconUrl} />
         </div>
@@ -45,10 +27,8 @@ export default class ResultRow extends Component {
 }
 
 ResultRow.propTypes = {
-  result:       PropTypes.instanceOf(Result).isRequired,
-  selected:     PropTypes.bool,
-  onMouseEnter: PropTypes.func,
-  onSelect:     PropTypes.func
+  result:   PropTypes.instanceOf(Result).isRequired,
+  selected: PropTypes.bool
 };
 
 ResultRow.defaultProps = {

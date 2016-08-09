@@ -18,21 +18,13 @@ export default class ResultList extends Component {
   }
 
   render() {
-    const {
-      results,
-      selectedRowIndex,
-      onMouseEnterRow,
-      onSelectResult
-    } = this.props;
+    const { results, selectedRowIndex } = this.props;
 
     const resultRows = results.map((result, index) => {
       const selected = (index == selectedRowIndex);
       const ref = selected ? 'selected' : null;
 
-      return <ResultRow key={index} ref={ref}
-        result={result} selected={selected}
-        onMouseEnter={onMouseEnterRow}
-        onSelect={onSelectResult} />;
+      return <ResultRow key={index} ref={ref} result={result} selected={selected} />;
     });
 
     return (
@@ -45,9 +37,7 @@ export default class ResultList extends Component {
 
 ResultList.propTypes = {
   results:          PropTypes.array.isRequired,
-  selectedRowIndex: PropTypes.number,
-  onMouseEnterRow:  PropTypes.func,
-  onSelectResult:   PropTypes.func
+  selectedRowIndex: PropTypes.number
 };
 
 ResultList.defaultProps = {

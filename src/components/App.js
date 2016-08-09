@@ -18,8 +18,6 @@ export default class App extends Component {
     };
 
     this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this);
-    this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this);
-    this.handleSelectResult = this.handleSelectResult.bind(this);
   }
 
   componentDidMount() {
@@ -138,26 +136,13 @@ export default class App extends Component {
     this.setState({ query: value }, this.updateItems.bind(this));
   }
 
-  handleMouseEnterRow(index) {
-    this.setState({ selectedRowIndex: index });
-  }
-
-  handleSelectResult(result) {
-    this.openItem(result.item);
-    this.closeWindow();
-  }
-
   render() {
     const { query, results, selectedRowIndex } = this.state;
 
     return (
       <div className='app'>
-        <SearchField value={query}
-          onValueChanged={this.handleSearchFieldChange} />
-        <ResultList results={results}
-          selectedRowIndex={selectedRowIndex}
-          onMouseEnterRow={this.handleMouseEnterRow}
-          onSelectResult={this.handleSelectResult} />
+        <SearchField value={query} onValueChanged={this.handleSearchFieldChange} />
+        <ResultList results={results} selectedRowIndex={selectedRowIndex} />
       </div>
     );
   }
