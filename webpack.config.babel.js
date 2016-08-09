@@ -5,7 +5,7 @@ export default {
   context: path.join(__dirname, 'src'),
 
   entry: {
-    'index': './index.js',
+    'index': ['babel-polyfill', './index.js'],
     'background': './background.js'
   },
 
