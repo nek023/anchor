@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 
-export default class SearchBox extends Component {
+export default class SearchField extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
   }
@@ -16,7 +16,7 @@ export default class SearchBox extends Component {
 
   render() {
     return (
-      <div className='search-box'>
+      <div className='search-field'>
         <input ref='input' className='search-input' type='text'
           autoFocus={true} value={this.props.value}
           onChange={this.handleChange.bind(this)}
@@ -26,7 +26,7 @@ export default class SearchBox extends Component {
   }
 }
 
-SearchBox.propTypes = {
+SearchField.propTypes = {
   value:    PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import { MAX_RESULTS, ItemType, KeyCode, Message } from '../constants';
-import SearchBox from './SearchBox';
+import SearchField from './SearchField';
 import ResultList from './ResultList';
 import Result from '../models/Result';
 import Item from '../models/Item';
@@ -152,7 +152,7 @@ export default class App extends Component {
 
     return (
       <div className='app'>
-        <SearchBox value={query}
+        <SearchField value={query}
           onChange={this.handleSearchFieldChange} />
         <ResultList results={results}
           selectedRowIndex={selectedRowIndex}
