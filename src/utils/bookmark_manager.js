@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import { MAX_BOOKMARK_RESULTS, ItemType } from '../constants';
+import { MAX_BOOKMARK_RESULTS, ItemTypes } from '../constants';
 
 export default class BookmarkManager extends EventEmitter {
   constructor() {
@@ -32,7 +32,7 @@ export default class BookmarkManager extends EventEmitter {
     chrome.bookmarks.getRecent(MAX_BOOKMARK_RESULTS, items => {
       this.items = items.map(item => {
         return {
-          type: ItemType.BOOKMARK,
+          type: ItemTypes.BOOKMARK,
           title: item.title,
           url: item.url
         };

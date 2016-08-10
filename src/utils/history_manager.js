@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import { MAX_HISTORY_RESULTS, ItemType } from '../constants';
+import { MAX_HISTORY_RESULTS, ItemTypes } from '../constants';
 
 export default class HistoryManager extends EventEmitter {
   constructor() {
@@ -28,7 +28,7 @@ export default class HistoryManager extends EventEmitter {
     }, items => {
       this.items = items.map(item => {
         return {
-          type: ItemType.HISTORY,
+          type: ItemTypes.HISTORY,
           title: item.title,
           url: item.url
         };

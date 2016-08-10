@@ -8,6 +8,7 @@ export default class ResultList extends PureComponent {
   }
 
   scrollComponentToVisible(component) {
+    if (!component) return;
     const node = findDOMNode(component);
     node.scrollIntoViewIfNeeded(false);
   }
@@ -32,9 +33,5 @@ export default class ResultList extends PureComponent {
 
 ResultList.propTypes = {
   results:          PropTypes.array.isRequired,
-  selectedRowIndex: PropTypes.number
-};
-
-ResultList.defaultProps = {
-  selectedRowIndex: 0
+  selectedRowIndex: PropTypes.number.isRequired
 };

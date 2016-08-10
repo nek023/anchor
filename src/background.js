@@ -1,7 +1,8 @@
-import { Command, Message } from './constants';
+import { Commands } from './constants';
 import DisplayManager from './utils/display_manager';
 import WindowManager from './utils/window_manager';
 import ItemManager from './utils/item_manager';
+import { QUERY_ITEMS } from './messages';
 
 const appUrl = chrome.runtime.getURL('index.html');
 
@@ -27,25 +28,25 @@ function showWindowOnCurrentDisplay() {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type == Message.QUERY_ITEMS) {
-    const query = message.query;
+  if (message.type == QUERY_ITEMS) {
+    const query = message.payload;
     const items = itemManager.queryItems(query);
     sendResponse(items);
   }
 });
 
 chrome.commands.onCommand.addListener(command => {
-  switch(command) {
-  case Command.TOGGLE_ANCHOR:
+  switch (command) {
+  case Commands.TOGGLE_ANCHOR:
     showWindowOnCurrentDisplay();
     break;
 
-  case Command.TOGGLE_ANCHOR_WITH_BOOKMARK_MODE:
+  case Commands.TOGGLE_ANCHOR_WITH_BOOKMARK_MODE:
     // TODO: Set 'b:' as initial query
     showWindowOnCurrentDisplay();
     break;
 
-  case Command.TOGGLE_ANCHOR_WITH_HISTORY_MODE:
+  case Commands.TOGGLE_ANCHOR_WITH_HISTORY_MODE:
     // TODO: Set 'h:' as initial query
     showWindowOnCurrentDisplay();
     break;
