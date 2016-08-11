@@ -12,7 +12,10 @@ const ItemRecord = Record({
 
 export default class Item extends ItemRecord {
   getFavIconUrl() {
-    if (this.type == ItemTypes.TAB) {
+    if (this.type == ItemTypes.TAB && this.favIconUrl) {
+      if (this.favIconUrl.startsWith('chrome://theme/')) {
+        return `chrome://favicon`;
+      }
       return this.favIconUrl;
     }
     return `chrome://favicon/${this.url}`;
