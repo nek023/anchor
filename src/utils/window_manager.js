@@ -1,6 +1,5 @@
 export default class WindowManager {
-  constructor(url) {
-    this.url = url;
+  constructor() {
     this.window = null;
 
     chrome.windows.onRemoved.addListener(
@@ -38,7 +37,7 @@ export default class WindowManager {
     }
   }
 
-  showWindow(left, top, width, height) {
+  showWindow({ url = null, left, top, width, height }, callback = null) {
     if (this.isWindowVisible()) {
       chrome.windows.update(this.window.id, {
         left: left,
@@ -46,10 +45,12 @@ export default class WindowManager {
         width: width,
         height: height,
         focused: true
+      }, window => {
+        if (callback) callback(window, false);
       });
     } else {
       chrome.windows.create({
-        url: this.url,
+        url: url,
         left: left,
         top: top,
         width: width,
@@ -58,15 +59,19 @@ export default class WindowManager {
         type: 'popup'
       }, window => {
         this.window = window;
+
+        if (callback) callback(window, true);
       });
     }
   }
 
-  closeWindow() {
+  closeWindow(callback = null) {
     if (!this.isWindowVisible()) return;
 
     chrome.windows.remove(this.window.id, () => {
       this.window = null;
+
+      if (callback) callback();
     });
   }
 }

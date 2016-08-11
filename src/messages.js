@@ -3,6 +3,7 @@ import Result from './models/Result';
 import Item from './models/Item';
 
 export const QUERY_ITEMS = 'QUERY_ITEMS';
+export const SET_QUERY = 'SET_QUERY';
 
 function sendMessage(type, payload) {
   return new Promise((resolve, reject) => {
