@@ -1,7 +1,7 @@
 {
   "name": "anchor",
   "version": "0.0.1",
-  "description": "",
+  "description": "Tab switcher for Google Chrome",
   "main": "build/index.js",
   "scripts": {
     "clean": "rm -rf build",

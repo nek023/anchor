@@ -1,5 +1,5 @@
 # anchor
 
-Tab switcher extension for Google Chrome.
+Tab switcher for Google Chrome.
 
 ![](screenshot.png)
