@@ -20,16 +20,22 @@ export default class WindowManager {
   }
 
   isWindowFocused() {
+    if (!this.isWindowVisible()) return false;
+
     return this.window.focused;
   }
 
   handleWindowRemoval(windowId) {
+    if (!this.isWindowVisible()) return;
+
     if (windowId == this.window.id) {
       this.window = null;
     }
   }
 
   handleFocusChanges(windowId) {
+    if (!this.isWindowVisible()) return;
+
     if (windowId == this.window.id) {
       this.window.focused = true;
     } else {
