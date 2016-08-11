@@ -3338,11 +3338,6 @@
       "from": "redux-actions@latest",
       "resolved": "https://registry.npmjs.org/redux-actions/-/redux-actions-0.10.1.tgz"
     },
-    "redux-logger": {
-      "version": "2.6.1",
-      "from": "redux-logger@latest",
-      "resolved": "https://registry.npmjs.org/redux-logger/-/redux-logger-2.6.1.tgz"
-    },
     "redux-saga": {
       "version": "0.11.0",
       "from": "redux-saga@latest",
