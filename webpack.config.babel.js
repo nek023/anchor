@@ -5,7 +5,7 @@ export default {
   context: path.join(__dirname, 'src'),
 
   entry: {
-    'index': './index.js',
+    'index': ['babel-polyfill', './index.js'],
     'background': './background.js'
   },
 
@@ -34,7 +34,7 @@ export default {
       },
       {
         test: /\.scss/,
-        loaders: ['style', 'css', 'sass'],
+        loaders: ['style', 'css', 'sass']
       }
     ],
   },

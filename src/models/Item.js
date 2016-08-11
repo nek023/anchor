@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { ItemType } from '../constants';
+import { ItemTypes } from '../constants';
 
 const ItemRecord = Record({
   type:       undefined,
@@ -12,7 +12,7 @@ const ItemRecord = Record({
 
 export default class Item extends ItemRecord {
   getFavIconUrl() {
-    if (this.type == ItemType.TAB) {
+    if (this.type == ItemTypes.TAB) {
       return this.favIconUrl;
     }
     return `chrome://favicon/${this.url}`;

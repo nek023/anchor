@@ -2,19 +2,19 @@ export const MAX_RESULTS = 100;
 export const MAX_HISTORY_RESULTS = 100;
 export const MAX_BOOKMARK_RESULTS = 1000;
 
-export const ItemType = {
+export const ItemTypes = {
   TAB: 'tab',
   HISTORY: 'history',
   BOOKMARK: 'bookmark'
 };
 
-export const Command = {
+export const Commands = {
   TOGGLE_ANCHOR: 'toggle-anchor',
   TOGGLE_ANCHOR_WITH_BOOKMARK_MODE: 'toggle-anchor-with-bookmark-mode',
   TOGGLE_ANCHOR_WITH_HISTORY_MODE: 'toggle-anchor-with-history-mode'
 };
 
-export const KeyCode = {
+export const KeyCodes = {
   RETURN: 13,
   ESCAPE: 27,
   LEFT: 37,
@@ -23,8 +23,4 @@ export const KeyCode = {
   DOWN: 40,
   N: 78,
   P: 80
-};
-
-export const Message = {
-  QUERY_ITEMS: 'QUERY_ITEMS'
 };

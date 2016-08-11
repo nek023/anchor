@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import { ItemType } from '../constants';
+import { ItemTypes } from '../constants';
 
 export default class TabManager extends EventEmitter {
   constructor() {
@@ -24,7 +24,7 @@ export default class TabManager extends EventEmitter {
     }, items => {
       this.items = items.map(item => {
         return {
-          type: ItemType.TAB,
+          type: ItemTypes.TAB,
           windowId: item.windowId,
           tabIndex: item.index,
           title: item.title,
