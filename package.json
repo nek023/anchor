@@ -5,9 +5,9 @@
   "main": "build/index.js",
   "scripts": {
     "clean": "rm -rf build",
-    "build": "webpack --progress --devtool source-map",
-    "build:dist": "webpack --progress --optimize-minimize",
-    "watch": "webpack --progress --devtool source-map --watch",
+    "build": "webpack --progress -d",
+    "build:dist": "webpack --progress -p",
+    "watch": "webpack --progress -d --watch",
     "package": "npm run clean && npm run build:dist && zip package.zip -r build index.html manifest.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
