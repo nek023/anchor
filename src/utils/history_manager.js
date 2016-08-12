@@ -1,5 +1,7 @@
 import EventEmitter from 'events';
-import { MAX_HISTORY_RESULTS, ItemTypes } from '../constants';
+import * as ItemTypes from '../constants/item_types';
+
+const MAX_HISTORY_RESULTS = 100;
 
 export default class HistoryManager extends EventEmitter {
   constructor() {

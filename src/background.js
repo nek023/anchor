@@ -1,4 +1,4 @@
-import { Commands } from './constants';
+import * as Commands from './constants/commands';
 import DisplayManager from './utils/display_manager';
 import WindowManager from './utils/window_manager';
 import ItemManager from './utils/item_manager';
