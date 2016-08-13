@@ -9,6 +9,7 @@ export default class SearchField extends PureComponent {
   }
 
   handleChange(event) {
+    if (!this.props.onValueChanged) return;
     this.props.onValueChanged(event.target.value);
   }
 
@@ -29,6 +30,10 @@ export default class SearchField extends PureComponent {
 }
 
 SearchField.propTypes = {
-  value:          PropTypes.string.isRequired,
-  onValueChanged: PropTypes.func.isRequired
+  value:          PropTypes.string,
+  onValueChanged: PropTypes.func
+};
+
+SearchField.defaultProps = {
+  value: ''
 };
