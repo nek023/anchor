@@ -32,6 +32,11 @@ export default class ResultList extends PureComponent {
 }
 
 ResultList.propTypes = {
-  results:          PropTypes.array.isRequired,
-  selectedRowIndex: PropTypes.number.isRequired
+  results:          PropTypes.array,
+  selectedRowIndex: PropTypes.number
+};
+
+ResultList.defaultProps = {
+  results: [],
+  selectedRowIndex: 0
 };
