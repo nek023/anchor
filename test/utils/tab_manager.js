@@ -1,14 +1,13 @@
-import EventEmitter from 'events';
 import TabManager from '../../src/utils/tab_manager';
 import * as ItemTypes from '../../src/constants/item_types';
 import assert from 'power-assert';
 import sinon from 'sinon';
+import createMockChromeObject from '../helpers/chrome_extension_helper';
 import createTab from '../fixtures/tab';
 
 describe('TabManager', () => {
   let tabs;
   let items;
-  let eventEmitter;
   let tabManager;
 
   beforeEach(() => {
@@ -24,31 +23,8 @@ describe('TabManager', () => {
       };
     });
 
-    eventEmitter = new EventEmitter();
-
-    function addListenerForEvent(event) {
-      return (callback) => {
-        eventEmitter.on(event, callback);
-      };
-    }
-
-    global.chrome = {
-      tabs: {
-        onCreated: {
-          addListener: addListenerForEvent('created')
-        },
-        onUpdated: {
-          addListener: addListenerForEvent('updated')
-        },
-        onRemoved: {
-          addListener: addListenerForEvent('removed')
-        },
-        onReplaced: {
-          addListener: addListenerForEvent('replaced')
-        },
-        query: sinon.stub().callsArgWith(1, tabs)
-      }
-    };
+    global.chrome = createMockChromeObject();
+    chrome.tabs.query.callsArgWith(1, tabs);
 
     tabManager = new TabManager();
   });
@@ -56,7 +32,7 @@ describe('TabManager', () => {
   it("should emit 'update' when tab has been created", () => {
     const callback = sinon.spy();
     tabManager.on('update', callback);
-    eventEmitter.emit('created');
+    chrome.tabs.onCreated.emit();
 
     assert(callback.called);
     assert.deepEqual(tabManager.getItems(), items);
@@ -65,7 +41,7 @@ describe('TabManager', () => {
   it("should emit 'update' when tab has been updated", () => {
     const callback = sinon.spy();
     tabManager.on('update', callback);
-    eventEmitter.emit('updated');
+    chrome.tabs.onUpdated.emit();
 
     assert(callback.called);
     assert.deepEqual(tabManager.getItems(), items);
@@ -74,7 +50,7 @@ describe('TabManager', () => {
   it("should emit 'update' when tab has been removed", () => {
     const callback = sinon.spy();
     tabManager.on('update', callback);
-    eventEmitter.emit('removed');
+    chrome.tabs.onRemoved.emit();
 
     assert(callback.called);
     assert.deepEqual(tabManager.getItems(), items);
@@ -83,7 +59,7 @@ describe('TabManager', () => {
   it("should emit 'update' when tab has been replaced", () => {
     const callback = sinon.spy();
     tabManager.on('update', callback);
-    eventEmitter.emit('replaced');
+    chrome.tabs.onReplaced.emit();
 
     assert(callback.called);
     assert.deepEqual(tabManager.getItems(), items);
