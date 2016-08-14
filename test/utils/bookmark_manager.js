@@ -1,14 +1,13 @@
-import EventEmitter from 'events';
 import BookmarkManager from '../../src/utils/bookmark_manager';
 import * as ItemTypes from '../../src/constants/item_types';
 import assert from 'power-assert';
 import sinon from 'sinon';
+import createMockChromeObject from '../helpers/chrome_extension_helper';
 import createBookmark from '../fixtures/bookmark';
 
 describe('BookmarkManager', () => {
   let bookmarks;
   let items;
-  let eventEmitter;
   let bookmarkManager;
 
   beforeEach(() => {
@@ -21,34 +20,8 @@ describe('BookmarkManager', () => {
       };
     });
 
-    eventEmitter = new EventEmitter();
-
-    function addListenerForEvent(event) {
-      return (callback) => {
-        eventEmitter.on(event, callback);
-      };
-    }
-
-    global.chrome = {
-      bookmarks: {
-        onImportBegan: {
-          addListener: addListenerForEvent('importBegan')
-        },
-        onImportEnded: {
-          addListener: addListenerForEvent('importEnded')
-        },
-        onCreated: {
-          addListener: addListenerForEvent('created')
-        },
-        onRemoved: {
-          addListener: addListenerForEvent('removed')
-        },
-        onChanged: {
-          addListener: addListenerForEvent('changed')
-        },
-        getRecent: sinon.stub().callsArgWith(1, bookmarks)
-      }
-    };
+    global.chrome = createMockChromeObject();
+    chrome.bookmarks.getRecent.callsArgWith(1, bookmarks);
 
     bookmarkManager = new BookmarkManager();
   });
@@ -56,7 +29,7 @@ describe('BookmarkManager', () => {
   it("should emit 'update' when bookmarks has been created", () => {
     const callback = sinon.spy();
     bookmarkManager.on('update', callback);
-    eventEmitter.emit('created');
+    chrome.bookmarks.onCreated.emit();
 
     assert(callback.called);
     assert.deepEqual(bookmarkManager.getItems(), items);
@@ -65,8 +38,8 @@ describe('BookmarkManager', () => {
   it("should not emit 'update' when bookmarks has been created during import", () => {
     const callback = sinon.spy();
     bookmarkManager.on('update', callback);
-    eventEmitter.emit('importBegan');
-    eventEmitter.emit('created');
+    chrome.bookmarks.onImportBegan.emit();
+    chrome.bookmarks.onCreated.emit();
 
     assert(!callback.called);
     assert.deepEqual(bookmarkManager.getItems(), items);
@@ -75,7 +48,7 @@ describe('BookmarkManager', () => {
   it("should emit 'update' when bookmarks has been removed", () => {
     const callback = sinon.spy();
     bookmarkManager.on('update', callback);
-    eventEmitter.emit('removed');
+    chrome.bookmarks.onRemoved.emit();
 
     assert(callback.called);
     assert.deepEqual(bookmarkManager.getItems(), items);
@@ -84,7 +57,7 @@ describe('BookmarkManager', () => {
   it("should emit 'update' when bookmarks has been changed", () => {
     const callback = sinon.spy();
     bookmarkManager.on('update', callback);
-    eventEmitter.emit('changed');
+    chrome.bookmarks.onChanged.emit();
 
     assert(callback.called);
     assert.deepEqual(bookmarkManager.getItems(), items);
@@ -93,8 +66,8 @@ describe('BookmarkManager', () => {
   it("should not emit 'update' when bookmarks has been imported", () => {
     const callback = sinon.spy();
     bookmarkManager.on('update', callback);
-    eventEmitter.emit('importBegan');
-    eventEmitter.emit('importEnded');
+    chrome.bookmarks.onImportBegan.emit();
+    chrome.bookmarks.onImportEnded.emit();
 
     assert(callback.called);
     assert.deepEqual(bookmarkManager.getItems(), items);
