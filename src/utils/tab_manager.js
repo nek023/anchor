@@ -4,10 +4,12 @@ import * as ItemTypes from '../constants/item_types';
 export default class TabManager extends EventEmitter {
   constructor() {
     super();
+
     this.items = [];
 
     const updateItems = this.updateItems.bind(this);
     updateItems();
+
     chrome.tabs.onCreated.addListener(updateItems);
     chrome.tabs.onUpdated.addListener(updateItems);
     chrome.tabs.onRemoved.addListener(updateItems);
