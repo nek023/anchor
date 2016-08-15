@@ -46,6 +46,14 @@ export default function createMockChromeObject() {
       onRemoved: new SingleEventEmitter(),
       onReplaced: new SingleEventEmitter(),
       query: sinon.stub()
+    },
+
+    windows: {
+      onRemoved: new SingleEventEmitter(),
+      onFocusChanged: new SingleEventEmitter(),
+      create: sinon.stub(),
+      update: sinon.stub(),
+      remove: sinon.stub()
     }
   };
 
