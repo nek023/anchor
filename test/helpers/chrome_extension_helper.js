@@ -33,6 +33,13 @@ export default function createMockChromeObject() {
       search: sinon.stub()
     },
 
+    system: {
+      display: {
+        onDisplayChanged: new SingleEventEmitter(),
+        getInfo: sinon.stub()
+      }
+    },
+
     tabs: {
       onCreated: new SingleEventEmitter(),
       onUpdated: new SingleEventEmitter(),
