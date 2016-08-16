@@ -2,7 +2,7 @@ import TabManager from '../../src/utils/tab_manager';
 import * as ItemTypes from '../../src/constants/item_types';
 import assert from 'power-assert';
 import sinon from 'sinon';
-import createMockChromeObject from '../helpers/chrome_extension_helper';
+import createMockChromeObject from '../helpers/chrome';
 import createTab from '../fixtures/tab';
 
 describe('TabManager', () => {

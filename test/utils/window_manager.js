@@ -1,6 +1,6 @@
 import WindowManager from '../../src/utils/window_manager';
 import assert from 'power-assert';
-import createMockChromeObject from '../helpers/chrome_extension_helper';
+import createMockChromeObject from '../helpers/chrome';
 import createWindow from '../fixtures/window';
 
 describe('WindowManager', () => {

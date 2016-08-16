@@ -3,7 +3,7 @@ import HistoryManager from '../../src/utils/history_manager';
 import TabManager from '../../src/utils/tab_manager';
 import ItemManager from '../../src/utils/item_manager';
 import assert from 'power-assert';
-import createMockChromeObject from '../helpers/chrome_extension_helper';
+import createMockChromeObject from '../helpers/chrome';
 import createBookmark from '../fixtures/bookmark';
 import createHistory from '../fixtures/history';
 import createTab from '../fixtures/tab';
