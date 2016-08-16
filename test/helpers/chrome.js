@@ -1,20 +1,5 @@
-import EventEmitter from 'events';
 import sinon from 'sinon';
-
-class SingleEventEmitter {
-  constructor(eventName = '') {
-    this.eventEmitter = new EventEmitter();
-    this.eventName = eventName;
-  }
-
-  addListener(listener) {
-    this.eventEmitter.on(this.eventName, listener);
-  }
-
-  emit(...args) {
-    this.eventEmitter.emit(this.eventName, ...args);
-  }
-}
+import SingleEventEmitter from '../helpers/single_event_emitter';
 
 export default function createMockChromeObject() {
   const chrome = {
