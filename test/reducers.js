@@ -1,6 +1,7 @@
 import * as reducers from '../src/reducers';
 import * as actions from '../src/actions';
 import assert from 'power-assert';
+import createResult from './fixtures/result';
 
 describe('Reducers', () => {
   describe('query()', () => {
@@ -32,7 +33,7 @@ describe('Reducers', () => {
     });
 
     it('should handle SET_RESULTS', () => {
-      const results = ['result1', 'result2'];
+      const results = [createResult(), createResult()];
       const actual = reducer([], actions.setResults(results));
 
       assert.deepEqual(actual, results);

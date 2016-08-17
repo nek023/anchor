@@ -1,6 +1,7 @@
 import * as actions from '../src/actions';
 import * as types from '../src/constants/action_types';
 import assert from 'power-assert';
+import createResult from './fixtures/result';
 
 describe('Actions', () => {
   describe('setQuery()', () => {
@@ -17,7 +18,7 @@ describe('Actions', () => {
 
   describe('setResults()', () => {
     it('should create an action to set results', () => {
-      const results = ['result1', 'result2'];
+      const results = [createResult(), createResult()];
       const nextSelectedRowIndex = 1;
       const expected = {
         type: types.SET_RESULTS,
@@ -34,7 +35,7 @@ describe('Actions', () => {
     });
 
     it('should set nextSelectedRowIndex to 0 if omitted', () => {
-      const results = ['result1', 'result2'];
+      const results = [createResult(), createResult()];
       const nextSelectedRowIndex = 0;
       const expected = {
         type: types.SET_RESULTS,

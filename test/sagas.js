@@ -4,13 +4,14 @@ import * as sagas from '../src/sagas';
 import * as actions from '../src/actions';
 import * as messages from '../src/messages';
 import assert from 'power-assert';
+import createResult from './fixtures/result';
 
 describe('Sagas', () => {
   describe('queryItems()', () => {
     it('should query items and set results', () => {
       const query = 'test query';
       const action = actions.setQuery(query);
-      const results = ['result1', 'result2'];
+      const results = [createResult(), createResult()];
       const generator = sagas.queryItems(action);
 
       assert.deepEqual(
