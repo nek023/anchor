@@ -4,7 +4,7 @@ import assert from 'power-assert';
 import { shallow } from 'enzyme';
 import createResult from '../fixtures/result';
 
-describe('ResultRow component', () => {
+describe('ResultRow', () => {
   let result;
   let wrapper;
 

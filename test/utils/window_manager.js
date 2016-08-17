@@ -13,7 +13,7 @@ describe('WindowManager', () => {
   });
 
   context('when it does not have a window', () => {
-    describe('showWindow', () => {
+    describe('#showWindow()', () => {
       it('should create a new window', () => {
         const window = createWindow();
         chrome.windows.create.callsArgWith(1, window);
@@ -30,19 +30,19 @@ describe('WindowManager', () => {
       });
     });
 
-    describe('getWindow', () => {
+    describe('#getWindow()', () => {
       it('should return null', () => {
         assert(windowManager.getWindow() === null);
       });
     });
 
-    describe('isWindowVisible', () => {
+    describe('#isWindowVisible()', () => {
       it('should return false', () => {
         assert(!windowManager.isWindowVisible());
       });
     });
 
-    describe('isWindowFocused', () => {
+    describe('#isWindowFocused()', () => {
       it('should return false', () => {
         assert(!windowManager.isWindowFocused());
       });
@@ -71,19 +71,19 @@ describe('WindowManager', () => {
       assert(windowManager.getWindow() === null);
     });
 
-    describe('getWindow', () => {
+    describe('#getWindow()', () => {
       it('should return the window', () => {
         assert(windowManager.getWindow() === window);
       });
     });
 
-    describe('isWindowVisible', () => {
+    describe('#isWindowVisible()', () => {
       it('should return true', () => {
         assert(windowManager.isWindowVisible());
       });
     });
 
-    describe('showWindow', () => {
+    describe('#showWindow()', () => {
       it('should not create a new window', () => {
         const newWindow = createWindow();
         chrome.windows.create.callsArgWith(1, newWindow);
@@ -101,7 +101,7 @@ describe('WindowManager', () => {
       });
     });
 
-    describe('closeWindow', () => {
+    describe('#closeWindow()', () => {
       it('should remove the window', () => {
         chrome.windows.remove.callsArg(1);
 

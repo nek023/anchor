@@ -30,7 +30,7 @@ describe('DisplayManager', () => {
     assert(displayManager.getDisplays().length === newDisplays.length);
   });
 
-  describe('getDisplays', () => {
+  describe('#getDisplays()', () => {
     it('should return all displays', () => {
       const actual = displayManager.getDisplays();
 
@@ -38,7 +38,7 @@ describe('DisplayManager', () => {
     });
   });
 
-  describe('getPrimaryDisplay', () => {
+  describe('#getPrimaryDisplay()', () => {
     it('should return primary display', () => {
       const actual = displayManager.getPrimaryDisplay();
 
@@ -46,7 +46,7 @@ describe('DisplayManager', () => {
     });
   });
 
-  describe('displayContainsWindow', () => {
+  describe('#displayContainsWindow()', () => {
     it('should return display which contains specified window', () => {
       const newDisplays = [
         createDisplay({

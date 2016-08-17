@@ -64,7 +64,7 @@ describe('ItemManager', () => {
     assert(itemManager.queryItems('').length === 200);
   });
 
-  describe('queryItems', () => {
+  describe('#queryItems()', () => {
     it('should return all tab items when query is empty', () => {
       const items = tabManager.getItems();
       const expected = resultsFromItems(items);

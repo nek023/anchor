@@ -5,8 +5,8 @@ import * as actions from '../src/actions';
 import * as messages from '../src/messages';
 import assert from 'power-assert';
 
-describe('sagas', () => {
-  describe('queryItems saga', () => {
+describe('Sagas', () => {
+  describe('queryItems()', () => {
     it('should query items and set results', () => {
       const query = 'test query';
       const action = actions.setQuery(query);

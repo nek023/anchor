@@ -30,7 +30,7 @@ describe('Item', () => {
         item = item.set('favIconUrl', null);
       });
 
-      describe('getFavIconUrl', () => {
+      describe('#getFavIconUrl()', () => {
         it('should return cached favicon', () => {
           assert(item.getFavIconUrl() === `chrome://favicon/${item.url}`);
         });
@@ -43,7 +43,7 @@ describe('Item', () => {
           item = item.set('favIconUrl', 'chrome://theme/test');
         });
 
-        describe('getFavIconUrl', () => {
+        describe('#getFavIconUrl()', () => {
           it('should return default favicon', () => {
             assert(item.getFavIconUrl() === 'chrome://favicon');
           });
@@ -51,7 +51,7 @@ describe('Item', () => {
       });
 
       context('when favicon is not chrome asset', () => {
-        describe('getFavIconUrl', () => {
+        describe('#getFavIconUrl()', () => {
           it('should return its favicon url', () => {
             assert(item.getFavIconUrl() === item.favIconUrl);
           });
@@ -65,7 +65,7 @@ describe('Item', () => {
       item = item.set('type', ItemTypes.HISTORY);
     });
 
-    describe('getFavIconUrl', () => {
+    describe('#getFavIconUrl()', () => {
       it('should return cached favicon', () => {
         assert(item.getFavIconUrl() === `chrome://favicon/${item.url}`);
       });

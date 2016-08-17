@@ -2,8 +2,8 @@ import * as reducers from '../src/reducers';
 import * as actions from '../src/actions';
 import assert from 'power-assert';
 
-describe('reducers', () => {
-  describe('query reducer', () => {
+describe('Reducers', () => {
+  describe('query()', () => {
     const reducer = reducers.query;
 
     it('should return the initial state', () => {
@@ -21,7 +21,7 @@ describe('reducers', () => {
     });
   });
 
-  describe('results reducer', () => {
+  describe('results()', () => {
     const reducer = reducers.results;
 
     it('should return the initial state', () => {
@@ -39,7 +39,7 @@ describe('reducers', () => {
     });
   });
 
-  describe('selectedRowIndex reducer', () => {
+  describe('selectedRowIndex()', () => {
     const reducer = reducers.selectedRowIndex;
 
     it('should return the initial state', () => {

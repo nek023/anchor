@@ -4,7 +4,7 @@ import assert from 'power-assert';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-describe('SearchField component', () => {
+describe('SearchField', () => {
   it('should be rendered correctly', () => {
     const value = 'test query';
     const wrapper = shallow(<SearchField value={value} />);

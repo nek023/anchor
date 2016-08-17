@@ -5,7 +5,7 @@ import assert from 'power-assert';
 import { shallow } from 'enzyme';
 import createResult from '../fixtures/result';
 
-describe('ResultList component', () => {
+describe('ResultList', () => {
   let results;
 
   beforeEach(() => {
