@@ -16,6 +16,7 @@
   "author": "Katsuma Tanaka",
   "license": "MIT",
   "devDependencies": {
+    "@kadira/storybook": "^2.3.0",
     "babel-core": "^6.7.13",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
