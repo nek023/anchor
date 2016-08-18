@@ -1,5 +1,5 @@
 import assert from 'power-assert';
-import createResult from '../fixtures/result';
+import createResult from '../factories/result';
 
 describe('Result', () => {
   let result;

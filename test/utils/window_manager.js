@@ -1,7 +1,7 @@
 import WindowManager from '../../src/utils/window_manager';
 import assert from 'power-assert';
 import createMockChromeObject from '../helpers/chrome';
-import createWindow from '../fixtures/window';
+import createWindow from '../factories/window';
 
 describe('WindowManager', () => {
   let windowManager;

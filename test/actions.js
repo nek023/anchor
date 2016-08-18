@@ -1,7 +1,7 @@
 import * as actions from '../src/actions';
 import * as types from '../src/constants/action_types';
 import assert from 'power-assert';
-import createResult from './fixtures/result';
+import createResult from './factories/result';
 
 describe('Actions', () => {
   describe('setQuery()', () => {

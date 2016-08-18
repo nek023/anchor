@@ -4,7 +4,7 @@ import * as sagas from '../src/sagas';
 import * as actions from '../src/actions';
 import * as messages from '../src/messages';
 import assert from 'power-assert';
-import createResult from './fixtures/result';
+import createResult from './factories/result';
 
 describe('Sagas', () => {
   describe('queryItems()', () => {

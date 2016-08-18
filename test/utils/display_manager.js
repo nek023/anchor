@@ -1,8 +1,8 @@
 import DisplayManager from '../../src/utils/display_manager';
 import assert from 'power-assert';
 import createMockChromeObject from '../helpers/chrome';
-import createDisplay from '../fixtures/display';
-import createWindow from '../fixtures/window';
+import createDisplay from '../factories/display';
+import createWindow from '../factories/window';
 
 describe('DisplayManager', () => {
   let displays;

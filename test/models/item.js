@@ -1,6 +1,6 @@
 import * as ItemTypes from '../../src/constants/item_types';
 import assert from 'power-assert';
-import createItem from '../fixtures/item';
+import createItem from '../factories/item';
 
 describe('Item', () => {
   let item;

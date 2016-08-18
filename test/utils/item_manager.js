@@ -4,9 +4,9 @@ import TabManager from '../../src/utils/tab_manager';
 import ItemManager from '../../src/utils/item_manager';
 import assert from 'power-assert';
 import createMockChromeObject from '../helpers/chrome';
-import createBookmark from '../fixtures/bookmark';
-import createHistory from '../fixtures/history';
-import createTab from '../fixtures/tab';
+import createBookmark from '../factories/bookmark';
+import createHistory from '../factories/history';
+import createTab from '../factories/tab';
 
 function createResultObject({
   item    = null,

@@ -2,7 +2,7 @@ import React from 'react';
 import ResultRow from '../../src/components/ResultRow';
 import assert from 'power-assert';
 import { shallow } from 'enzyme';
-import createResult from '../fixtures/result';
+import createResult from '../factories/result';
 
 describe('ResultRow', () => {
   let result;

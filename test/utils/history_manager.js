@@ -3,7 +3,7 @@ import * as ItemTypes from '../../src/constants/item_types';
 import assert from 'power-assert';
 import sinon from 'sinon';
 import createMockChromeObject from '../helpers/chrome';
-import createHistory from '../fixtures/history';
+import createHistory from '../factories/history';
 
 describe('HistoryManager', () => {
   let histories;
