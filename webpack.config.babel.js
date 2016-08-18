@@ -1,5 +1,4 @@
 import path from 'path';
-import webpack from 'webpack';
 
 export default {
   context: path.join(__dirname, 'src'),
@@ -33,7 +32,7 @@ export default {
         loader: 'babel'
       },
       {
-        test: /\.scss/,
+        test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
       }
     ],
@@ -43,4 +42,4 @@ export default {
     configFile: './.eslintrc',
     failOnError: true
   }
-}
+};
