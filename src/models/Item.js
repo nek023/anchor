@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { ItemTypes } from '../constants';
+import * as ItemTypes from '../constants/item_types';
 
 const ItemRecord = Record({
   type:       undefined,

@@ -4,7 +4,7 @@ const ResultRecord = Record({
   index:   undefined,
   item:    undefined,
   score:   undefined,
-  matched: undefined
+  matches: undefined
 });
 
 export default class Result extends ResultRecord {

@@ -1,6 +1,7 @@
-import { MAX_RESULTS } from './constants';
 import Result from './models/Result';
 import Item from './models/Item';
+
+const MAX_RESULTS = 100;
 
 export const QUERY_ITEMS = 'QUERY_ITEMS';
 export const SET_QUERY = 'SET_QUERY';

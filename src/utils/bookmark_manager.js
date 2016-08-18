@@ -1,22 +1,25 @@
 import EventEmitter from 'events';
-import { MAX_BOOKMARK_RESULTS, ItemTypes } from '../constants';
+import * as ItemTypes from '../constants/item_types';
+
+const MAX_BOOKMARK_RESULTS = 1000;
 
 export default class BookmarkManager extends EventEmitter {
   constructor() {
     super();
+
     this.items = [];
     this.importing = false;
+
+    const updateItems = this.updateItems.bind(this);
+    updateItems();
 
     chrome.bookmarks.onImportBegan.addListener(() => {
       this.importing = true;
     });
-
     chrome.bookmarks.onImportEnded.addListener(() => {
       this.importing = false;
+      updateItems();
     });
-
-    const updateItems = this.updateItems.bind(this);
-    updateItems();
     chrome.bookmarks.onCreated.addListener(() => {
       if (!this.importing) updateItems();
     });

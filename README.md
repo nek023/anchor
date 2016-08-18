@@ -1,5 +1,7 @@
 # anchor
 
+[![Build Status](https://travis-ci.org/questbeat/anchor.svg)](https://travis-ci.org/questbeat/anchor)
+
 Tab switcher for Google Chrome.
 
 ![](screenshot.png)

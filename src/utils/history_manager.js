@@ -1,14 +1,15 @@
 import EventEmitter from 'events';
-import { MAX_HISTORY_RESULTS, ItemTypes } from '../constants';
+import * as ItemTypes from '../constants/item_types';
+
+const MAX_HISTORY_RESULTS = 100;
+const HISTORY_DISTANCE = 1000 * 60 * 60 * 24 * 30; // 30 days
 
 export default class HistoryManager extends EventEmitter {
   constructor() {
     super();
-    this.items = [];
 
-    const days = 30;
-    const microsecondsBack = 1000 * 60 * 60 * 24 * days;
-    this.startTime = Date.now() - microsecondsBack;
+    this.items = [];
+    this.startTime = Date.now() - HISTORY_DISTANCE;
 
     const updateItems = this.updateItems.bind(this);
     updateItems();

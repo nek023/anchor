@@ -1,7 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { ItemTypes, KeyCodes } from '../constants';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import * as ItemTypes from '../constants/item_types';
+import * as KeyCodes from '../constants/key_codes';
 import * as actions from '../actions';
 import SearchField from '../components/SearchField';
 import ResultList from '../components/ResultList';

@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import ResultRow from './ResultRow';
+import Result from '../models/Result';
 
 export default class ResultList extends PureComponent {
   componentDidUpdate() {
@@ -32,6 +33,11 @@ export default class ResultList extends PureComponent {
 }
 
 ResultList.propTypes = {
-  results:          PropTypes.array.isRequired,
-  selectedRowIndex: PropTypes.number.isRequired
+  results:          PropTypes.arrayOf(PropTypes.instanceOf(Result)),
+  selectedRowIndex: PropTypes.number
+};
+
+ResultList.defaultProps = {
+  results: [],
+  selectedRowIndex: 0
 };
