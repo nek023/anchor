@@ -19,7 +19,9 @@
     }
   },
   "globals": {
-    "chrome": true
+    "chrome": true,
+    "__ENV__": true,
+    "__DEBUG__": true
   },
   "plugins": [
     "react"

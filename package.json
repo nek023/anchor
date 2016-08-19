@@ -7,12 +7,14 @@
     "clean": "rm -rf build",
     "build": "webpack --progress -d",
     "build:watch": "webpack --progress -d --watch",
-    "build:dist": "webpack --progress -p",
+    "build:dist": "NODE_ENV=production webpack --progress -p",
+    "lint": "eslint src; exit 0",
     "test": "mocha --require test/setup.js --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch",
     "test:lint": "eslint test; exit 0",
     "package": "npm run clean && npm run build:dist && zip package.zip -r build icons index.html manifest.json",
-    "storybook": "start-storybook -s storybook/static -c storybook -p 3000"
+    "storybook": "start-storybook -s storybook/static -c storybook -p 3000",
+    "storybook:lint": "eslint storybook; exit 0"
   },
   "author": "Katsuma Tanaka",
   "license": "MIT",
