@@ -20,9 +20,8 @@ export default class SearchField extends PureComponent {
   render() {
     return (
       <div className='search-field'>
-        <input ref='input' className='search-input' type='text'
-          autoFocus={true} value={this.props.value}
-          onChange={this.handleChange}
+        <input ref='input' type='text' value={this.props.value}
+          autoFocus={true} onChange={this.handleChange}
           onBlur={this.handleBlur} />
       </div>
     );
