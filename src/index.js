@@ -6,6 +6,7 @@ import App from './containers/App';
 import './assets/stylesheets/style.scss';
 import { SET_QUERY } from './messages';
 import { setQuery } from './actions';
+import rootSaga from './sagas';
 
 const url = new URL(document.URL);
 const initialQuery = url.searchParams.get('q') || '';
@@ -17,6 +18,7 @@ const initialState = {
 };
 
 const store = configureStore(initialState);
+store.runSaga(rootSaga);
 
 chrome.runtime.onMessage.addListener(message => {
   if (message.type == SET_QUERY) {
