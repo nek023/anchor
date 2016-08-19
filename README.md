@@ -18,7 +18,7 @@ After installing, open Chrome extension settings and setup keyboard shortcut fro
 
 ### Install from source
 
-```bash
+```sh
 git clone git@github.com:questbeat/anchor.git
 cd anchor
 npm run build:dist
