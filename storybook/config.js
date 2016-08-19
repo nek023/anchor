@@ -5,6 +5,7 @@ function loadStories() {
   require('./stories/search_field');
   require('./stories/result_row');
   require('./stories/result_list');
+  require('./stories/app');
 }
 
 configure(loadStories, module);

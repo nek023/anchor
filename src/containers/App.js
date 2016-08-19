@@ -7,7 +7,7 @@ import * as actions from '../actions';
 import SearchField from '../components/SearchField';
 import ResultList from '../components/ResultList';
 
-class App extends PureComponent {
+export class App extends PureComponent {
   constructor(props) {
     super(props);
 
