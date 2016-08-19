@@ -7,7 +7,7 @@
     "clean": "rm -rf build",
     "build": "webpack --progress -d",
     "build:watch": "webpack --progress -d --watch",
-    "build:dist": "webpack --progress -p",
+    "build:dist": "NODE_ENV=production webpack --progress -p",
     "lint": "eslint src; exit 0",
     "test": "mocha --require test/setup.js --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch",

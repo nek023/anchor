@@ -1,4 +1,7 @@
 import path from 'path';
+import webpack from 'webpack';
+
+const env = process.env.NODE_ENV || 'development';
 
 export default {
   context: path.join(__dirname, 'src'),
@@ -37,6 +40,13 @@ export default {
       }
     ],
   },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      '__ENV__': `'${env}'`,
+      '__DEBUG__': (env === 'development')
+    })
+  ],
 
   eslint: {
     configFile: './.eslintrc',
