@@ -8,14 +8,16 @@
     "build": "webpack --progress -d",
     "build:watch": "webpack --progress -d --watch",
     "build:dist": "webpack --progress -p",
-    "package": "npm run clean && npm run build:dist && zip package.zip -r build icons index.html manifest.json",
     "test": "mocha --require test/setup.js --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch",
-    "test:lint": "eslint test; exit 0"
+    "test:lint": "eslint test; exit 0",
+    "package": "npm run clean && npm run build:dist && zip package.zip -r build icons index.html manifest.json",
+    "storybook": "start-storybook -s storybook/static -c storybook -p 3000"
   },
   "author": "Katsuma Tanaka",
   "license": "MIT",
   "devDependencies": {
+    "@kadira/storybook": "^2.3.0",
     "babel-core": "^6.7.13",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
