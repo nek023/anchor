@@ -4,7 +4,7 @@
   "description": "Tab switcher for Google Chrome",
   "main": "build/index.js",
   "scripts": {
-    "clean": "rm -rf build",
+    "clean": "rimraf build",
     "build": "webpack --progress -d",
     "build:watch": "webpack --progress -d --watch",
     "build:dist": "NODE_ENV=production webpack --progress -p",
@@ -43,6 +43,7 @@
     "react-addons-perf": "^15.3.0",
     "react-addons-test-utils": "^15.3.0",
     "redux-logger": "^2.6.1",
+    "rimraf": "^2.5.4",
     "sass-loader": "^4.0.0",
     "sinon": "^1.17.5",
     "style-loader": "^0.13.1",
