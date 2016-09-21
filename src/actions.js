@@ -1,11 +1,22 @@
-import { createAction } from 'redux-actions';
 import * as types from './constants/action_types';
 
-export const setQuery = createAction(types.SET_QUERY);
-export const setResults = createAction(
-  types.SET_RESULTS,
-  (results, nextSelectedRowIndex = 0) => {
-    return { results, nextSelectedRowIndex };
-  }
-);
-export const selectRow = createAction(types.SELECT_ROW);
+export function setQuery(query) {
+  return {
+    type: types.SET_QUERY,
+    payload: query
+  };
+}
+
+export function setResults(results, nextSelectedRowIndex = 0) {
+  return {
+    type: types.SET_RESULTS,
+    payload: { results, nextSelectedRowIndex }
+  };
+}
+
+export function selectRow(index) {
+  return {
+    type: types.SELECT_ROW,
+    payload: index
+  };
+}

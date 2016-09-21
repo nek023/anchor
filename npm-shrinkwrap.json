@@ -124,20 +124,10 @@
       "from": "react-redux@>=4.4.5 <5.0.0",
       "resolved": "https://registry.npmjs.org/react-redux/-/react-redux-4.4.5.tgz"
     },
-    "reduce-reducers": {
-      "version": "0.1.2",
-      "from": "reduce-reducers@>=0.1.0 <0.2.0",
-      "resolved": "https://registry.npmjs.org/reduce-reducers/-/reduce-reducers-0.1.2.tgz"
-    },
     "redux": {
       "version": "3.6.0",
       "from": "redux@>=3.6.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/redux/-/redux-3.6.0.tgz"
-    },
-    "redux-actions": {
-      "version": "0.12.0",
-      "from": "redux-actions@>=0.12.0 <0.13.0",
-      "resolved": "https://registry.npmjs.org/redux-actions/-/redux-actions-0.12.0.tgz"
     },
     "redux-saga": {
       "version": "0.11.1",
