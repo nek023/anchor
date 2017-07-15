@@ -2,27 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
-import App from './containers/App';
-import './assets/stylesheets/style.scss';
-import { SET_QUERY } from './messages';
-import { setQuery } from './actions';
-import rootSaga from './sagas';
+import { MessageTypes } from './constants';
+import { actions } from './modules';
+import { State } from './models';
+import { App } from './components';
+import './assets/stylesheets/app.scss';
 
 const url = new URL(document.URL);
-const initialQuery = url.searchParams.get('q') || '';
+const query = url.searchParams.get('q') || '';
 
-const initialState = {
-  query: initialQuery,
-  results: [],
-  selectedRowIndex: 0
-};
-
+const initialState = new State({ query });
 const store = configureStore(initialState);
-store.runSaga(rootSaga);
 
-chrome.runtime.onMessage.addListener(message => {
-  if (message.type == SET_QUERY) {
-    store.dispatch(setQuery(message.payload));
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type == MessageTypes.SET_QUERY) {
+    store.dispatch(actions.setQuery(message.payload));
+    sendResponse(true);
   }
 });
 

@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "anchor",
   "description": "Tab switcher for Google Chrome",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -24,13 +24,13 @@
     }
   },
   "background": {
-    "scripts": ["build/background.js"]
+    "scripts": ["dist/background.js"]
   },
   "permissions": [
-    "chrome://favicon/*",
-    "tabs",
     "bookmarks",
+    "chrome://favicon/*",
     "history",
-    "system.display"
+    "system.display",
+    "tabs"
   ]
 }

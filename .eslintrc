@@ -11,7 +11,7 @@
   ],
   "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 7,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true,
@@ -19,14 +19,13 @@
     }
   },
   "globals": {
-    "chrome": true,
-    "__ENV__": true,
-    "__DEBUG__": true
+    "chrome": true
   },
   "plugins": [
     "react"
   ],
   "rules": {
+    "arrow-parens": [2],
     "no-console": [0],
     "no-unused-vars": [1],
     "semi": [2, "always"]

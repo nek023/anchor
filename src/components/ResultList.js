@@ -1,43 +1,57 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import ResultRow from './ResultRow';
-import Result from '../models/Result';
+import { ResultListItem } from '../components';
+import { Result } from '../models';
 
-export default class ResultList extends PureComponent {
-  componentDidUpdate() {
-    this.scrollComponentToVisible(this.refs.selected);
+export default class ResultList extends React.PureComponent {
+  static propTypes = {
+    onClickItem: PropTypes.func,
+    onMouseEnterItem: PropTypes.func,
+    results: PropTypes.arrayOf(Result.propTypes).isRequired,
+    selectedItemIndex: PropTypes.number.isRequired
   }
 
-  scrollComponentToVisible(component) {
+  static defaultProps = {
+    results: [],
+    selectedItemIndex: 0
+  }
+
+  componentDidUpdate = () => {
+    this.scrollComponentToVisible(this.selectedItem);
+  }
+
+  scrollComponentToVisible = (component) => {
     if (!component) return;
     const node = findDOMNode(component);
     node.scrollIntoViewIfNeeded(false);
   }
 
-  render() {
-    const { results, selectedRowIndex } = this.props;
+  render = () => {
+    const {
+      onClickItem,
+      onMouseEnterItem,
+      results,
+      selectedItemIndex
+    } = this.props;
 
-    const resultRows = results.map((result, index) => {
-      const selected = (index == selectedRowIndex);
-      const ref = selected ? 'selected' : null;
+    const listItems = results.map((result, index) => {
+      const selected = (index == selectedItemIndex);
+      const ref = selected ? ((item) => { this.selectedItem = item; }) : null;
 
-      return <ResultRow key={index} ref={ref} result={result} selected={selected} />;
+      return <ResultListItem
+        key={index}
+        ref={ref}
+        onClick={onClickItem}
+        onMouseEnter={onMouseEnterItem}
+        result={result}
+        selected={selected} />;
     });
 
     return (
       <ul className='item-list'>
-        {resultRows}
+        {listItems}
       </ul>
     );
   }
 }
-
-ResultList.propTypes = {
-  results:          PropTypes.arrayOf(PropTypes.instanceOf(Result)),
-  selectedRowIndex: PropTypes.number
-};
-
-ResultList.defaultProps = {
-  results: [],
-  selectedRowIndex: 0
-};

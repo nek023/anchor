@@ -1,11 +1,18 @@
-import { jsdom } from 'jsdom';
+import 'babel-polyfill';
 
-global.document = jsdom('');
-global.window = document.defaultView;
+const { JSDOM } = require('jsdom');
+
+const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const { window } = jsdom;
+
+function copyProps(src, target) {
+  const props = Object.getOwnPropertyNames(src)
+    .filter((prop) => typeof target[prop] === 'undefined')
+    .map((prop) => Object.getOwnPropertyDescriptor(src, prop));
+  Object.defineProperties(target, props);
+}
+
+global.window = window;
+global.document = window.document;
 global.navigator = { userAgent: 'node.js' };
-
-Object.keys(document.defaultView).forEach(property => {
-  if (typeof global[property] === 'undefined') {
-    global[property] = document.defaultView[property];
-  }
-});
+copyProps(window, global);
