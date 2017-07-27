@@ -1,5 +1,11 @@
 # Change Log
 
+## [v1.0.1](https://github.com/questbeat/anchor/tree/v1.0.1)
+
+- Fix caret position after first launch
+- Update packages
+
+
 ## [v1.0.0](https://github.com/questbeat/anchor/tree/v1.0.0)
 
 - [#13] Refactoring and upgrading packages

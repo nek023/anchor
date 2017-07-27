@@ -1,6 +1,6 @@
 {
   "name": "anchor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tab switcher for Google Chrome",
   "main": "dist/index.js",
   "scripts": {
