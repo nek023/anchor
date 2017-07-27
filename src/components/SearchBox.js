@@ -11,6 +11,11 @@ export default class SearchBox extends React.PureComponent {
     value: ''
   }
 
+  componentDidMount = () => {
+    const index = this.props.value.length;
+    this.input.setSelectionRange(index, index);
+  }
+
   handleBlur = () => {
     this.input.focus();
   }
