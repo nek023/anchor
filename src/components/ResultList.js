@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
 import { ResultListItem } from '../components';
 import { Result } from '../models';
 
@@ -15,16 +14,6 @@ export default class ResultList extends React.PureComponent {
   static defaultProps = {
     results: [],
     selectedItemIndex: 0
-  }
-
-  componentDidUpdate = () => {
-    this.scrollComponentToVisible(this.selectedItem);
-  }
-
-  scrollComponentToVisible = (component) => {
-    if (!component) return;
-    const node = findDOMNode(component);
-    node.scrollIntoViewIfNeeded(false);
   }
 
   render = () => {

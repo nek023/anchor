@@ -15,6 +15,12 @@ export default class ResultListItem extends React.Component {
     selected: false
   }
 
+  componentDidUpdate = () => {
+    if (this.props.selected) {
+      this.node.scrollIntoViewIfNeeded(false);
+    }
+  }
+
   handleMouseEnter = () => {
     const { onMouseEnter } = this.props;
     if (onMouseEnter) onMouseEnter(this.props.result.index);
@@ -39,7 +45,8 @@ export default class ResultListItem extends React.Component {
     return (
       <li className={className}
         onMouseEnter={this.handleMouseEnter}
-        onClick={this.handleClick}>
+        onClick={this.handleClick}
+        ref={(node) => { this.node = node; }}>
         <div className='item-left'>
           <img className='favicon' src={result.item.getFavIconUrl()} />
         </div>
