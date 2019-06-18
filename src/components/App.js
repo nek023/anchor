@@ -44,7 +44,7 @@ export class App extends React.Component {
     actions.selectItem(index - 1);
   }
 
-  handleKeyDown = () => {
+  handleKeyDown = (event) => {
     switch (event.keyCode) {
     case KeyCodes.RETURN: {
       event.preventDefault();
