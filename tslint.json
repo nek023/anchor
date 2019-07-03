@@ -1,0 +1,22 @@
+{
+  "defaultSeverity": "error",
+  "extends": [],
+  "jsRules": {},
+  "rules": {
+    "ordered-imports": true,
+    "quotemark": [true, "single"],
+    "semicolon": [true, "never"],
+    "trailing-comma": [
+      true,
+      {
+        "esSpecCompliant": true,
+        "multiline": {
+          "arrays": "always",
+          "objects": "always"
+        },
+        "singleline": "never"
+      }
+    ]
+  },
+  "rulesDirectory": []
+}

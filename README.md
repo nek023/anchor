@@ -1,7 +1,5 @@
 # anchor
 
-[![Build Status](https://travis-ci.org/questbeat/anchor.svg?branch=master)](https://travis-ci.org/questbeat/anchor)
-
 Tab switcher for Google Chrome.
 
 ![](screenshot.png)
@@ -9,27 +7,29 @@ Tab switcher for Google Chrome.
 
 ## Installation
 
-### Chrome Web Store
+### Download from Chrome Web Store
 
 Go to the [Chrome Web Store page](https://chrome.google.com/webstore/detail/anchor/hgnlmkibblofcjgcljofkcdofkplhlgb) and install extension.
 
 After installing, open Chrome extension settings and setup keyboard shortcut from the bottom right link.
 
 
-### Install from source
+### Build manually
 
 ```sh
 git clone git@github.com:questbeat/anchor.git
 cd anchor
-npm run build:dist
+
+yarn install
+yarn run build:dist
 ```
 
 Then open Chrome extension settings and drag & drop anchor folder.
 
 
-### Usage
+## Usage
 
-Launch anchor with keyboard shortcut and input any keywords.  
+Launch anchor with keyboard shortcut and input any keywords.
 Anchor shows the list of tabs matched to the keywords.
 
 It's also possible to find pages from bookmarks or histories by using following filters.

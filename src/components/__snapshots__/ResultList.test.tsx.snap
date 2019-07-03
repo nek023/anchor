@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultList matches snapshot 1`] = `
+<styled.ul>
+  <ResultListItem
+    index={0}
+    item={
+      Object {
+        "title": "item1",
+        "type": "bookmark",
+        "url": "https://example.com",
+      }
+    }
+    key="0"
+    onClick={[Function]}
+    selected={false}
+  />
+  <ResultListItem
+    index={1}
+    item={
+      Object {
+        "title": "item2",
+        "type": "bookmark",
+        "url": "https://example.com",
+      }
+    }
+    key="1"
+    onClick={[Function]}
+    selected={false}
+  />
+</styled.ul>
+`;
