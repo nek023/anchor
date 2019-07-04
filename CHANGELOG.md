@@ -1,5 +1,10 @@
 # Change Log
 
+## [v2.0.0](https://github.com/questbeat/anchor/tree/v2.0.0)
+
+- Rewrite in TypeScript
+
+
 ## [v1.0.2](https://github.com/questbeat/anchor/tree/v1.0.2)
 
 - Update packages
