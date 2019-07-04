@@ -1,5 +1,7 @@
 # anchor
 
+[![CircleCI](https://circleci.com/gh/questbeat/anchor.svg?style=svg)](https://circleci.com/gh/questbeat/anchor)
+
 Tab switcher for Google Chrome.
 
 ![](screenshot.png)
