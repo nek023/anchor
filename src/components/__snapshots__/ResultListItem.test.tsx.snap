@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultListItem matches snapshot 1`] = `
+<styled.li
+  onClick={[Function]}
+  selected={false}
+>
+  <styled.div>
+    <styled.img
+      src="chrome://favicon/https://example.com"
+    />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      example
+    </styled.div>
+    <styled.div>
+      https://example.com
+    </styled.div>
+  </styled.div>
+</styled.li>
+`;

@@ -1,9 +1,0 @@
-{
-  "presets": [
-    "env",
-    "flow",
-    "power-assert",
-    "react",
-    "stage-0"
-  ]
-}
