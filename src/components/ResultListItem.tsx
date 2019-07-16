@@ -64,7 +64,7 @@ const ResultListItemContainer = styled.li<{ selected: boolean }>`
   display: flex
   flex-direction: row
 
-  ${(props) =>
+  ${props =>
     props.selected && css`
       background-color: #0067ff;
 

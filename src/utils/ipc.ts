@@ -33,7 +33,7 @@ export function setQuery(query: string): SetQueryMessage {
 
 export async function sendMessage(message: MessageTypes) {
   return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage(message, (response) => {
+    chrome.runtime.sendMessage(message, response => {
       if (response) {
         resolve(response)
       } else {

@@ -3,6 +3,7 @@
   "extends": [],
   "jsRules": {},
   "rules": {
+    "arrow-parens": [true, "ban-single-arg-parens"],
     "ordered-imports": true,
     "quotemark": [true, "single"],
     "semicolon": [true, "never"],

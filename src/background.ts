@@ -22,7 +22,7 @@ function showWindow(query: string) {
       mainWindow = undefined
     })
   } else {
-    chrome.windows.getCurrent((currentWindow) => {
+    chrome.windows.getCurrent(currentWindow => {
       const display = displayManager.displayContainsWindow(currentWindow)
         || displayManager.primaryDisplay
       if (display === undefined) { return }
@@ -49,7 +49,7 @@ function showWindow(query: string) {
           url,
           focused: true,
           type: 'popup',
-        }, (window) => {
+        }, window => {
           mainWindow = window
         })
       }
@@ -57,7 +57,7 @@ function showWindow(query: string) {
   }
 }
 
-chrome.windows.onRemoved.addListener((windowId) => {
+chrome.windows.onRemoved.addListener(windowId => {
   if (!mainWindow) return
 
   if (windowId === mainWindow.id) {
@@ -65,7 +65,7 @@ chrome.windows.onRemoved.addListener((windowId) => {
   }
 })
 
-chrome.windows.onFocusChanged.addListener((windowId) => {
+chrome.windows.onFocusChanged.addListener(windowId => {
   if (!mainWindow) return
 
   if (windowId === mainWindow.id) {
