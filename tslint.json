@@ -21,6 +21,18 @@
         },
         "singleline": "never"
       }
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-module",
+      "check-preblock",
+      "check-rest-spread",
+      "check-separator",
+      "check-type",
+      "check-typecast",
+      "check-type-operator"
     ]
   },
   "rulesDirectory": []
