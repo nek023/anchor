@@ -1,5 +1,5 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { CLOSE_WINDOW, OPEN_ITEM, OpenItemAction, SET_QUERY, setItems, SetQueryAction } from '../modules/index'
+import { ActionType, OpenItemAction, setItems, SetQueryAction } from '../modules/index'
 import { Item, ItemType } from '../types'
 import { queryItems, sendMessage } from '../utils/ipc'
 
@@ -32,7 +32,7 @@ function* setQuery(action: SetQueryAction) {
 }
 
 export function* rootSaga() {
-  yield takeEvery(CLOSE_WINDOW, closeWindow)
-  yield takeEvery(OPEN_ITEM, openItem)
-  yield takeLatest(SET_QUERY, setQuery)
+  yield takeEvery(ActionType.CloseWindow, closeWindow)
+  yield takeEvery(ActionType.OpenItem, openItem)
+  yield takeLatest(ActionType.SetQuery, setQuery)
 }

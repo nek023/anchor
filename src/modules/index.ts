@@ -1,75 +1,78 @@
 import { Item } from '../types'
 
-export const CLOSE_WINDOW = 'CLOSE_WINDOW'
-export const OPEN_ITEM = 'OPEN_ITEM'
-export const SELECT_ITEM = 'SELECT_ITEM'
-export const SET_ITEMS = 'SET_ITEMS'
-export const SET_QUERY = 'SET_QUERY'
+export enum ActionType {
+  CloseWindow = 'CLOSE_WINDOW',
+  OpenItem    = 'OPEN_ITEM',
+  SelectItem  = 'SELECT_ITEM',
+  SetItems    = 'SET_ITEMS',
+  SetQuery    = 'SET_QUERY',
+}
 
 export interface CloseWindowAction {
-  type: typeof CLOSE_WINDOW
+  type: typeof ActionType.CloseWindow
 }
 
 export interface OpenItemAction {
-  type: typeof OPEN_ITEM
+  type: typeof ActionType.OpenItem
   payload: {
     item: Item
   }
 }
 
 export interface SelectItemAction {
-  type: typeof SELECT_ITEM
+  type: typeof ActionType.SelectItem
   payload: {
     index: number
   }
 }
 
 export interface SetItemsAction {
-  type: typeof SET_ITEMS
+  type: typeof ActionType.SetItems
   payload: {
     items: Item[]
   }
 }
 
 export interface SetQueryAction {
-  type: typeof SET_QUERY
+  type: typeof ActionType.SetQuery
   payload: {
     query: string
   }
 }
 
-export type ActionTypes = CloseWindowAction | OpenItemAction | SelectItemAction | SetItemsAction | SetQueryAction
+export type Action = CloseWindowAction | OpenItemAction | SelectItemAction
+  | SetItemsAction | SetQueryAction
 
 export function closeWindow(): CloseWindowAction {
   return {
-    type: CLOSE_WINDOW,
+    type: ActionType.CloseWindow,
   }
 }
 
 export function openItem(item: Item): OpenItemAction {
   return {
-    type: OPEN_ITEM,
+    type: ActionType.OpenItem,
     payload: { item },
   }
 }
 
 export function selectItem(index: number): SelectItemAction {
   return {
-    type: SELECT_ITEM,
+    type: ActionType.SelectItem,
     payload: { index },
   }
 }
 
 export function setItems(items: Item[]): SetItemsAction {
   return {
-    type: SET_ITEMS,
+    type: ActionType.SetItems,
     payload: { items },
   }
 }
 
 export function setQuery(query: string): SetQueryAction {
   return {
-    type: SET_QUERY,
+    type: ActionType.SetQuery,
     payload: { query },
   }
 }
@@ -88,21 +91,21 @@ export const initialState: State = {
 
 export function rootReducer(
   state = initialState,
-  action: ActionTypes
+  action: Action
 ): State {
   switch (action.type) {
-    case SELECT_ITEM:
+    case ActionType.SelectItem:
       return {
         ...state,
         selectedItemIndex: action.payload.index,
       }
-    case SET_ITEMS:
+    case ActionType.SetItems:
       return {
         ...state,
         items: action.payload.items,
         selectedItemIndex: 0,
       }
-    case SET_QUERY:
+    case ActionType.SetQuery:
       return {
         ...state,
         query: action.payload.query,
