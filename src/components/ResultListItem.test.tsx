@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme'
 import React from 'react'
+import { BookmarkItem, ItemType } from '../types'
 import ResultListItem from './ResultListItem'
-import { ItemType, BookmarkItem } from '../types'
 
 describe('ResultListItem', () => {
   let item: BookmarkItem
@@ -10,7 +10,7 @@ describe('ResultListItem', () => {
     item = {
       type: ItemType.Bookmark,
       title: 'example',
-      url: 'https://example.com'
+      url: 'https://example.com',
     }
   })
 

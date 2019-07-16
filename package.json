@@ -9,7 +9,7 @@
     "build": "webpack --mode development --progress",
     "build:dist": "webpack --mode production --progress",
     "clean": "rimraf dist",
-    "lint": "tslint src/**.ts src/**.tsx",
+    "lint": "tslint src/*.ts src/*.tsx src/**/*.ts src/**/*.tsx",
     "package": "npm run clean && npm run build:dist && zip package.zip -r dist icons index.html manifest.json",
     "test": "jest"
   },
