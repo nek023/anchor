@@ -7,6 +7,7 @@
     "arrow-return-shorthand": true,
     "indent": [true, "spaces", 2],
     "no-irregular-whitespace": true,
+    "no-trailing-whitespace": true,
     "ordered-imports": true,
     "quotemark": [true, "single"],
     "semicolon": [true, "never"],
