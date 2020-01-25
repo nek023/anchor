@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { App } from './components/App'
 import { initialState, setQuery } from './modules/index'
-import { createStore } from './store'
+import { createStore } from './createStore'
 import { MessageTypes, SET_QUERY } from './utils/ipc'
 
 const url = new URL(document.URL)
