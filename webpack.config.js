@@ -2,12 +2,12 @@
 /* eslint-disable no-undef */
 
 const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const config = {
-  context: path.resolve(__dirname, 'src'),
   entry: {
-    index: './index.tsx',
-    background: './background.ts',
+    index: './src/index.tsx',
+    background: './src/background.ts',
   },
   module: {
     rules: [
@@ -22,8 +22,9 @@ const config = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
+  plugins: [new CopyPlugin(['public'])],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.ts', '.tsx', '.js'],
   },
 }
 

@@ -24,7 +24,7 @@
     }
   },
   "background": {
-    "scripts": ["dist/background.js"]
+    "scripts": ["background.js"]
   },
   "permissions": [
     "bookmarks",
