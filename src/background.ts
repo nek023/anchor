@@ -16,7 +16,7 @@ const itemManager = new ItemManager()
 
 let mainWindow: chrome.windows.Window | undefined
 
-function showWindow(query: string) {
+const showWindow = (query: string) => {
   if (mainWindow && mainWindow.focused) {
     chrome.windows.remove(mainWindow.id, () => {
       mainWindow = undefined

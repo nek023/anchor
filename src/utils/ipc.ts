@@ -17,21 +17,21 @@ export interface SetQueryMessage {
 
 export type MessageTypes = QueryItemsMessage | SetQueryMessage
 
-export function queryItems(query: string): QueryItemsMessage {
+export const queryItems = (query: string): QueryItemsMessage => {
   return {
     type: QUERY_ITEMS,
     payload: { query },
   }
 }
 
-export function setQuery(query: string): SetQueryMessage {
+export const setQuery = (query: string): SetQueryMessage => {
   return {
     type: SET_QUERY,
     payload: { query },
   }
 }
 
-export async function sendMessage(message: MessageTypes) {
+export const sendMessage = async (message: MessageTypes) => {
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(message, response => {
       if (response) {

@@ -3,7 +3,7 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 import styled, { css } from 'styled-components'
 import { Item, ItemType } from '../types'
 
-function getFavIconUrl(item: Item) {
+const getFavIconUrl = (item: Item) => {
   if (item.type === ItemType.Tab && item.favIconUrl) {
     if (item.favIconUrl.startsWith('chrome://theme/')) {
       return 'chrome://favicon'
