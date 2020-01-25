@@ -45,24 +45,24 @@ const ResultListItemTitle = styled.div`
 
 const ResultListItemUrl = styled.div`
   color: #9999aa;
-  margin-top: 2px
-  color: #9999aa
-  font-size: 13px
-  font-weight: lighter
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
-  flex: 1
+  margin-top: 2px;
+  color: #9999aa;
+  font-size: 13px;
+  font-weight: lighter;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
 `
 
 const ResultListItemContainer = styled.li<{ selected: boolean }>`
-  width: 100%
-  height: 46px
-  padding: 3px
-  margin-bottom: 2px
-  overflow: hidden
-  display: flex
-  flex-direction: row
+  width: 100%;
+  height: 46px;
+  padding: 3px;
+  margin-bottom: 2px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
 
   ${props =>
     props.selected &&
