@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import styled, { css } from 'styled-components'
 import { Item, ItemType } from '../types'
@@ -106,19 +106,24 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
     }
   }, [selected])
 
-  return (
-    <ResultListItemContainer
-      onClick={handleClick}
-      ref={listItemContainerRef}
-      selected={selected}
-    >
-      <ResultListItemIconContainer>
-        <ResultListItemIconImage src={getFavIconUrl(item)} />
-      </ResultListItemIconContainer>
-      <ResultListItemBody>
-        <ResultListItemTitle>{item.title}</ResultListItemTitle>
-        <ResultListItemUrl>{item.url}</ResultListItemUrl>
-      </ResultListItemBody>
-    </ResultListItemContainer>
+  const listItem = useMemo(
+    () => (
+      <ResultListItemContainer
+        onClick={handleClick}
+        ref={listItemContainerRef}
+        selected={selected}
+      >
+        <ResultListItemIconContainer>
+          <ResultListItemIconImage src={getFavIconUrl(item)} />
+        </ResultListItemIconContainer>
+        <ResultListItemBody>
+          <ResultListItemTitle>{item.title}</ResultListItemTitle>
+          <ResultListItemUrl>{item.url}</ResultListItemUrl>
+        </ResultListItemBody>
+      </ResultListItemContainer>
+    ),
+    [handleClick, item, selected]
   )
+
+  return listItem
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { Item } from '../types'
 import { ResultListItem } from './ResultListItem'
@@ -31,9 +31,9 @@ export const ResultList: React.FC<ResultListProps> = ({
     onItemClick,
   ])
 
-  const listItems = useMemo(
-    () =>
-      items.map((item, index) => (
+  return (
+    <ResultListContainer>
+      {items.map((item, index) => (
         <ResultListItem
           index={index}
           item={item}
@@ -41,9 +41,7 @@ export const ResultList: React.FC<ResultListProps> = ({
           onClick={handleClick}
           selected={index === selectedItemIndex}
         />
-      )),
-    [handleClick, items, selectedItemIndex]
+      ))}
+    </ResultListContainer>
   )
-
-  return <ResultListContainer>{listItems}</ResultListContainer>
 }
