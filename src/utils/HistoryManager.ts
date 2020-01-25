@@ -8,7 +8,7 @@ export enum HistoryManagerEvent {
   Update = 'update',
 }
 
-export default class HistoryManager extends EventEmitter {
+export class HistoryManager extends EventEmitter {
   private _items: HistoryItem[]
 
   constructor() {

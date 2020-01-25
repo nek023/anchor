@@ -89,7 +89,7 @@ type Props = OptionalProps & {
   item: Item
 }
 
-export default class ResultListItem extends React.PureComponent<Props> {
+export class ResultListItem extends React.PureComponent<Props> {
   public static defaultProps: OptionalProps = {
     selected: false,
   }

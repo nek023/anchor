@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Item } from '../types'
-import ResultListItem from './ResultListItem'
+import { ResultListItem } from './ResultListItem'
 
 const ResultListContainer = styled.ul`
   width: 100%;
@@ -25,7 +25,7 @@ type Props = OptionalProps & {
   items: Item[]
 }
 
-export default class ResultList extends React.PureComponent<Props> {
+export class ResultList extends React.PureComponent<Props> {
   render() {
     const listItems = this.props.items.map((item, index) => {
       const selected = index === this.props.selectedItemIndex

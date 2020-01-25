@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 import { BookmarkItem, ItemType } from '../types'
-import ResultListItem from './ResultListItem'
+import { ResultListItem } from './ResultListItem'
 
 describe('ResultListItem', () => {
   let item: BookmarkItem

@@ -5,7 +5,7 @@ export enum TabManagerEvent {
   Update = 'update',
 }
 
-export default class TabManager extends EventEmitter {
+export class TabManager extends EventEmitter {
   private _items: TabItem[]
 
   constructor() {

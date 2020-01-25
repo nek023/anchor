@@ -1,4 +1,4 @@
-export default class DisplayManager {
+export class DisplayManager {
   private _displays: chrome.system.display.DisplayInfo[] = []
   private _primaryDisplay: chrome.system.display.DisplayInfo | undefined
 

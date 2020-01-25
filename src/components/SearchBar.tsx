@@ -23,7 +23,7 @@ type Props = OptionalProps & {
   value: string
 }
 
-export default class SearchBar extends React.PureComponent<Props> {
+export class SearchBar extends React.PureComponent<Props> {
   private inputRef = React.createRef<HTMLInputElement>()
 
   componentDidMount() {

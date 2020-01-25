@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme'
 import React from 'react'
-import SearchBar from './SearchBar'
+import { SearchBar } from './SearchBar'
 
 describe('SearchBar', () => {
   it('matches snapshot', () => {

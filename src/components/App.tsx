@@ -9,8 +9,8 @@ import {
   selectItem,
   setQuery,
 } from '../modules/index'
-import ResultList from './ResultList'
-import SearchBar from './SearchBar'
+import { ResultList } from './ResultList'
+import { SearchBar } from './SearchBar'
 
 enum KeyCode {
   Return = 13,
@@ -48,7 +48,7 @@ const AppContainer = styled.div`
 type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>
 
-export class App extends React.PureComponent<Props> {
+export class InnerApp extends React.PureComponent<Props> {
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown)
     this.props.setQuery(this.props.query)
@@ -136,4 +136,4 @@ export class App extends React.PureComponent<Props> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export const App = connect(mapStateToProps, mapDispatchToProps)(InnerApp)
