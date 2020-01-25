@@ -1,8 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
+import { Dispatch, bindActionCreators } from 'redux'
 import styled from 'styled-components'
-import { closeWindow, openItem, selectItem, setQuery, State } from '../modules/index'
+import {
+  State,
+  closeWindow,
+  openItem,
+  selectItem,
+  setQuery,
+} from '../modules/index'
 import ResultList from './ResultList'
 import SearchBar from './SearchBar'
 
@@ -24,12 +30,15 @@ const mapStateToProps = (state: State) => {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
-  return bindActionCreators({
-    closeWindow,
-    openItem,
-    selectItem,
-    setQuery,
-  }, dispatch)
+  return bindActionCreators(
+    {
+      closeWindow,
+      openItem,
+      selectItem,
+      setQuery,
+    },
+    dispatch
+  )
 }
 
 const AppContainer = styled.div`
@@ -52,10 +61,15 @@ export class App extends React.PureComponent<Props> {
   render() {
     return (
       <AppContainer>
-        <SearchBar value={this.props.query}
-          onValueChanged={this.onValueChanged} />
-        <ResultList items={this.props.items} onClickItem={this.onClickItem}
-          selectedItemIndex={this.props.selectedItemIndex} />
+        <SearchBar
+          value={this.props.query}
+          onValueChanged={this.onValueChanged}
+        />
+        <ResultList
+          items={this.props.items}
+          onClickItem={this.onClickItem}
+          selectedItemIndex={this.props.selectedItemIndex}
+        />
       </AppContainer>
     )
   }
@@ -72,42 +86,42 @@ export class App extends React.PureComponent<Props> {
 
   private handleKeyDown = (event: KeyboardEvent) => {
     switch (event.keyCode) {
-    case KeyCode.Return:
-      event.preventDefault()
-      if (this.props.items.length === 0) break
-      this.props.openItem(this.props.items[this.props.selectedItemIndex])
-      this.props.closeWindow()
-      break
+      case KeyCode.Return:
+        event.preventDefault()
+        if (this.props.items.length === 0) break
+        this.props.openItem(this.props.items[this.props.selectedItemIndex])
+        this.props.closeWindow()
+        break
 
-    case KeyCode.Escape:
-      event.preventDefault()
-      this.props.closeWindow()
-      break
+      case KeyCode.Escape:
+        event.preventDefault()
+        this.props.closeWindow()
+        break
 
-    case KeyCode.Up:
-      event.preventDefault()
-      this.selectPreviousItem()
-      break
+      case KeyCode.Up:
+        event.preventDefault()
+        this.selectPreviousItem()
+        break
 
-    case KeyCode.Down:
-      event.preventDefault()
-      this.selectNextItem()
-      break
+      case KeyCode.Down:
+        event.preventDefault()
+        this.selectNextItem()
+        break
 
-    case KeyCode.N:
-      if (!event.ctrlKey) break
-      event.preventDefault()
-      this.selectNextItem()
-      break
+      case KeyCode.N:
+        if (!event.ctrlKey) break
+        event.preventDefault()
+        this.selectNextItem()
+        break
 
-    case KeyCode.P:
-      if (!event.ctrlKey) break
-      event.preventDefault()
-      this.selectPreviousItem()
-      break
+      case KeyCode.P:
+        if (!event.ctrlKey) break
+        event.preventDefault()
+        this.selectPreviousItem()
+        break
 
-    default:
-      break
+      default:
+        break
     }
   }
 

@@ -14,16 +14,18 @@ const store = createStore({
   query: query,
 })
 
-chrome.runtime.onMessage.addListener((message: MessageTypes, sender, sendResponse) => {
-  if (message.type === SET_QUERY) {
-    store.dispatch(setQuery(message.payload.query))
-    sendResponse(true)
+chrome.runtime.onMessage.addListener(
+  (message: MessageTypes, sender, sendResponse) => {
+    if (message.type === SET_QUERY) {
+      store.dispatch(setQuery(message.payload.query))
+      sendResponse(true)
+    }
   }
-})
+)
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 )

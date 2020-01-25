@@ -4,7 +4,7 @@ import SearchBar from './SearchBar'
 
 describe('SearchBar', () => {
   it('matches snapshot', () => {
-    const wrapper = shallow(<SearchBar value='' />)
+    const wrapper = shallow(<SearchBar value="" />)
 
     expect(wrapper).toMatchSnapshot()
   })
