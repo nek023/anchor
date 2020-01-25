@@ -1,45 +1,38 @@
-const path = require('path');
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
+
+const path = require('path')
 
 const config = {
   context: path.resolve(__dirname, 'src'),
   entry: {
-    'index': './index.tsx',
-    'background': './background.ts'
+    index: './index.tsx',
+    background: './background.ts',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        enforce: 'pre',
-        use: [
-          {
-            loader: 'tslint-loader',
-            options: { fix: true }
-          }
-        ]
-      },
-      {
-        test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/
-      }
-    ]
+        exclude: /node_modules/,
+      },
+    ],
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
-  }
-};
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+}
 
 module.exports = (env, argv) => {
   if (argv.mode === 'production') {
-    config.devtool = false;
+    config.devtool = false
   } else {
-    config.devtool = 'inline-source-map';
+    config.devtool = 'inline-source-map'
   }
 
-  return config;
-};
+  return config
+}

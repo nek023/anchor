@@ -28,19 +28,20 @@ type Props = OptionalProps & {
 export default class ResultList extends React.PureComponent<Props> {
   render() {
     const listItems = this.props.items.map((item, index) => {
-      const selected = (index === this.props.selectedItemIndex)
+      const selected = index === this.props.selectedItemIndex
 
       return (
-        <ResultListItem index={index} item={item} key={index}
-          onClick={this.handleClick} selected={selected} />
+        <ResultListItem
+          index={index}
+          item={item}
+          key={index}
+          onClick={this.handleClick}
+          selected={selected}
+        />
       )
     })
 
-    return (
-      <ResultListContainer>
-        {listItems}
-      </ResultListContainer>
-    )
+    return <ResultListContainer>{listItems}</ResultListContainer>
   }
 
   private handleClick = (index: number) => {

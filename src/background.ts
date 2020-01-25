@@ -3,9 +3,9 @@ import { MessageTypes, QUERY_ITEMS, sendMessage, setQuery } from './utils/ipc'
 import ItemManager from './utils/ItemManager'
 
 enum Command {
-  ToggleTab      = 'toggle-anchor',
+  ToggleTab = 'toggle-anchor',
   ToggleBookmark = 'toggle-anchor-with-bookmark-mode',
-  ToggleHistory  = 'toggle-anchor-with-history-mode',
+  ToggleHistory = 'toggle-anchor-with-history-mode',
 }
 
 const WINDOW_WIDTH = 600
@@ -23,35 +23,49 @@ function showWindow(query: string) {
     })
   } else {
     chrome.windows.getCurrent(currentWindow => {
-      const display = displayManager.displayContainsWindow(currentWindow)
-        || displayManager.primaryDisplay
-      if (display === undefined) { return }
+      const display =
+        displayManager.displayContainsWindow(currentWindow) ||
+        displayManager.primaryDisplay
+      if (display === undefined) {
+        return
+      }
 
       const bounds = {
         width: WINDOW_WIDTH,
         height: WINDOW_HEIGHT,
-        left: display.bounds.left + Math.round((display.bounds.width - WINDOW_WIDTH) * 0.5),
-        top: display.bounds.top + Math.round((display.bounds.height - WINDOW_HEIGHT) * 0.5),
+        left:
+          display.bounds.left +
+          Math.round((display.bounds.width - WINDOW_WIDTH) * 0.5),
+        top:
+          display.bounds.top +
+          Math.round((display.bounds.height - WINDOW_HEIGHT) * 0.5),
       }
 
       if (mainWindow) {
-        chrome.windows.update(mainWindow.id, {
-          ...bounds,
-          focused: true,
-        }, () => {
-          sendMessage(setQuery(query))
-        })
+        chrome.windows.update(
+          mainWindow.id,
+          {
+            ...bounds,
+            focused: true,
+          },
+          () => {
+            sendMessage(setQuery(query))
+          }
+        )
       } else {
         const url = chrome.runtime.getURL('index.html') + `?q=${query}`
 
-        chrome.windows.create({
-          ...bounds,
-          url,
-          focused: true,
-          type: 'popup',
-        }, window => {
-          mainWindow = window
-        })
+        chrome.windows.create(
+          {
+            ...bounds,
+            url,
+            focused: true,
+            type: 'popup',
+          },
+          window => {
+            mainWindow = window
+          }
+        )
       }
     })
   }
@@ -77,25 +91,27 @@ chrome.windows.onFocusChanged.addListener(windowId => {
 
 chrome.commands.onCommand.addListener((command: string) => {
   switch (command) {
-  case Command.ToggleTab:
-    showWindow('')
-    break
+    case Command.ToggleTab:
+      showWindow('')
+      break
 
-  case Command.ToggleBookmark:
-    showWindow('b:')
-    break
+    case Command.ToggleBookmark:
+      showWindow('b:')
+      break
 
-  case Command.ToggleHistory:
-    showWindow('h:')
-    break
+    case Command.ToggleHistory:
+      showWindow('h:')
+      break
 
-  default:
-    break
+    default:
+      break
   }
 })
 
-chrome.runtime.onMessage.addListener((message: MessageTypes, sender, sendResponse) => {
-  if (message.type === QUERY_ITEMS) {
-    sendResponse(itemManager.queryItems(message.payload.query))
+chrome.runtime.onMessage.addListener(
+  (message: MessageTypes, sender, sendResponse) => {
+    if (message.type === QUERY_ITEMS) {
+      sendResponse(itemManager.queryItems(message.payload.query))
+    }
   }
-})
+)

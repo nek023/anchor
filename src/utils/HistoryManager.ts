@@ -27,19 +27,22 @@ export default class HistoryManager extends EventEmitter {
   }
 
   private updateItems = () => {
-    chrome.history.search({
-      text: '',
-      maxResults: MAX_HISTORIES,
-      startTime: (Date.now() - HISTORY_RANGE),
-    }, items => {
-      this._items = items.map(item => {
-        return {
-          type: ItemType.History,
-          title: item.title,
-          url: item.url,
-        }
-      })
-      this.emit(HistoryManagerEvent.Update)
-    })
+    chrome.history.search(
+      {
+        text: '',
+        maxResults: MAX_HISTORIES,
+        startTime: Date.now() - HISTORY_RANGE,
+      },
+      items => {
+        this._items = items.map(item => {
+          return {
+            type: ItemType.History,
+            title: item.title,
+            url: item.url,
+          }
+        })
+        this.emit(HistoryManagerEvent.Update)
+      }
+    )
   }
 }

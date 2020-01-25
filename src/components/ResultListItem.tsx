@@ -65,7 +65,8 @@ const ResultListItemContainer = styled.li<{ selected: boolean }>`
   flex-direction: row
 
   ${props =>
-    props.selected && css`
+    props.selected &&
+    css`
       background-color: #0067ff;
 
       ${ResultListItemTitle} {
@@ -75,8 +76,7 @@ const ResultListItemContainer = styled.li<{ selected: boolean }>`
       ${ResultListItemUrl} {
         color: #bcd5fb;
       }
-    `
-  }
+    `}
 `
 
 type OptionalProps = {
@@ -108,18 +108,17 @@ export default class ResultListItem extends React.PureComponent<Props> {
 
   render() {
     return (
-      <ResultListItemContainer onClick={this.handleClick} ref={this.listRef}
-        selected={this.props.selected}>
+      <ResultListItemContainer
+        onClick={this.handleClick}
+        ref={this.listRef}
+        selected={this.props.selected}
+      >
         <ResultListItemIconContainer>
           <ResultListItemIconImage src={getFavIconUrl(this.props.item)} />
         </ResultListItemIconContainer>
         <ResultListItemBody>
-          <ResultListItemTitle>
-            {this.props.item.title}
-          </ResultListItemTitle>
-          <ResultListItemUrl>
-            {this.props.item.url}
-          </ResultListItemUrl>
+          <ResultListItemTitle>{this.props.item.title}</ResultListItemTitle>
+          <ResultListItemUrl>{this.props.item.url}</ResultListItemUrl>
         </ResultListItemBody>
       </ResultListItemContainer>
     )

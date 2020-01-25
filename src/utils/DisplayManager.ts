@@ -18,21 +18,29 @@ export default class DisplayManager {
     return this._primaryDisplay
   }
 
-  public displayContainsWindow(window: chrome.windows.Window): chrome.system.display.DisplayInfo | undefined {
+  public displayContainsWindow(
+    window: chrome.windows.Window
+  ): chrome.system.display.DisplayInfo | undefined {
     const { left, top, width, height } = window
 
-    if (typeof left !== 'number' || typeof top !== 'number'
-      || typeof width !== 'number' || typeof height !== 'number') {
+    if (
+      typeof left !== 'number' ||
+      typeof top !== 'number' ||
+      typeof width !== 'number' ||
+      typeof height !== 'number'
+    ) {
       return undefined
     }
 
     const displays = this.displays.filter(display => {
       const b = display.bounds
 
-      return (b.left   <= left
-           && b.top    <= top
-           && b.left + b.width  >= left + width
-           && b.top  + b.height >= top + height)
+      return (
+        b.left <= left &&
+        b.top <= top &&
+        b.left + b.width >= left + width &&
+        b.top + b.height >= top + height
+      )
     })
 
     return displays.length > 0 ? displays[0] : undefined

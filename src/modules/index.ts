@@ -2,10 +2,10 @@ import { Item } from '../types'
 
 export enum ActionType {
   CloseWindow = 'CLOSE_WINDOW',
-  OpenItem    = 'OPEN_ITEM',
-  SelectItem  = 'SELECT_ITEM',
-  SetItems    = 'SET_ITEMS',
-  SetQuery    = 'SET_QUERY',
+  OpenItem = 'OPEN_ITEM',
+  SelectItem = 'SELECT_ITEM',
+  SetItems = 'SET_ITEMS',
+  SetQuery = 'SET_QUERY',
 }
 
 export interface CloseWindowAction {
@@ -40,8 +40,12 @@ export interface SetQueryAction {
   }
 }
 
-export type Action = CloseWindowAction | OpenItemAction | SelectItemAction
-  | SetItemsAction | SetQueryAction
+export type Action =
+  | CloseWindowAction
+  | OpenItemAction
+  | SelectItemAction
+  | SetItemsAction
+  | SetQueryAction
 
 export function closeWindow(): CloseWindowAction {
   return {
@@ -89,10 +93,7 @@ export const initialState: State = {
   selectedItemIndex: 0,
 }
 
-export function rootReducer(
-  state = initialState,
-  action: Action
-): State {
+export function rootReducer(state = initialState, action: Action): State {
   switch (action.type) {
     case ActionType.SelectItem:
       return {

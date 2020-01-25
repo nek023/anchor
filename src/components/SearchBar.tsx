@@ -36,7 +36,7 @@ export default class SearchBar extends React.PureComponent<Props> {
   render() {
     return (
       <SearchBarInput
-        type='text'
+        type="text"
         value={this.props.value}
         ref={this.inputRef}
         autoFocus={true}
