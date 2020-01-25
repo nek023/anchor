@@ -1,4 +1,4 @@
-import EventEmitter from 'events'
+import { EventEmitter } from 'events'
 import { BookmarkItem, ItemType } from '../types'
 
 const MAX_BOOKMARKS = 1000

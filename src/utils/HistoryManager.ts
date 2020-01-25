@@ -1,4 +1,4 @@
-import EventEmitter from 'events'
+import { EventEmitter } from 'events'
 import { HistoryItem, ItemType } from '../types'
 
 const MAX_HISTORIES = 100
