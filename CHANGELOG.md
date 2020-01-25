@@ -1,5 +1,11 @@
 # Change Log
 
+## [v2.1.0](https://github.com/questbeat/anchor/tree/v2.1.0)
+
+- TSLint to ESLint
+- Update packages
+
+
 ## [v2.0.0](https://github.com/questbeat/anchor/tree/v2.0.0)
 
 - Rewrite in TypeScript
