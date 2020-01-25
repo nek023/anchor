@@ -1,10 +1,10 @@
 import Fuse, { FuseOptions } from 'fuse.js'
 import { Item } from '../types'
-import BookmarkManager, { BookmarkManagerEvent } from './BookmarkManager'
-import HistoryManager, { HistoryManagerEvent } from './HistoryManager'
-import TabManager, { TabManagerEvent } from './TabManager'
+import { BookmarkManager, BookmarkManagerEvent } from './BookmarkManager'
+import { HistoryManager, HistoryManagerEvent } from './HistoryManager'
+import { TabManager, TabManagerEvent } from './TabManager'
 
-export default class ItemManager {
+export class ItemManager {
   private _bookmarkManager: BookmarkManager
   private _historyManager: HistoryManager
   private _tabManager: TabManager

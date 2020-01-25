@@ -1,6 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Dispatch, bindActionCreators } from 'redux'
+import React, { useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import {
   State,
@@ -9,131 +8,80 @@ import {
   selectItem,
   setQuery,
 } from '../modules/index'
-import ResultList from './ResultList'
-import SearchBar from './SearchBar'
-
-enum KeyCode {
-  Return = 13,
-  Escape = 27,
-  Up = 38,
-  Down = 40,
-  N = 78,
-  P = 80,
-}
-
-const mapStateToProps = (state: State) => {
-  return {
-    items: state.items,
-    query: state.query,
-    selectedItemIndex: state.selectedItemIndex,
-  }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return bindActionCreators(
-    {
-      closeWindow,
-      openItem,
-      selectItem,
-      setQuery,
-    },
-    dispatch
-  )
-}
+import { ResultList } from './ResultList'
+import { SearchBar } from './SearchBar'
+import { KeyboardEventHandler } from './KeyboardEventHandler'
+import { Item } from '../types'
 
 const AppContainer = styled.div`
   padding: 8px;
 `
 
-type Props = ReturnType<typeof mapStateToProps> &
-  ReturnType<typeof mapDispatchToProps>
+export const App: React.FC = () => {
+  const dispatch = useDispatch()
+  const items = useSelector<State, Item[]>(state => state.items)
+  const query = useSelector<State, string>(state => state.query)
+  const selectedItemIndex = useSelector<State, number>(
+    state => state.selectedItemIndex
+  )
 
-export class App extends React.PureComponent<Props> {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown)
-    this.props.setQuery(this.props.query)
-  }
+  useEffect(
+    () => {
+      dispatch(setQuery(query))
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown)
-  }
+  const handleReturn = useCallback(() => {
+    if (items.length === 0) return
+    dispatch(openItem(items[selectedItemIndex]))
+    dispatch(closeWindow())
+  }, [dispatch, items, selectedItemIndex])
 
-  render() {
-    return (
+  const handleEscape = useCallback(() => dispatch(closeWindow()), [dispatch])
+
+  const handleUp = useCallback(() => {
+    if (selectedItemIndex <= 0) return
+    dispatch(selectItem(selectedItemIndex - 1))
+  }, [dispatch, selectedItemIndex])
+
+  const handleDown = useCallback(() => {
+    if (selectedItemIndex >= items.length - 1) return
+    dispatch(selectItem(selectedItemIndex + 1))
+  }, [dispatch, items.length, selectedItemIndex])
+
+  const handleItemClick = useCallback(
+    (index: number) => {
+      dispatch(selectItem(index))
+      dispatch(openItem(items[index]))
+      dispatch(closeWindow())
+    },
+    [dispatch, items]
+  )
+
+  const handleValueChange = useCallback(
+    (query: string) => {
+      dispatch(setQuery(query))
+    },
+    [dispatch]
+  )
+
+  return (
+    <KeyboardEventHandler
+      onReturn={handleReturn}
+      onEscape={handleEscape}
+      onUp={handleUp}
+      onDown={handleDown}
+    >
       <AppContainer>
-        <SearchBar
-          value={this.props.query}
-          onValueChanged={this.onValueChanged}
-        />
+        <SearchBar value={query} onValueChange={handleValueChange} />
         <ResultList
-          items={this.props.items}
-          onClickItem={this.onClickItem}
-          selectedItemIndex={this.props.selectedItemIndex}
+          items={items}
+          onItemClick={handleItemClick}
+          selectedItemIndex={selectedItemIndex}
         />
       </AppContainer>
-    )
-  }
-
-  private selectNextItem = () => {
-    if (this.props.selectedItemIndex >= this.props.items.length - 1) return
-    this.props.selectItem(this.props.selectedItemIndex + 1)
-  }
-
-  private selectPreviousItem = () => {
-    if (this.props.selectedItemIndex <= 0) return
-    this.props.selectItem(this.props.selectedItemIndex - 1)
-  }
-
-  private handleKeyDown = (event: KeyboardEvent) => {
-    switch (event.keyCode) {
-      case KeyCode.Return:
-        event.preventDefault()
-        if (this.props.items.length === 0) break
-        this.props.openItem(this.props.items[this.props.selectedItemIndex])
-        this.props.closeWindow()
-        break
-
-      case KeyCode.Escape:
-        event.preventDefault()
-        this.props.closeWindow()
-        break
-
-      case KeyCode.Up:
-        event.preventDefault()
-        this.selectPreviousItem()
-        break
-
-      case KeyCode.Down:
-        event.preventDefault()
-        this.selectNextItem()
-        break
-
-      case KeyCode.N:
-        if (!event.ctrlKey) break
-        event.preventDefault()
-        this.selectNextItem()
-        break
-
-      case KeyCode.P:
-        if (!event.ctrlKey) break
-        event.preventDefault()
-        this.selectPreviousItem()
-        break
-
-      default:
-        break
-    }
-  }
-
-  private onClickItem = (index: number) => {
-    this.props.selectItem(index)
-    this.props.openItem(this.props.items[index])
-    this.props.closeWindow()
-  }
-
-  private onValueChanged = (value: string) => {
-    this.props.setQuery(value)
-  }
+    </KeyboardEventHandler>
+  )
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)

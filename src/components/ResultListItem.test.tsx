@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 import { BookmarkItem, ItemType } from '../types'
-import ResultListItem from './ResultListItem'
+import { ResultListItem } from './ResultListItem'
 
 describe('ResultListItem', () => {
   let item: BookmarkItem
@@ -15,21 +15,33 @@ describe('ResultListItem', () => {
   })
 
   it('matches snapshot', () => {
-    const wrapper = shallow(<ResultListItem index={0} item={item} />)
+    const wrapper = shallow(
+      <ResultListItem
+        index={0}
+        item={item}
+        onClick={() => {}}
+        selected={false}
+      />
+    )
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('calls onClick when mouse has been clicked', () => {
-    const onClick = jest.fn()
+    const handleClick = jest.fn()
     const wrapper = shallow(
-      <ResultListItem index={0} item={item} onClick={onClick} />
+      <ResultListItem
+        index={0}
+        item={item}
+        onClick={handleClick}
+        selected={false}
+      />
     )
 
-    expect(onClick).not.toHaveBeenCalled()
+    expect(handleClick).not.toHaveBeenCalled()
 
     wrapper.simulate('click')
 
-    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(handleClick).toHaveBeenCalledTimes(1)
   })
 })

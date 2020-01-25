@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore as reduxCreateStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { State, rootReducer } from './modules/index'
 import { rootSaga } from './sagas/index'
 
-export default (initialState: State) => {
+export const createStore = (initialState: State) => {
   const middlewares = []
 
   if (process.env.NODE_ENV === 'development') {
@@ -16,7 +16,7 @@ export default (initialState: State) => {
   const sagaMiddleware = createSagaMiddleware()
   middlewares.push(sagaMiddleware)
 
-  const store = createStore(
+  const store = reduxCreateStore(
     rootReducer,
     initialState,
     applyMiddleware(...middlewares)

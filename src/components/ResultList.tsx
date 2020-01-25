@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { Item } from '../types'
-import ResultListItem from './ResultListItem'
+import { ResultListItem } from './ResultListItem'
 
 const ResultListContainer = styled.ul`
   width: 100%;
@@ -16,37 +16,32 @@ const ResultListContainer = styled.ul`
   cursor: default;
 `
 
-type OptionalProps = {
-  onClickItem?: (index: number) => void
-  selectedItemIndex?: number
-}
-
-type Props = OptionalProps & {
+interface ResultListProps {
   items: Item[]
+  onItemClick: (index: number) => void
+  selectedItemIndex: number
 }
 
-export default class ResultList extends React.PureComponent<Props> {
-  render() {
-    const listItems = this.props.items.map((item, index) => {
-      const selected = index === this.props.selectedItemIndex
+export const ResultList: React.FC<ResultListProps> = ({
+  items,
+  onItemClick,
+  selectedItemIndex,
+}) => {
+  const handleClick = useCallback((index: number) => onItemClick(index), [
+    onItemClick,
+  ])
 
-      return (
+  return (
+    <ResultListContainer>
+      {items.map((item, index) => (
         <ResultListItem
           index={index}
           item={item}
           key={index}
-          onClick={this.handleClick}
-          selected={selected}
+          onClick={handleClick}
+          selected={index === selectedItemIndex}
         />
-      )
-    })
-
-    return <ResultListContainer>{listItems}</ResultListContainer>
-  }
-
-  private handleClick = (index: number) => {
-    if (this.props.onClickItem) {
-      this.props.onClickItem(index)
-    }
-  }
+      ))}
+    </ResultListContainer>
+  )
 }

@@ -7,7 +7,7 @@ export enum BookmarkManagerEvent {
   Update = 'update',
 }
 
-export default class BookmarkManager extends EventEmitter {
+export class BookmarkManager extends EventEmitter {
   private _items: BookmarkItem[]
   private _importing: boolean
 

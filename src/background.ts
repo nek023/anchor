@@ -1,6 +1,6 @@
-import DisplayManager from './utils/DisplayManager'
+import { DisplayManager } from './utils/DisplayManager'
 import { MessageTypes, QUERY_ITEMS, sendMessage, setQuery } from './utils/ipc'
-import ItemManager from './utils/ItemManager'
+import { ItemManager } from './utils/ItemManager'
 
 enum Command {
   ToggleTab = 'toggle-anchor',
@@ -16,7 +16,7 @@ const itemManager = new ItemManager()
 
 let mainWindow: chrome.windows.Window | undefined
 
-function showWindow(query: string) {
+const showWindow = (query: string) => {
   if (mainWindow && mainWindow.focused) {
     chrome.windows.remove(mainWindow.id, () => {
       mainWindow = undefined

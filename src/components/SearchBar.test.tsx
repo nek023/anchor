@@ -1,24 +1,24 @@
 import { shallow } from 'enzyme'
 import React from 'react'
-import SearchBar from './SearchBar'
+import { SearchBar } from './SearchBar'
 
 describe('SearchBar', () => {
   it('matches snapshot', () => {
-    const wrapper = shallow(<SearchBar value="" />)
+    const wrapper = shallow(<SearchBar value="" onValueChange={() => {}} />)
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('calls onValueChanged when value has changed', () => {
-    const onValueChanged = jest.fn()
+    const handleValueChange = jest.fn()
     const wrapper = shallow(
-      <SearchBar value={'test value'} onValueChanged={onValueChanged} />
+      <SearchBar value={'test value'} onValueChange={handleValueChange} />
     )
 
-    expect(onValueChanged).not.toHaveBeenCalled()
+    expect(handleValueChange).not.toHaveBeenCalled()
 
     wrapper.simulate('change', { target: { value: 'new value' } })
 
-    expect(onValueChanged).toHaveBeenCalledTimes(1)
+    expect(handleValueChange).toHaveBeenCalledTimes(1)
   })
 })

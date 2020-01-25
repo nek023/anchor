@@ -47,34 +47,34 @@ export type Action =
   | SetItemsAction
   | SetQueryAction
 
-export function closeWindow(): CloseWindowAction {
+export const closeWindow = (): CloseWindowAction => {
   return {
     type: ActionType.CloseWindow,
   }
 }
 
-export function openItem(item: Item): OpenItemAction {
+export const openItem = (item: Item): OpenItemAction => {
   return {
     type: ActionType.OpenItem,
     payload: { item },
   }
 }
 
-export function selectItem(index: number): SelectItemAction {
+export const selectItem = (index: number): SelectItemAction => {
   return {
     type: ActionType.SelectItem,
     payload: { index },
   }
 }
 
-export function setItems(items: Item[]): SetItemsAction {
+export const setItems = (items: Item[]): SetItemsAction => {
   return {
     type: ActionType.SetItems,
     payload: { items },
   }
 }
 
-export function setQuery(query: string): SetQueryAction {
+export const setQuery = (query: string): SetQueryAction => {
   return {
     type: ActionType.SetQuery,
     payload: { query },
@@ -93,7 +93,7 @@ export const initialState: State = {
   selectedItemIndex: 0,
 }
 
-export function rootReducer(state = initialState, action: Action): State {
+export const rootReducer = (state = initialState, action: Action): State => {
   switch (action.type) {
     case ActionType.SelectItem:
       return {

@@ -24,6 +24,7 @@ module.exports = {
   ],
   rules: {
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "prettier/prettier": [
       "error",
       {
@@ -34,6 +35,7 @@ module.exports = {
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
     "sort-imports": ["warn", { ignoreDeclarationSort: true }],
     "sort-vars": "warn",
   }
