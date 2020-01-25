@@ -10,16 +10,6 @@ const config = {
     rules: [
       {
         test: /\.tsx?$/,
-        enforce: 'pre',
-        use: [
-          {
-            loader: 'tslint-loader',
-            options: { fix: true }
-          }
-        ]
-      },
-      {
-        test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
       }
