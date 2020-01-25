@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import styled, { css } from 'styled-components'
 import { Item, ItemType } from '../types'
@@ -79,54 +79,46 @@ const ResultListItemContainer = styled.li<{ selected: boolean }>`
     `}
 `
 
-type OptionalProps = {
-  onClick?: (index: number) => void
+interface ResultListItemProps {
+  index: number
+  item: Item
+  onClick: (index: number) => void
   selected: boolean
 }
 
-type Props = OptionalProps & {
-  index: number
-  item: Item
-}
+export const ResultListItem: React.FC<ResultListItemProps> = ({
+  index,
+  item,
+  onClick,
+  selected,
+}) => {
+  const listItemContainerRef = useRef<HTMLLIElement>(null)
 
-export class ResultListItem extends React.PureComponent<Props> {
-  public static defaultProps: OptionalProps = {
-    selected: false,
-  }
+  const handleClick = useCallback(() => onClick(index), [index, onClick])
 
-  private listRef = React.createRef<HTMLLIElement>()
-
-  componentDidUpdate() {
-    if (this.props.selected && this.listRef.current) {
-      scrollIntoView(this.listRef.current, {
+  useEffect(() => {
+    if (selected && listItemContainerRef?.current) {
+      scrollIntoView(listItemContainerRef?.current, {
         block: 'nearest',
         inline: 'nearest',
         scrollMode: 'if-needed',
       })
     }
-  }
+  }, [selected])
 
-  render() {
-    return (
-      <ResultListItemContainer
-        onClick={this.handleClick}
-        ref={this.listRef}
-        selected={this.props.selected}
-      >
-        <ResultListItemIconContainer>
-          <ResultListItemIconImage src={getFavIconUrl(this.props.item)} />
-        </ResultListItemIconContainer>
-        <ResultListItemBody>
-          <ResultListItemTitle>{this.props.item.title}</ResultListItemTitle>
-          <ResultListItemUrl>{this.props.item.url}</ResultListItemUrl>
-        </ResultListItemBody>
-      </ResultListItemContainer>
-    )
-  }
-
-  private handleClick = () => {
-    if (this.props.onClick) {
-      this.props.onClick(this.props.index)
-    }
-  }
+  return (
+    <ResultListItemContainer
+      onClick={handleClick}
+      ref={listItemContainerRef}
+      selected={selected}
+    >
+      <ResultListItemIconContainer>
+        <ResultListItemIconImage src={getFavIconUrl(item)} />
+      </ResultListItemIconContainer>
+      <ResultListItemBody>
+        <ResultListItemTitle>{item.title}</ResultListItemTitle>
+        <ResultListItemUrl>{item.url}</ResultListItemUrl>
+      </ResultListItemBody>
+    </ResultListItemContainer>
+  )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 const SearchBarInput = styled.input`
@@ -15,46 +15,39 @@ const SearchBarInput = styled.input`
   }
 `
 
-type OptionalProps = {
-  onValueChanged?: (value: string) => void
-}
-
-type Props = OptionalProps & {
+interface SearchBarProps {
   value: string
+  onValueChange: (value: string) => void
 }
 
-export class SearchBar extends React.PureComponent<Props> {
-  private inputRef = React.createRef<HTMLInputElement>()
+export const SearchBar: React.FC<SearchBarProps> = ({
+  value,
+  onValueChange,
+}) => {
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  componentDidMount() {
-    if (this.inputRef.current) {
-      const index = this.props.value.length
-      this.inputRef.current.setSelectionRange(index, index)
-    }
-  }
+  const handleBlur = useCallback(() => inputRef?.current?.focus(), [])
 
-  render() {
-    return (
-      <SearchBarInput
-        type="text"
-        value={this.props.value}
-        ref={this.inputRef}
-        autoFocus={true}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-      />
-    )
-  }
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) =>
+      onValueChange(event.target.value),
+    [onValueChange]
+  )
 
-  private handleBlur = () => {
-    if (this.inputRef.current) {
-      this.inputRef.current.focus()
-    }
-  }
+  useEffect(
+    () => inputRef?.current?.setSelectionRange(value.length, value.length),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
 
-  private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (this.props.onValueChanged) {
-      this.props.onValueChanged(event.target.value)
-    }
-  }
+  return (
+    <SearchBarInput
+      type="text"
+      value={value}
+      ref={inputRef}
+      autoFocus={true}
+      onBlur={handleBlur}
+      onChange={handleChange}
+    />
+  )
 }

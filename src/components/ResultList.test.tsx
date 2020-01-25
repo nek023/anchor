@@ -22,21 +22,27 @@ describe('ResultList', () => {
   })
 
   it('matches snapshot', () => {
-    const wrapper = shallow(<ResultList items={items} />)
+    const wrapper = shallow(
+      <ResultList items={items} onItemClick={() => {}} selectedItemIndex={0} />
+    )
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('calls onClickItem when list item has been clicked', () => {
-    const onClickItem = jest.fn()
+    const handleItemClick = jest.fn()
     const wrapper = shallow(
-      <ResultList items={items} onClickItem={onClickItem} />
+      <ResultList
+        items={items}
+        onItemClick={handleItemClick}
+        selectedItemIndex={0}
+      />
     )
 
-    expect(onClickItem).not.toHaveBeenCalled()
+    expect(handleItemClick).not.toHaveBeenCalled()
 
     wrapper.childAt(0).simulate('click')
 
-    expect(onClickItem).toHaveBeenCalledTimes(1)
+    expect(handleItemClick).toHaveBeenCalledTimes(1)
   })
 })
