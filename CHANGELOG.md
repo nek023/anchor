@@ -1,5 +1,10 @@
 # Change Log
 
+## [v2.2.0](https://github.com/questbeat/anchor/tree/v2.2.0)
+
+- React hooks
+
+
 ## [v2.1.0](https://github.com/questbeat/anchor/tree/v2.1.0)
 
 - TSLint to ESLint
