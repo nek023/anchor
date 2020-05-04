@@ -58,7 +58,7 @@ export class ItemManager {
       return this.items
     }
 
-    return this._fuse.search(keyword)
+    return this._fuse.search(keyword).map((result) => result.item)
   }
 
   private separateQuery(query: string) {
