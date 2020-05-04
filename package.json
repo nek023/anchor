@@ -6,12 +6,10 @@
   "author": "Katsuma Tanaka",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode development",
-    "build:dist": "webpack --mode production",
-    "build:watch": "webpack --mode development --watch",
+    "build": "webpack --mode production",
     "clean": "rimraf dist",
+    "dev": "webpack --mode development --watch",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "lint:fix": "yarn lint -- --fix",
     "package": "yarn run clean && yarn run build:dist && zip -r package.zip dist",
     "test": "jest"
   },

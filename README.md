@@ -23,7 +23,7 @@ git clone git@github.com:questbeat/anchor.git
 cd anchor
 
 yarn install
-yarn run build:dist
+yarn run build
 ```
 
 Then open Chrome extension settings and drag & drop anchor folder.
