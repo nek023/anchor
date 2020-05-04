@@ -11,7 +11,7 @@ import { queryItems, sendMessage } from '../utils/ipc'
 const MAX_RESULTS = 100
 
 function closeWindow() {
-  chrome.windows.getCurrent(window => {
+  chrome.windows.getCurrent((window) => {
     chrome.windows.remove(window.id)
   })
 }
@@ -25,7 +25,7 @@ function openItem(action: OpenItemAction) {
         tabs: item.tabIndex,
         windowId: item.windowId,
       },
-      window => {
+      (window) => {
         chrome.windows.update(window.id, { focused: true })
       }
     )

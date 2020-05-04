@@ -19,10 +19,10 @@ const AppContainer = styled.div`
 
 export const App: React.FC = () => {
   const dispatch = useDispatch()
-  const items = useSelector<State, Item[]>(state => state.items)
-  const query = useSelector<State, string>(state => state.query)
+  const items = useSelector<State, Item[]>((state) => state.items)
+  const query = useSelector<State, string>((state) => state.query)
   const selectedItemIndex = useSelector<State, number>(
-    state => state.selectedItemIndex
+    (state) => state.selectedItemIndex
   )
 
   useEffect(

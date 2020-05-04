@@ -33,8 +33,8 @@ export class HistoryManager extends EventEmitter {
         maxResults: MAX_HISTORIES,
         startTime: Date.now() - HISTORY_RANGE,
       },
-      items => {
-        this._items = items.map(item => {
+      (items) => {
+        this._items = items.map((item) => {
           return {
             type: ItemType.History,
             title: item.title,
