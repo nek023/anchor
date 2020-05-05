@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
-import { Item } from '../types'
+import { Item } from '../../common/types'
 import { ResultListItem } from './ResultListItem'
 
 const Container = styled.ul`

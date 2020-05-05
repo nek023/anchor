@@ -5,7 +5,7 @@ import { State, closeWindow, openItem, selectItem, setQuery } from '../modules'
 import { ResultList } from './ResultList'
 import { SearchBar } from './SearchBar'
 import { KeyboardEventHandler } from './KeyboardEventHandler'
-import { Item } from '../types'
+import { Item } from '../../common/types'
 
 const Container = styled.div`
   padding: 8px;

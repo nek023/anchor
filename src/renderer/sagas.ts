@@ -1,7 +1,7 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { ActionType, openItem, setItems, setQuery } from './modules'
-import { Item, ItemType } from './types'
-import { queryItems, sendMessage } from './ipc'
+import { Item, ItemType } from '../common/types'
+import { queryItems, sendMessage } from '../common/ipc'
 
 const MAX_RESULTS = 100
 

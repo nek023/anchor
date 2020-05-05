@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { App } from './components/App'
 import { initialState, setQuery } from './modules'
 import { createStore } from './store'
-import { Message, MessageType } from './ipc'
+import { Message, MessageType } from '../common/ipc'
 
 const query = new URL(document.URL).searchParams.get('q') || ''
 const store = createStore({ ...initialState, query })

@@ -1,6 +1,6 @@
-import { DisplayManager } from './utils/DisplayManager'
-import { Message, MessageType, sendMessage, setQuery } from './ipc'
-import { ItemManager } from './utils/ItemManager'
+import { DisplayManager } from './DisplayManager'
+import { Message, MessageType, sendMessage, setQuery } from '../common/ipc'
+import { ItemManager } from './ItemManager'
 
 enum Command {
   ToggleTab = 'toggle-anchor',

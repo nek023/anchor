@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import styled, { css } from 'styled-components'
-import { Item, ItemType } from '../types'
+import { Item, ItemType } from '../../common/types'
 
 const getFavIconUrl = (item: Item) => {
   if (item.type === ItemType.Tab && item.favIconUrl) {

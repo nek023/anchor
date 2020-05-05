@@ -21,6 +21,7 @@ export const createStore = (initialState: State) => {
     applyMiddleware(...middlewares)
   )
 
+  // saga middleware must be mounted before running
   sagaMiddleware.run(rootSaga)
 
   return store

@@ -1,4 +1,4 @@
-import { Item } from './types'
+import { Item } from '../common/types'
 
 export enum ActionType {
   CloseWindow = 'CLOSE_WINDOW',
