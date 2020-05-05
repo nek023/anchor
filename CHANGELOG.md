@@ -1,5 +1,10 @@
 # Change Log
 
+## [v2.3.0](https://github.com/questbeat/anchor/tree/v2.3.0)
+
+- Update packages
+
+
 ## [v2.2.0](https://github.com/questbeat/anchor/tree/v2.2.0)
 
 - React hooks
