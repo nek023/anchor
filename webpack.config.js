@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-
-const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
+const path = require('path')
 
 const config = {
   entry: {
-    index: './src/index.tsx',
-    background: './src/background.ts',
+    background: './src/background/index.ts',
+    renderer: './src/renderer/index.tsx',
   },
   module: {
     rules: [
@@ -20,11 +19,11 @@ const config = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
   },
   plugins: [new CopyPlugin(['public'])],
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.js', '.ts', '.tsx'],
   },
 }
 
@@ -34,6 +33,5 @@ module.exports = (env, argv) => {
   } else {
     config.devtool = 'inline-source-map'
   }
-
   return config
 }

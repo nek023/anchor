@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { BookmarkItem, ItemType } from '../types'
+import { BookmarkItem, ItemType } from '../common/types'
 
 const MAX_BOOKMARKS = 1000
 
@@ -38,14 +38,12 @@ export class BookmarkManager extends EventEmitter {
   }
 
   private updateItems = () => {
-    chrome.bookmarks.getRecent(MAX_BOOKMARKS, items => {
-      this._items = items.map(item => {
-        return {
-          type: ItemType.Bookmark,
-          title: item.title,
-          url: item.url,
-        }
-      })
+    chrome.bookmarks.getRecent(MAX_BOOKMARKS, (items) => {
+      this._items = items.map((item) => ({
+        type: ItemType.Bookmark,
+        title: item.title,
+        url: item.url,
+      }))
       this.emit(BookmarkManagerEvent.Update)
     })
   }

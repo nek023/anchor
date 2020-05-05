@@ -1,6 +1,6 @@
-import { DisplayManager } from './utils/DisplayManager'
-import { MessageTypes, QUERY_ITEMS, sendMessage, setQuery } from './utils/ipc'
-import { ItemManager } from './utils/ItemManager'
+import { DisplayManager } from './DisplayManager'
+import { Message, MessageType, sendMessage, setQuery } from '../common/ipc'
+import { ItemManager } from './ItemManager'
 
 enum Command {
   ToggleTab = 'toggle-anchor',
@@ -16,19 +16,17 @@ const itemManager = new ItemManager()
 
 let mainWindow: chrome.windows.Window | undefined
 
-const showWindow = (query: string) => {
+const openWindow = (query: string) => {
   if (mainWindow && mainWindow.focused) {
     chrome.windows.remove(mainWindow.id, () => {
       mainWindow = undefined
     })
   } else {
-    chrome.windows.getCurrent(currentWindow => {
+    chrome.windows.getCurrent((currentWindow) => {
       const display =
         displayManager.displayContainsWindow(currentWindow) ||
         displayManager.primaryDisplay
-      if (display === undefined) {
-        return
-      }
+      if (display === undefined) return
 
       const bounds = {
         width: WINDOW_WIDTH,
@@ -48,13 +46,10 @@ const showWindow = (query: string) => {
             ...bounds,
             focused: true,
           },
-          () => {
-            sendMessage(setQuery(query))
-          }
+          () => sendMessage(setQuery(query))
         )
       } else {
         const url = chrome.runtime.getURL('index.html') + `?q=${query}`
-
         chrome.windows.create(
           {
             ...bounds,
@@ -62,7 +57,7 @@ const showWindow = (query: string) => {
             focused: true,
             type: 'popup',
           },
-          window => {
+          (window) => {
             mainWindow = window
           }
         )
@@ -71,7 +66,7 @@ const showWindow = (query: string) => {
   }
 }
 
-chrome.windows.onRemoved.addListener(windowId => {
+chrome.windows.onRemoved.addListener((windowId) => {
   if (!mainWindow) return
 
   if (windowId === mainWindow.id) {
@@ -79,7 +74,7 @@ chrome.windows.onRemoved.addListener(windowId => {
   }
 })
 
-chrome.windows.onFocusChanged.addListener(windowId => {
+chrome.windows.onFocusChanged.addListener((windowId) => {
   if (!mainWindow) return
 
   if (windowId === mainWindow.id) {
@@ -89,18 +84,18 @@ chrome.windows.onFocusChanged.addListener(windowId => {
   }
 })
 
-chrome.commands.onCommand.addListener((command: string) => {
+chrome.commands.onCommand.addListener((command) => {
   switch (command) {
     case Command.ToggleTab:
-      showWindow('')
+      openWindow('')
       break
 
     case Command.ToggleBookmark:
-      showWindow('b:')
+      openWindow('b:')
       break
 
     case Command.ToggleHistory:
-      showWindow('h:')
+      openWindow('h:')
       break
 
     default:
@@ -109,8 +104,8 @@ chrome.commands.onCommand.addListener((command: string) => {
 })
 
 chrome.runtime.onMessage.addListener(
-  (message: MessageTypes, sender, sendResponse) => {
-    if (message.type === QUERY_ITEMS) {
+  (message: Message, sender, sendResponse) => {
+    if (message.type === MessageType.QUERY_ITEMS) {
       sendResponse(itemManager.queryItems(message.payload.query))
     }
   }

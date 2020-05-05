@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import styled, { css } from 'styled-components'
-import { Item, ItemType } from '../types'
+import { Item, ItemType } from '../../common/types'
 
 const getFavIconUrl = (item: Item) => {
   if (item.type === ItemType.Tab && item.favIconUrl) {
@@ -13,7 +13,7 @@ const getFavIconUrl = (item: Item) => {
   return `chrome://favicon/${item.url}`
 }
 
-const ResultListItemIconContainer = styled.div`
+const ItemLeft = styled.div`
   width: 30px;
   min-width: 30px;
   display: flex;
@@ -21,12 +21,7 @@ const ResultListItemIconContainer = styled.div`
   justify-content: center;
 `
 
-const ResultListItemIconImage = styled.img`
-  width: 24px;
-  height: 24px;
-`
-
-const ResultListItemBody = styled.div`
+const ItemRight = styled.div`
   margin-left: 8px;
   display: flex;
   flex-direction: column;
@@ -34,7 +29,12 @@ const ResultListItemBody = styled.div`
   flex: 1;
 `
 
-const ResultListItemTitle = styled.div`
+const ItemImage = styled.img`
+  width: 24px;
+  height: 24px;
+`
+
+const ItemTitle = styled.div`
   color: #333333;
   font-size: 15px;
   overflow: hidden;
@@ -43,7 +43,7 @@ const ResultListItemTitle = styled.div`
   flex: 1;
 `
 
-const ResultListItemUrl = styled.div`
+const ItemUrl = styled.div`
   color: #9999aa;
   margin-top: 2px;
   color: #9999aa;
@@ -55,7 +55,7 @@ const ResultListItemUrl = styled.div`
   flex: 1;
 `
 
-const ResultListItemContainer = styled.li<{ selected: boolean }>`
+const ItemContainer = styled.li<{ selected: boolean }>`
   width: 100%;
   height: 46px;
   padding: 3px;
@@ -64,16 +64,16 @@ const ResultListItemContainer = styled.li<{ selected: boolean }>`
   display: flex;
   flex-direction: row;
 
-  ${props =>
+  ${(props) =>
     props.selected &&
     css`
       background-color: #0067ff;
 
-      ${ResultListItemTitle} {
+      ${ItemTitle} {
         color: #fafafa;
       }
 
-      ${ResultListItemUrl} {
+      ${ItemUrl} {
         color: #bcd5fb;
       }
     `}
@@ -106,24 +106,22 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
     }
   }, [selected])
 
-  const listItem = useMemo(
+  return useMemo(
     () => (
-      <ResultListItemContainer
+      <ItemContainer
         onClick={handleClick}
         ref={listItemContainerRef}
         selected={selected}
       >
-        <ResultListItemIconContainer>
-          <ResultListItemIconImage src={getFavIconUrl(item)} />
-        </ResultListItemIconContainer>
-        <ResultListItemBody>
-          <ResultListItemTitle>{item.title}</ResultListItemTitle>
-          <ResultListItemUrl>{item.url}</ResultListItemUrl>
-        </ResultListItemBody>
-      </ResultListItemContainer>
+        <ItemLeft>
+          <ItemImage src={getFavIconUrl(item)} />
+        </ItemLeft>
+        <ItemRight>
+          <ItemTitle>{item.title}</ItemTitle>
+          <ItemUrl>{item.url}</ItemUrl>
+        </ItemRight>
+      </ItemContainer>
     ),
     [handleClick, item, selected]
   )
-
-  return listItem
 }

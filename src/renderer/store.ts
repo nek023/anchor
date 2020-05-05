@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 import { applyMiddleware, createStore as reduxCreateStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { State, rootReducer } from './modules/index'
-import { rootSaga } from './sagas/index'
+import { State, rootReducer } from './modules'
+import { rootSaga } from './sagas'
 
 export const createStore = (initialState: State) => {
   const middlewares = []
 
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { logger } = require('redux-logger')
     middlewares.push(logger)
   }
@@ -22,6 +21,7 @@ export const createStore = (initialState: State) => {
     applyMiddleware(...middlewares)
   )
 
+  // saga middleware must be mounted before running
   sagaMiddleware.run(rootSaga)
 
   return store

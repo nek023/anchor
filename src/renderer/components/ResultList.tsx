@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
-import { Item } from '../types'
+import { Item } from '../../common/types'
 import { ResultListItem } from './ResultListItem'
 
-const ResultListContainer = styled.ul`
+const Container = styled.ul`
   width: 100%;
   height: 432px; /* (46 + 2) * 9 */
   padding: 0;
@@ -32,7 +32,7 @@ export const ResultList: React.FC<ResultListProps> = ({
   ])
 
   return (
-    <ResultListContainer>
+    <Container>
       {items.map((item, index) => (
         <ResultListItem
           index={index}
@@ -42,6 +42,6 @@ export const ResultList: React.FC<ResultListProps> = ({
           selected={index === selectedItemIndex}
         />
       ))}
-    </ResultListContainer>
+    </Container>
   )
 }

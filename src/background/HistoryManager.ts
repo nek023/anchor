@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events'
-import { HistoryItem, ItemType } from '../types'
+import { HistoryItem, ItemType } from '../common/types'
 
-const MAX_HISTORIES = 100
+const MAX_HISTORIES = 1000
 const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30 // 30 days
 
 export enum HistoryManagerEvent {
@@ -33,14 +33,12 @@ export class HistoryManager extends EventEmitter {
         maxResults: MAX_HISTORIES,
         startTime: Date.now() - HISTORY_RANGE,
       },
-      items => {
-        this._items = items.map(item => {
-          return {
-            type: ItemType.History,
-            title: item.title,
-            url: item.url,
-          }
-        })
+      (items) => {
+        this._items = items.map((item) => ({
+          type: ItemType.History,
+          title: item.title,
+          url: item.url,
+        }))
         this.emit(HistoryManagerEvent.Update)
       }
     )

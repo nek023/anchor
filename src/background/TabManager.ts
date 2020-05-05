@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { ItemType, TabItem } from '../types'
+import { ItemType, TabItem } from '../common/types'
 
 export enum TabManagerEvent {
   Update = 'update',
@@ -26,17 +26,15 @@ export class TabManager extends EventEmitter {
   }
 
   private updateItems = () => {
-    chrome.tabs.query({ windowType: 'normal' }, items => {
-      this._items = items.map(item => {
-        return {
-          type: ItemType.Tab,
-          favIconUrl: item.favIconUrl,
-          title: item.title,
-          url: item.url,
-          tabIndex: item.index,
-          windowId: item.windowId,
-        }
-      })
+    chrome.tabs.query({ windowType: 'normal' }, (items) => {
+      this._items = items.map((item) => ({
+        type: ItemType.Tab,
+        favIconUrl: item.favIconUrl,
+        title: item.title,
+        url: item.url,
+        tabIndex: item.index,
+        windowId: item.windowId,
+      }))
       this.emit(TabManagerEvent.Update)
     })
   }

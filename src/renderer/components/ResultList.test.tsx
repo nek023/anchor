@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme'
 import React from 'react'
-import { BookmarkItem, ItemType } from '../types'
+import { BookmarkItem, ItemType } from '../../common/types'
 import { ResultList } from './ResultList'
 
 describe('ResultList', () => {

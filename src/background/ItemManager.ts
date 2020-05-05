@@ -1,5 +1,5 @@
-import Fuse, { FuseOptions } from 'fuse.js'
-import { Item } from '../types'
+import Fuse from 'fuse.js'
+import { Item } from '../common/types'
 import { BookmarkManager, BookmarkManagerEvent } from './BookmarkManager'
 import { HistoryManager, HistoryManagerEvent } from './HistoryManager'
 import { TabManager, TabManagerEvent } from './TabManager'
@@ -10,7 +10,7 @@ export class ItemManager {
   private _tabManager: TabManager
   private _filter: string
   private _items: Item[]
-  private _fuse: Fuse<Item, FuseOptions<Item>>
+  private _fuse: Fuse<Item, Fuse.IFuseOptions<Item>>
 
   constructor(
     bookmarkManager: BookmarkManager = new BookmarkManager(),
@@ -22,8 +22,7 @@ export class ItemManager {
     this._tabManager = tabManager
     this._filter = ''
     this._items = []
-
-    const options: FuseOptions<Item> = {
+    this._fuse = new Fuse(this.items, {
       keys: [
         {
           name: 'title',
@@ -34,8 +33,7 @@ export class ItemManager {
           weight: 0.3,
         },
       ],
-    }
-    this._fuse = new Fuse(this.items, options)
+    })
 
     this.updateItems()
 
@@ -60,7 +58,7 @@ export class ItemManager {
       return this.items
     }
 
-    return this._fuse.search(keyword)
+    return this._fuse.search(keyword).map((result) => result.item)
   }
 
   private separateQuery(query: string) {

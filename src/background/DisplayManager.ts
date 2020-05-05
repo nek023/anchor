@@ -32,7 +32,7 @@ export class DisplayManager {
       return undefined
     }
 
-    const displays = this.displays.filter(display => {
+    const displays = this.displays.filter((display) => {
       const b = display.bounds
 
       return (
@@ -47,9 +47,9 @@ export class DisplayManager {
   }
 
   private updateDisplays() {
-    chrome.system.display.getInfo(displays => {
+    chrome.system.display.getInfo((displays) => {
       this._displays = displays
-      this._primaryDisplay = displays.filter(d => d.isPrimary)[0]
+      this._primaryDisplay = displays.filter((d) => d.isPrimary)[0]
     })
   }
 }

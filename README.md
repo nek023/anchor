@@ -19,14 +19,11 @@ After installing, open Chrome extension settings and setup keyboard shortcut fro
 ### Build manually
 
 ```sh
-git clone git@github.com:questbeat/anchor.git
-cd anchor
-
 yarn install
-yarn run build:dist
+yarn run build
 ```
 
-Then open Chrome extension settings and drag & drop anchor folder.
+Then open Chrome extension settings and drag & drop `build` directory.
 
 
 ## Usage
@@ -50,4 +47,4 @@ Filters can be combined, for example:
 
 ## License
 
-MIT License: [http://questbeat.mit-license.org/](http://questbeat.mit-license.org/) or see [the LICENSE file](https://github.com/questbeat/anchor/blob/master/LICENSE).
+anchor is [MIT Licensed](LICENSE).
