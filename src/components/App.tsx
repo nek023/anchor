@@ -1,19 +1,13 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import {
-  State,
-  closeWindow,
-  openItem,
-  selectItem,
-  setQuery,
-} from '../modules/index'
+import { State, closeWindow, openItem, selectItem, setQuery } from '../modules'
 import { ResultList } from './ResultList'
 import { SearchBar } from './SearchBar'
 import { KeyboardEventHandler } from './KeyboardEventHandler'
 import { Item } from '../types'
 
-const AppContainer = styled.div`
+const Container = styled.div`
   padding: 8px;
 `
 
@@ -61,9 +55,7 @@ export const App: React.FC = () => {
   )
 
   const handleValueChange = useCallback(
-    (query: string) => {
-      dispatch(setQuery(query))
-    },
+    (query: string) => dispatch(setQuery(query)),
     [dispatch]
   )
 
@@ -74,14 +66,14 @@ export const App: React.FC = () => {
       onUp={handleUp}
       onDown={handleDown}
     >
-      <AppContainer>
+      <Container>
         <SearchBar value={query} onValueChange={handleValueChange} />
         <ResultList
           items={items}
           onItemClick={handleItemClick}
           selectedItemIndex={selectedItemIndex}
         />
-      </AppContainer>
+      </Container>
     </KeyboardEventHandler>
   )
 }

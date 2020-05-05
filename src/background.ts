@@ -1,5 +1,5 @@
 import { DisplayManager } from './utils/DisplayManager'
-import { MessageTypes, QUERY_ITEMS, sendMessage, setQuery } from './utils/ipc'
+import { Message, MessageType, sendMessage, setQuery } from './ipc'
 import { ItemManager } from './utils/ItemManager'
 
 enum Command {
@@ -16,7 +16,7 @@ const itemManager = new ItemManager()
 
 let mainWindow: chrome.windows.Window | undefined
 
-const showWindow = (query: string) => {
+const openWindow = (query: string) => {
   if (mainWindow && mainWindow.focused) {
     chrome.windows.remove(mainWindow.id, () => {
       mainWindow = undefined
@@ -26,9 +26,7 @@ const showWindow = (query: string) => {
       const display =
         displayManager.displayContainsWindow(currentWindow) ||
         displayManager.primaryDisplay
-      if (display === undefined) {
-        return
-      }
+      if (display === undefined) return
 
       const bounds = {
         width: WINDOW_WIDTH,
@@ -48,13 +46,10 @@ const showWindow = (query: string) => {
             ...bounds,
             focused: true,
           },
-          () => {
-            sendMessage(setQuery(query))
-          }
+          () => sendMessage(setQuery(query))
         )
       } else {
         const url = chrome.runtime.getURL('index.html') + `?q=${query}`
-
         chrome.windows.create(
           {
             ...bounds,
@@ -89,18 +84,18 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
   }
 })
 
-chrome.commands.onCommand.addListener((command: string) => {
+chrome.commands.onCommand.addListener((command) => {
   switch (command) {
     case Command.ToggleTab:
-      showWindow('')
+      openWindow('')
       break
 
     case Command.ToggleBookmark:
-      showWindow('b:')
+      openWindow('b:')
       break
 
     case Command.ToggleHistory:
-      showWindow('h:')
+      openWindow('h:')
       break
 
     default:
@@ -109,8 +104,8 @@ chrome.commands.onCommand.addListener((command: string) => {
 })
 
 chrome.runtime.onMessage.addListener(
-  (message: MessageTypes, sender, sendResponse) => {
-    if (message.type === QUERY_ITEMS) {
+  (message: Message, sender, sendResponse) => {
+    if (message.type === MessageType.QUERY_ITEMS) {
       sendResponse(itemManager.queryItems(message.payload.query))
     }
   }

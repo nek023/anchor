@@ -34,13 +34,11 @@ export class HistoryManager extends EventEmitter {
         startTime: Date.now() - HISTORY_RANGE,
       },
       (items) => {
-        this._items = items.map((item) => {
-          return {
-            type: ItemType.History,
-            title: item.title,
-            url: item.url,
-          }
-        })
+        this._items = items.map((item) => ({
+          type: ItemType.History,
+          title: item.title,
+          url: item.url,
+        }))
         this.emit(HistoryManagerEvent.Update)
       }
     )

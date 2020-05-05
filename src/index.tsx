@@ -2,21 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { App } from './components/App'
-import { initialState, setQuery } from './modules/index'
-import { createStore } from './createStore'
-import { MessageTypes, SET_QUERY } from './utils/ipc'
+import { initialState, setQuery } from './modules'
+import { createStore } from './store'
+import { Message, MessageType } from './ipc'
 
-const url = new URL(document.URL)
-const query = url.searchParams.get('q') || ''
-
-const store = createStore({
-  ...initialState,
-  query: query,
-})
+const query = new URL(document.URL).searchParams.get('q') || ''
+const store = createStore({ ...initialState, query })
 
 chrome.runtime.onMessage.addListener(
-  (message: MessageTypes, sender, sendResponse) => {
-    if (message.type === SET_QUERY) {
+  (message: Message, sender, sendResponse) => {
+    if (message.type === MessageType.SET_QUERY) {
       store.dispatch(setQuery(message.payload.query))
       sendResponse(true)
     }
