@@ -2,15 +2,15 @@
   "name": "anchor",
   "description": "Tab switcher for Google Chrome",
   "version": "2.2.0",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "author": "Katsuma Tanaka",
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production",
-    "clean": "rimraf dist",
+    "clean": "rimraf build",
     "dev": "webpack --mode development --watch",
+    "dist": "yarn run clean && yarn run build && zip -r anchor.zip build",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "package": "yarn run clean && yarn run build:dist && zip -r package.zip dist",
     "test": "jest"
   },
   "dependencies": {

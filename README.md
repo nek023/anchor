@@ -19,14 +19,11 @@ After installing, open Chrome extension settings and setup keyboard shortcut fro
 ### Build manually
 
 ```sh
-git clone git@github.com:questbeat/anchor.git
-cd anchor
-
 yarn install
 yarn run build
 ```
 
-Then open Chrome extension settings and drag & drop anchor folder.
+Then open Chrome extension settings and drag & drop `build` directory.
 
 
 ## Usage
