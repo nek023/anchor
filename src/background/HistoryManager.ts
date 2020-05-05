@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events'
 import { HistoryItem, ItemType } from '../common/types'
 
-const MAX_HISTORIES = 100
+const MAX_HISTORIES = 1000
 const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30 // 30 days
 
 export enum HistoryManagerEvent {
