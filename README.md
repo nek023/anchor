@@ -47,4 +47,4 @@ Filters can be combined, for example:
 
 ## License
 
-MIT License: [http://questbeat.mit-license.org/](http://questbeat.mit-license.org/) or see [the LICENSE file](https://github.com/questbeat/anchor/blob/master/LICENSE).
+anchor is [MIT Licensed](LICENSE).
