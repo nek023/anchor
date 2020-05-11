@@ -1,6 +1,7 @@
 # anchor
 
-[![CircleCI](https://circleci.com/gh/questbeat/anchor.svg?style=svg)](https://circleci.com/gh/questbeat/anchor)
+![Build](https://github.com/questbeat/anchor/workflows/Build/badge.svg)
+![Release](https://github.com/questbeat/anchor/workflows/Release/badge.svg)
 
 Tab switcher for Google Chrome.
 
