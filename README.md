@@ -3,7 +3,7 @@
 ![Build](https://github.com/questbeat/anchor/workflows/Build/badge.svg)
 ![Release](https://github.com/questbeat/anchor/workflows/Release/badge.svg)
 
-Tab switcher for Google Chrome.
+Tab switcher for Google Chrome
 
 ![](screenshot.png)
 
@@ -12,7 +12,7 @@ Tab switcher for Google Chrome.
 
 ### Download from Chrome Web Store
 
-Go to the [Chrome Web Store page](https://chrome.google.com/webstore/detail/anchor/hgnlmkibblofcjgcljofkcdofkplhlgb) and install extension.
+Go to the [Chrome Web Store](https://chrome.google.com/webstore/detail/anchor/hgnlmkibblofcjgcljofkcdofkplhlgb) and install extension.
 
 After installing, open Chrome extension settings and setup keyboard shortcut from the bottom right link.
 
