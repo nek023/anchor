@@ -5,9 +5,6 @@ import { queryItems, sendMessage } from '../common/ipc'
 
 const MAX_RESULTS = 100
 
-const handleCloseWindow = () =>
-  chrome.windows.getCurrent((window) => chrome.windows.remove(window.id))
-
 const handleOpenItem = (action: ReturnType<typeof openItem>) => {
   const item = action.payload.item
 
@@ -33,7 +30,6 @@ function* handleSetQuery(action: ReturnType<typeof setQuery>) {
 }
 
 export function* rootSaga() {
-  yield takeEvery(ActionType.CloseWindow, handleCloseWindow)
   yield takeEvery(ActionType.OpenItem, handleOpenItem)
   yield takeLatest(ActionType.SetQuery, handleSetQuery)
 }

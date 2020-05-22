@@ -1,16 +1,11 @@
 import { Item } from '../common/types'
 
 export enum ActionType {
-  CloseWindow = 'CLOSE_WINDOW',
   OpenItem = 'OPEN_ITEM',
   SelectItem = 'SELECT_ITEM',
   SetItems = 'SET_ITEMS',
   SetQuery = 'SET_QUERY',
 }
-
-export const closeWindow = () => ({
-  type: ActionType.CloseWindow as const,
-})
 
 export const openItem = (item: Item) => ({
   type: ActionType.OpenItem as const,
@@ -33,7 +28,6 @@ export const setQuery = (query: string) => ({
 })
 
 type Action =
-  | ReturnType<typeof closeWindow>
   | ReturnType<typeof openItem>
   | ReturnType<typeof selectItem>
   | ReturnType<typeof setItems>

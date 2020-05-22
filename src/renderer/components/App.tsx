@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { State, closeWindow, openItem, selectItem, setQuery } from '../modules'
+import { State, openItem, selectItem, setQuery } from '../modules'
 import { ResultList } from './ResultList'
 import { SearchBar } from './SearchBar'
 import { KeyboardEventHandler } from './KeyboardEventHandler'
@@ -10,6 +10,9 @@ import { Item } from '../../common/types'
 const Container = styled.div`
   padding: 8px;
 `
+
+const closeWindow = () =>
+  chrome.windows.getCurrent((window) => chrome.windows.remove(window.id))
 
 export const App: React.FC = () => {
   const dispatch = useDispatch()
@@ -30,10 +33,8 @@ export const App: React.FC = () => {
   const handleReturn = useCallback(() => {
     if (items.length === 0) return
     dispatch(openItem(items[selectedItemIndex]))
-    dispatch(closeWindow())
+    closeWindow()
   }, [dispatch, items, selectedItemIndex])
-
-  const handleEscape = useCallback(() => dispatch(closeWindow()), [dispatch])
 
   const handleUp = useCallback(() => {
     if (selectedItemIndex <= 0) return
@@ -49,7 +50,7 @@ export const App: React.FC = () => {
     (index: number) => {
       dispatch(selectItem(index))
       dispatch(openItem(items[index]))
-      dispatch(closeWindow())
+      closeWindow()
     },
     [dispatch, items]
   )
@@ -62,7 +63,7 @@ export const App: React.FC = () => {
   return (
     <KeyboardEventHandler
       onReturn={handleReturn}
-      onEscape={handleEscape}
+      onEscape={closeWindow}
       onUp={handleUp}
       onDown={handleDown}
     >
