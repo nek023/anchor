@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { State, openItem, selectItem, setQuery } from '../modules'
+import { State, selectItem, setQuery } from '../modules'
 import { ResultList } from './ResultList'
 import { SearchBar } from './SearchBar'
 import { KeyboardEventHandler } from './KeyboardEventHandler'
-import { Item } from '../../common/types'
+import { Item, ItemType } from '../../common/types'
 
 const Container = styled.div`
   padding: 8px;
@@ -13,6 +13,20 @@ const Container = styled.div`
 
 const closeWindow = () =>
   chrome.windows.getCurrent((window) => chrome.windows.remove(window.id))
+
+const openItem = (item: Item) => {
+  if (item.type === ItemType.Tab) {
+    chrome.tabs.highlight(
+      {
+        tabs: item.tabIndex,
+        windowId: item.windowId,
+      },
+      (window) => chrome.windows.update(window.id, { focused: true })
+    )
+  } else {
+    chrome.tabs.create({ url: item.url })
+  }
+}
 
 export const App: React.FC = () => {
   const dispatch = useDispatch()
@@ -32,9 +46,9 @@ export const App: React.FC = () => {
 
   const handleReturn = useCallback(() => {
     if (items.length === 0) return
-    dispatch(openItem(items[selectedItemIndex]))
+    openItem(items[selectedItemIndex])
     closeWindow()
-  }, [dispatch, items, selectedItemIndex])
+  }, [items, selectedItemIndex])
 
   const handleUp = useCallback(() => {
     if (selectedItemIndex <= 0) return
@@ -49,7 +63,7 @@ export const App: React.FC = () => {
   const handleItemClick = useCallback(
     (index: number) => {
       dispatch(selectItem(index))
-      dispatch(openItem(items[index]))
+      openItem(items[index])
       closeWindow()
     },
     [dispatch, items]

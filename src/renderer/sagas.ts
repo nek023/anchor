@@ -1,25 +1,9 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { ActionType, openItem, setItems, setQuery } from './modules'
-import { Item, ItemType } from '../common/types'
+import { call, put, takeLatest } from 'redux-saga/effects'
+import { ActionType, setItems, setQuery } from './modules'
+import { Item } from '../common/types'
 import { queryItems, sendMessage } from '../common/ipc'
 
 const MAX_RESULTS = 100
-
-const handleOpenItem = (action: ReturnType<typeof openItem>) => {
-  const item = action.payload.item
-
-  if (item.type === ItemType.Tab) {
-    chrome.tabs.highlight(
-      {
-        tabs: item.tabIndex,
-        windowId: item.windowId,
-      },
-      (window) => chrome.windows.update(window.id, { focused: true })
-    )
-  } else {
-    chrome.tabs.create({ url: item.url })
-  }
-}
 
 function* handleSetQuery(action: ReturnType<typeof setQuery>) {
   const items: Item[] = yield call(
@@ -30,6 +14,5 @@ function* handleSetQuery(action: ReturnType<typeof setQuery>) {
 }
 
 export function* rootSaga() {
-  yield takeEvery(ActionType.OpenItem, handleOpenItem)
   yield takeLatest(ActionType.SetQuery, handleSetQuery)
 }
