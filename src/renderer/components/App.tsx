@@ -1,7 +1,5 @@
 import React, { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { State, selectItem, setItems, setQuery } from '../modules'
 import { ResultList } from './ResultList'
 import { SearchBar } from './SearchBar'
 import { KeyboardEventHandler } from './KeyboardEventHandler'
@@ -31,26 +29,22 @@ const openItem = (item: Item) => {
 }
 
 const useItems = (query: string, maxItems = 100) => {
-  const dispatch = useDispatch()
-  const items = useSelector<State, Item[]>((state) => state.items)
+  const [items, setItems] = React.useState<Item[]>([])
 
   React.useEffect(() => {
     ;(async () => {
       const items = (await sendMessage(queryItems(query))) as Item[]
-      dispatch(setItems(items.slice(0, maxItems)))
+      setItems(items.slice(0, maxItems))
     })()
-  }, [dispatch, maxItems, query])
+  }, [maxItems, query])
 
   return items
 }
 
 export const App: React.FC = () => {
-  const dispatch = useDispatch()
-  const query = useSelector<State, string>((state) => state.query)
+  const [query, setQuery] = React.useState('')
   const items = useItems(useThrottle(query, 50))
-  const selectedItemIndex = useSelector<State, number>(
-    (state) => state.selectedItemIndex
-  )
+  const [selectedItemIndex, setSelectedItemIndex] = React.useState(0)
 
   const handleReturn = useCallback(() => {
     if (items.length === 0) return
@@ -60,27 +54,26 @@ export const App: React.FC = () => {
 
   const handleUp = useCallback(() => {
     if (selectedItemIndex <= 0) return
-    dispatch(selectItem(selectedItemIndex - 1))
-  }, [dispatch, selectedItemIndex])
+    setSelectedItemIndex(selectedItemIndex - 1)
+  }, [selectedItemIndex])
 
   const handleDown = useCallback(() => {
     if (selectedItemIndex >= items.length - 1) return
-    dispatch(selectItem(selectedItemIndex + 1))
-  }, [dispatch, items.length, selectedItemIndex])
+    setSelectedItemIndex(selectedItemIndex + 1)
+  }, [items.length, selectedItemIndex])
 
   const handleItemClick = useCallback(
     (index: number) => {
-      dispatch(selectItem(index))
+      setSelectedItemIndex(index)
       openItem(items[index])
       closeWindow()
     },
-    [dispatch, items]
+    [items]
   )
 
-  const handleValueChange = useCallback(
-    (query: string) => dispatch(setQuery(query)),
-    [dispatch]
-  )
+  const handleValueChange = useCallback((query: string) => setQuery(query), [
+    setQuery,
+  ])
 
   return (
     <KeyboardEventHandler
