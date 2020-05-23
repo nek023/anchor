@@ -21,7 +21,11 @@ const config = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'build'),
   },
-  plugins: [new CopyPlugin(['public'])],
+  plugins: [
+    new CopyPlugin({
+      patterns: ['public'],
+    }),
+  ],
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
   },
