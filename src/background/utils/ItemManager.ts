@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js'
-import { Item } from '../common/types'
+import { Item } from '../../common/types'
 import { BookmarkManager, BookmarkManagerEvent } from './BookmarkManager'
 import { HistoryManager, HistoryManagerEvent } from './HistoryManager'
 import { TabManager, TabManagerEvent } from './TabManager'

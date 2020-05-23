@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { ItemType, TabItem } from '../common/types'
+import { ItemType, TabItem } from '../../common/types'
 
 export enum TabManagerEvent {
   Update = 'update',
