@@ -46,7 +46,6 @@ const ItemTitle = styled.div`
 const ItemUrl = styled.div`
   color: #9999aa;
   margin-top: 2px;
-  color: #9999aa;
   font-size: 13px;
   font-weight: lighter;
   overflow: hidden;
