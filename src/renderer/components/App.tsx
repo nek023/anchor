@@ -1,68 +1,66 @@
-import React, { useCallback, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { State, closeWindow, openItem, selectItem, setQuery } from '../modules'
+import { useThrottle } from 'react-use'
 import { ResultList } from './ResultList'
 import { SearchBar } from './SearchBar'
 import { KeyboardEventHandler } from './KeyboardEventHandler'
 import { Item } from '../../common/types'
+import { closeWindow } from '../utils/closeWindow'
+import { openItem } from '../utils/openItem'
+import { useRemoteQuery } from '../utils/useRemoteQuery'
+import { useQueryResults } from '../utils/useQueryResults'
 
 const Container = styled.div`
   padding: 8px;
 `
 
-export const App: React.FC = () => {
-  const dispatch = useDispatch()
-  const items = useSelector<State, Item[]>((state) => state.items)
-  const query = useSelector<State, string>((state) => state.query)
-  const selectedItemIndex = useSelector<State, number>(
-    (state) => state.selectedItemIndex
-  )
+const initialQuery = new URL(document.URL).searchParams.get('q') || ''
 
-  useEffect(
-    () => {
-      dispatch(setQuery(query))
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+export const App: React.FC = () => {
+  const [query, setQuery] = useState(initialQuery)
+  const [items, setItems] = useState<Item[]>([])
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0)
+
+  useRemoteQuery(useCallback((query) => setQuery(query), []))
+
+  useQueryResults(
+    useThrottle(query, 50),
+    useCallback((items) => setItems(items.slice(0, 100)), [])
   )
 
   const handleReturn = useCallback(() => {
     if (items.length === 0) return
-    dispatch(openItem(items[selectedItemIndex]))
-    dispatch(closeWindow())
-  }, [dispatch, items, selectedItemIndex])
-
-  const handleEscape = useCallback(() => dispatch(closeWindow()), [dispatch])
+    openItem(items[selectedItemIndex])
+    closeWindow()
+  }, [items, selectedItemIndex])
 
   const handleUp = useCallback(() => {
     if (selectedItemIndex <= 0) return
-    dispatch(selectItem(selectedItemIndex - 1))
-  }, [dispatch, selectedItemIndex])
+    setSelectedItemIndex(selectedItemIndex - 1)
+  }, [selectedItemIndex])
 
   const handleDown = useCallback(() => {
     if (selectedItemIndex >= items.length - 1) return
-    dispatch(selectItem(selectedItemIndex + 1))
-  }, [dispatch, items.length, selectedItemIndex])
+    setSelectedItemIndex(selectedItemIndex + 1)
+  }, [items.length, selectedItemIndex])
 
   const handleItemClick = useCallback(
     (index: number) => {
-      dispatch(selectItem(index))
-      dispatch(openItem(items[index]))
-      dispatch(closeWindow())
+      setSelectedItemIndex(index)
+      openItem(items[index])
+      closeWindow()
     },
-    [dispatch, items]
+    [items]
   )
 
-  const handleValueChange = useCallback(
-    (query: string) => dispatch(setQuery(query)),
-    [dispatch]
-  )
+  const handleValueChange = useCallback((query: string) => setQuery(query), [
+    setQuery,
+  ])
 
   return (
     <KeyboardEventHandler
       onReturn={handleReturn}
-      onEscape={handleEscape}
+      onEscape={closeWindow}
       onUp={handleUp}
       onDown={handleDown}
     >
