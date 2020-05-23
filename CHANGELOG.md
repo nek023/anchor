@@ -1,43 +1,50 @@
 # Change Log
 
-## [v2.3.0](https://github.com/questbeat/anchor/tree/v2.3.0)
+## [3.0.0](https://github.com/questbeat/anchor/tree/v2.3.0) (2020-05-23)
+
+- Delete Redux
+- Update packages
+- CI with GitHub Actions
+
+
+## [2.3.0](https://github.com/questbeat/anchor/tree/v2.3.0) (2020-05-05)
 
 - Update packages
 
 
-## [v2.2.0](https://github.com/questbeat/anchor/tree/v2.2.0)
+## [2.2.0](https://github.com/questbeat/anchor/tree/v2.2.0) (2020-01-26)
 
 - React hooks
 
 
-## [v2.1.0](https://github.com/questbeat/anchor/tree/v2.1.0)
+## [2.1.0](https://github.com/questbeat/anchor/tree/v2.1.0) (2020-01-25)
 
 - TSLint to ESLint
 - Update packages
 
 
-## [v2.0.0](https://github.com/questbeat/anchor/tree/v2.0.0)
+## [2.0.0](https://github.com/questbeat/anchor/tree/v2.0.0) (2019-07-04)
 
 - Rewrite in TypeScript
 
 
-## [v1.0.2](https://github.com/questbeat/anchor/tree/v1.0.2)
+## [1.0.2](https://github.com/questbeat/anchor/tree/v1.0.2) (2018-08-04)
 
 - Update packages
 
 
-## [v1.0.1](https://github.com/questbeat/anchor/tree/v1.0.1)
+## [1.0.1](https://github.com/questbeat/anchor/tree/v1.0.1) (2017-07-27)
 
 - Fix caret position after first launch
 - Update packages
 
 
-## [v1.0.0](https://github.com/questbeat/anchor/tree/v1.0.0)
+## [1.0.0](https://github.com/questbeat/anchor/tree/v1.0.0) (2017-07-16)
 
 - [#13] Refactoring and upgrading packages
 
 
-## [v0.2.0](https://github.com/questbeat/anchor/tree/v0.2.0)
+## [0.2.0](https://github.com/questbeat/anchor/tree/v0.2.0) (2016-12-27)
 
 - [#6] Add icons
 - [#9] Add tests
@@ -45,7 +52,7 @@
 - [#12] Enable redux-logger only in development environment
 
 
-## [v0.1.0](https://github.com/questbeat/anchor/tree/v0.1.0)
+## [0.1.0](https://github.com/questbeat/anchor/tree/v0.1.0) (2016-08-12)
 
 - [#1] Add keyboard shortcuts to select next/prev row
 - [#2] Set longer time range for searching history
@@ -53,6 +60,6 @@
 - [#7] Add commands to launch anchor with history/bookmark mode
 
 
-## [v0.0.1](https://github.com/questbeat/anchor/tree/v0.0.1)
+## [0.0.1](https://github.com/questbeat/anchor/tree/v0.0.1) (2016-07-22)
 
 - First release
