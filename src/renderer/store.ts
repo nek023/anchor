@@ -1,7 +1,5 @@
 import { applyMiddleware, createStore as reduxCreateStore } from 'redux'
-import createSagaMiddleware from 'redux-saga'
 import { State, rootReducer } from './modules'
-import { rootSaga } from './sagas'
 
 export const createStore = (initialState: State) => {
   const middlewares = []
@@ -12,17 +10,11 @@ export const createStore = (initialState: State) => {
     middlewares.push(logger)
   }
 
-  const sagaMiddleware = createSagaMiddleware()
-  middlewares.push(sagaMiddleware)
-
   const store = reduxCreateStore(
     rootReducer,
     initialState,
     applyMiddleware(...middlewares)
   )
-
-  // saga middleware must be mounted before running
-  sagaMiddleware.run(rootSaga)
 
   return store
 }
