@@ -4,7 +4,7 @@ import { ResultList } from './ResultList'
 import { SearchBar } from './SearchBar'
 import { KeyboardEventHandler } from './KeyboardEventHandler'
 import { Item, ItemType } from '../../common/types'
-import { queryItems, sendMessage } from '../../common/ipc'
+import { Message, MessageType, queryItems, sendMessage } from '../../common/ipc'
 import { useThrottle } from 'react-use'
 
 const Container = styled.div`
@@ -28,6 +28,31 @@ const openItem = (item: Item) => {
   }
 }
 
+const useQuery = (
+  initialQuery = ''
+): [string, React.Dispatch<React.SetStateAction<string>>] => {
+  const [query, setQuery] = React.useState(initialQuery)
+
+  React.useEffect(() => {
+    const onMessage = (
+      message: Message,
+      sender: chrome.runtime.MessageSender,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      sendResponse: (response?: any) => void
+    ) => {
+      if (message.type === MessageType.SET_QUERY) {
+        setQuery(message.payload.query)
+        sendResponse(true)
+      }
+    }
+
+    chrome.runtime.onMessage.addListener(onMessage)
+    return () => chrome.runtime.onMessage.removeListener(onMessage)
+  }, [])
+
+  return [query, setQuery]
+}
+
 const useItems = (query: string, maxItems = 100) => {
   const [items, setItems] = React.useState<Item[]>([])
 
@@ -41,8 +66,10 @@ const useItems = (query: string, maxItems = 100) => {
   return items
 }
 
+const initialQuery = new URL(document.URL).searchParams.get('q') || ''
+
 export const App: React.FC = () => {
-  const [query, setQuery] = React.useState('')
+  const [query, setQuery] = useQuery(initialQuery)
   const items = useItems(useThrottle(query, 50))
   const [selectedItemIndex, setSelectedItemIndex] = React.useState(0)
 
