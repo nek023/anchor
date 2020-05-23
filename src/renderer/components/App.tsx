@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { State, selectItem, setQuery } from '../modules'
+import { State, selectItem, setItems, setQuery } from '../modules'
 import { ResultList } from './ResultList'
 import { SearchBar } from './SearchBar'
 import { KeyboardEventHandler } from './KeyboardEventHandler'
 import { Item, ItemType } from '../../common/types'
+import { queryItems, sendMessage } from '../../common/ipc'
+import { useThrottle } from 'react-use'
 
 const Container = styled.div`
   padding: 8px;
@@ -28,20 +30,26 @@ const openItem = (item: Item) => {
   }
 }
 
-export const App: React.FC = () => {
+const useItems = (query: string, maxItems = 100) => {
   const dispatch = useDispatch()
   const items = useSelector<State, Item[]>((state) => state.items)
+
+  React.useEffect(() => {
+    ;(async () => {
+      const items = (await sendMessage(queryItems(query))) as Item[]
+      dispatch(setItems(items.slice(0, maxItems)))
+    })()
+  }, [dispatch, maxItems, query])
+
+  return items
+}
+
+export const App: React.FC = () => {
+  const dispatch = useDispatch()
   const query = useSelector<State, string>((state) => state.query)
+  const items = useItems(useThrottle(query, 50))
   const selectedItemIndex = useSelector<State, number>(
     (state) => state.selectedItemIndex
-  )
-
-  useEffect(
-    () => {
-      dispatch(setQuery(query))
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
   )
 
   const handleReturn = useCallback(() => {
