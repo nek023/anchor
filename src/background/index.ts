@@ -2,11 +2,11 @@ import { DisplayManager } from './utils/DisplayManager'
 import { Message, MessageType, sendMessage, setQuery } from '../common/ipc'
 import { ItemManager } from './utils/ItemManager'
 
-enum Command {
-  ToggleTab = 'toggle-anchor',
-  ToggleBookmark = 'toggle-anchor-with-bookmark-mode',
-  ToggleHistory = 'toggle-anchor-with-history-mode',
-}
+const Command = {
+  ToggleTab: 'toggle-anchor',
+  ToggleBookmark: 'toggle-anchor-with-bookmark-mode',
+  ToggleHistory: 'toggle-anchor-with-history-mode',
+} as const
 
 const WINDOW_WIDTH = 600
 const WINDOW_HEIGHT = 496 + 22

@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events'
 import { ItemType, TabItem } from '../../common/types'
 
-export enum TabManagerEvent {
-  Update = 'update',
-}
+export const TabManagerEvent = {
+  Update: 'update',
+} as const
 
 export class TabManager extends EventEmitter {
   private _items: TabItem[]

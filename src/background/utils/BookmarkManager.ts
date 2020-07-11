@@ -3,9 +3,9 @@ import { BookmarkItem, ItemType } from '../../common/types'
 
 const MAX_BOOKMARKS = 1000
 
-export enum BookmarkManagerEvent {
-  Update = 'update',
-}
+export const BookmarkManagerEvent = {
+  Update: 'update',
+} as const
 
 export class BookmarkManager extends EventEmitter {
   private _items: BookmarkItem[]

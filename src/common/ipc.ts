@@ -1,15 +1,15 @@
-export enum MessageType {
-  QUERY_ITEMS = 'QUERY_ITEMS',
-  SET_QUERY = 'SET_QUERY',
-}
+export const MessageType = {
+  QUERY_ITEMS: 'QUERY_ITEMS',
+  SET_QUERY: 'SET_QUERY',
+} as const
 
 export const queryItems = (query: string) => ({
-  type: MessageType.QUERY_ITEMS as const,
+  type: MessageType.QUERY_ITEMS,
   payload: { query },
 })
 
 export const setQuery = (query: string) => ({
-  type: MessageType.SET_QUERY as const,
+  type: MessageType.SET_QUERY,
   payload: { query },
 })
 

@@ -4,9 +4,9 @@ import { HistoryItem, ItemType } from '../../common/types'
 const MAX_HISTORIES = 1000
 const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30 // 30 days
 
-export enum HistoryManagerEvent {
-  Update = 'update',
-}
+export const HistoryManagerEvent = {
+  Update: 'update',
+} as const
 
 export class HistoryManager extends EventEmitter {
   private _items: HistoryItem[]

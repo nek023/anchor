@@ -1,8 +1,8 @@
-export enum ItemType {
-  Bookmark = 'bookmark',
-  History = 'history',
-  Tab = 'tab',
-}
+export const ItemType = {
+  Bookmark: 'bookmark',
+  History: 'history',
+  Tab: 'tab',
+} as const
 
 export interface BookmarkItem {
   type: typeof ItemType.Bookmark

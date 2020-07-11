@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect } from 'react'
 
-enum KeyCode {
-  Return = 13,
-  Escape = 27,
-  Up = 38,
-  Down = 40,
-  N = 78,
-  P = 80,
-}
+const KeyCode = {
+  Return: 13,
+  Escape: 27,
+  Up: 38,
+  Down: 40,
+  N: 78,
+  P: 80,
+} as const
 
 interface KeyboardEventHandlerProps {
   onReturn: () => void
