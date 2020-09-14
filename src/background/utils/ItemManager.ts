@@ -10,7 +10,7 @@ export class ItemManager {
   private _tabManager: TabManager
   private _filter: string
   private _items: Item[]
-  private _fuse: Fuse<Item, Fuse.IFuseOptions<Item>>
+  private _fuse: Fuse<Item>
 
   constructor(
     bookmarkManager: BookmarkManager = new BookmarkManager(),
