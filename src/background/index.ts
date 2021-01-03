@@ -1,32 +1,32 @@
-import { DisplayManager } from './utils/DisplayManager'
-import { Message, MessageType, sendMessage, setQuery } from '../common/ipc'
-import { ItemManager } from './utils/ItemManager'
+import { DisplayManager } from "./utils/DisplayManager";
+import { Message, MessageType, sendMessage, setQuery } from "../common/ipc";
+import { ItemManager } from "./utils/ItemManager";
 
 const Command = {
-  ToggleTab: 'toggle-anchor',
-  ToggleBookmark: 'toggle-anchor-with-bookmark-mode',
-  ToggleHistory: 'toggle-anchor-with-history-mode',
-} as const
+  ToggleTab: "toggle-anchor",
+  ToggleBookmark: "toggle-anchor-with-bookmark-mode",
+  ToggleHistory: "toggle-anchor-with-history-mode",
+} as const;
 
-const WINDOW_WIDTH = 600
-const WINDOW_HEIGHT = 496 + 22
+const WINDOW_WIDTH = 600;
+const WINDOW_HEIGHT = 496 + 22;
 
-const displayManager = new DisplayManager()
-const itemManager = new ItemManager()
+const displayManager = new DisplayManager();
+const itemManager = new ItemManager();
 
-let mainWindow: chrome.windows.Window | undefined
+let mainWindow: chrome.windows.Window | undefined;
 
 const openWindow = (query: string) => {
   if (mainWindow && mainWindow.focused) {
     chrome.windows.remove(mainWindow.id, () => {
-      mainWindow = undefined
-    })
+      mainWindow = undefined;
+    });
   } else {
     chrome.windows.getCurrent((currentWindow) => {
       const display =
         displayManager.displayContainsWindow(currentWindow) ||
-        displayManager.primaryDisplay
-      if (display === undefined) return
+        displayManager.primaryDisplay;
+      if (display === undefined) return;
 
       const bounds = {
         width: WINDOW_WIDTH,
@@ -37,7 +37,7 @@ const openWindow = (query: string) => {
         top:
           display.bounds.top +
           Math.round((display.bounds.height - WINDOW_HEIGHT) * 0.5),
-      }
+      };
 
       if (mainWindow) {
         chrome.windows.update(
@@ -47,66 +47,66 @@ const openWindow = (query: string) => {
             focused: true,
           },
           () => sendMessage(setQuery(query))
-        )
+        );
       } else {
-        const url = chrome.runtime.getURL('index.html') + `?q=${query}`
+        const url = chrome.runtime.getURL("index.html") + `?q=${query}`;
         chrome.windows.create(
           {
             ...bounds,
             url,
             focused: true,
-            type: 'popup',
+            type: "popup",
           },
           (window) => {
-            mainWindow = window
+            mainWindow = window;
           }
-        )
+        );
       }
-    })
+    });
   }
-}
+};
 
 chrome.windows.onRemoved.addListener((windowId) => {
-  if (!mainWindow) return
+  if (!mainWindow) return;
 
   if (windowId === mainWindow.id) {
-    mainWindow = undefined
+    mainWindow = undefined;
   }
-})
+});
 
 chrome.windows.onFocusChanged.addListener((windowId) => {
-  if (!mainWindow) return
+  if (!mainWindow) return;
 
   if (windowId === mainWindow.id) {
-    mainWindow.focused = true
+    mainWindow.focused = true;
   } else {
-    mainWindow.focused = false
+    mainWindow.focused = false;
   }
-})
+});
 
 chrome.commands.onCommand.addListener((command) => {
   switch (command) {
     case Command.ToggleTab:
-      openWindow('')
-      break
+      openWindow("");
+      break;
 
     case Command.ToggleBookmark:
-      openWindow('b:')
-      break
+      openWindow("b:");
+      break;
 
     case Command.ToggleHistory:
-      openWindow('h:')
-      break
+      openWindow("h:");
+      break;
 
     default:
-      break
+      break;
   }
-})
+});
 
 chrome.runtime.onMessage.addListener(
   (message: Message, sender, sendResponse) => {
     if (message.type === MessageType.QUERY_ITEMS) {
-      sendResponse(itemManager.queryItems(message.payload.query))
+      sendResponse(itemManager.queryItems(message.payload.query));
     }
   }
-)
+);

@@ -17,13 +17,6 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-empty-function": "off",
     "arrow-body-style": ["error", "as-needed"],
-    "prettier/prettier": [
-      "error",
-      {
-        "semi": false,
-        "singleQuote": true
-      }
-    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/display-name": "off",

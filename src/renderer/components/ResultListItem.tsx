@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react'
-import scrollIntoView from 'scroll-into-view-if-needed'
-import styled, { css } from 'styled-components'
-import { Item, ItemType } from '../../common/types'
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import scrollIntoView from "scroll-into-view-if-needed";
+import styled, { css } from "styled-components";
+import { Item, ItemType } from "../../common/types";
 
 const getFavIconUrl = (item: Item) => {
   if (item.type === ItemType.Tab && item.favIconUrl) {
-    if (item.favIconUrl.startsWith('chrome://theme/')) {
-      return 'chrome://favicon'
+    if (item.favIconUrl.startsWith("chrome://theme/")) {
+      return "chrome://favicon";
     }
-    return item.favIconUrl
+    return item.favIconUrl;
   }
-  return `chrome://favicon/${item.url}`
-}
+  return `chrome://favicon/${item.url}`;
+};
 
 const ItemLeft = styled.div`
   width: 30px;
@@ -19,7 +19,7 @@ const ItemLeft = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const ItemRight = styled.div`
   margin-left: 8px;
@@ -27,12 +27,12 @@ const ItemRight = styled.div`
   flex-direction: column;
   overflow: hidden;
   flex: 1;
-`
+`;
 
 const ItemImage = styled.img`
   width: 24px;
   height: 24px;
-`
+`;
 
 const ItemTitle = styled.div`
   color: #333333;
@@ -41,7 +41,7 @@ const ItemTitle = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 1;
-`
+`;
 
 const ItemUrl = styled.div`
   color: #9999aa;
@@ -52,7 +52,7 @@ const ItemUrl = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 1;
-`
+`;
 
 const ItemContainer = styled.li<{ selected: boolean }>`
   width: 100%;
@@ -76,13 +76,13 @@ const ItemContainer = styled.li<{ selected: boolean }>`
         color: #bcd5fb;
       }
     `}
-`
+`;
 
 interface ResultListItemProps {
-  index: number
-  item: Item
-  onClick: (index: number) => void
-  selected: boolean
+  index: number;
+  item: Item;
+  onClick: (index: number) => void;
+  selected: boolean;
 }
 
 export const ResultListItem: React.FC<ResultListItemProps> = ({
@@ -91,19 +91,19 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
   onClick,
   selected,
 }) => {
-  const listItemContainerRef = useRef<HTMLLIElement>(null)
+  const listItemContainerRef = useRef<HTMLLIElement>(null);
 
-  const handleClick = useCallback(() => onClick(index), [index, onClick])
+  const handleClick = useCallback(() => onClick(index), [index, onClick]);
 
   useEffect(() => {
     if (selected && listItemContainerRef?.current) {
       scrollIntoView(listItemContainerRef?.current, {
-        block: 'nearest',
-        inline: 'nearest',
-        scrollMode: 'if-needed',
-      })
+        block: "nearest",
+        inline: "nearest",
+        scrollMode: "if-needed",
+      });
     }
-  }, [selected])
+  }, [selected]);
 
   return useMemo(
     () => (
@@ -122,5 +122,5 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
       </ItemContainer>
     ),
     [handleClick, item, selected]
-  )
-}
+  );
+};

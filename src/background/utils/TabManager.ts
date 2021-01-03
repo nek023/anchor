@@ -1,32 +1,32 @@
-import { EventEmitter } from 'events'
-import { ItemType, TabItem } from '../../common/types'
+import { EventEmitter } from "events";
+import { ItemType, TabItem } from "../../common/types";
 
 export const TabManagerEvent = {
-  Update: 'update',
-} as const
+  Update: "update",
+} as const;
 
 export class TabManager extends EventEmitter {
-  private _items: TabItem[]
+  private _items: TabItem[];
 
   constructor() {
-    super()
+    super();
 
-    this._items = []
+    this._items = [];
 
-    this.updateItems()
+    this.updateItems();
 
-    chrome.tabs.onCreated.addListener(this.updateItems)
-    chrome.tabs.onRemoved.addListener(this.updateItems)
-    chrome.tabs.onReplaced.addListener(this.updateItems)
-    chrome.tabs.onUpdated.addListener(this.updateItems)
+    chrome.tabs.onCreated.addListener(this.updateItems);
+    chrome.tabs.onRemoved.addListener(this.updateItems);
+    chrome.tabs.onReplaced.addListener(this.updateItems);
+    chrome.tabs.onUpdated.addListener(this.updateItems);
   }
 
   get items(): TabItem[] {
-    return this._items
+    return this._items;
   }
 
   private updateItems = () => {
-    chrome.tabs.query({ windowType: 'normal' }, (items) => {
+    chrome.tabs.query({ windowType: "normal" }, (items) => {
       this._items = items.map((item) => ({
         type: ItemType.Tab,
         favIconUrl: item.favIconUrl,
@@ -34,8 +34,8 @@ export class TabManager extends EventEmitter {
         url: item.url,
         tabIndex: item.index,
         windowId: item.windowId,
-      }))
-      this.emit(TabManagerEvent.Update)
-    })
-  }
+      }));
+      this.emit(TabManagerEvent.Update);
+    });
+  };
 }

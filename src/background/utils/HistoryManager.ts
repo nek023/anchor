@@ -1,35 +1,35 @@
-import { EventEmitter } from 'events'
-import { HistoryItem, ItemType } from '../../common/types'
+import { EventEmitter } from "events";
+import { HistoryItem, ItemType } from "../../common/types";
 
-const MAX_HISTORIES = 1000
-const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30 // 30 days
+const MAX_HISTORIES = 1000;
+const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30; // 30 days
 
 export const HistoryManagerEvent = {
-  Update: 'update',
-} as const
+  Update: "update",
+} as const;
 
 export class HistoryManager extends EventEmitter {
-  private _items: HistoryItem[]
+  private _items: HistoryItem[];
 
   constructor() {
-    super()
+    super();
 
-    this._items = []
+    this._items = [];
 
-    this.updateItems()
+    this.updateItems();
 
-    chrome.history.onVisited.addListener(this.updateItems)
-    chrome.history.onVisitRemoved.addListener(this.updateItems)
+    chrome.history.onVisited.addListener(this.updateItems);
+    chrome.history.onVisitRemoved.addListener(this.updateItems);
   }
 
   get items(): HistoryItem[] {
-    return this._items
+    return this._items;
   }
 
   private updateItems = () => {
     chrome.history.search(
       {
-        text: '',
+        text: "",
         maxResults: MAX_HISTORIES,
         startTime: Date.now() - HISTORY_RANGE,
       },
@@ -38,9 +38,9 @@ export class HistoryManager extends EventEmitter {
           type: ItemType.History,
           title: item.title,
           url: item.url,
-        }))
-        this.emit(HistoryManagerEvent.Update)
+        }));
+        this.emit(HistoryManagerEvent.Update);
       }
-    )
-  }
+    );
+  };
 }
