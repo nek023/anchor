@@ -2,7 +2,7 @@
 
 exports[`ResultList matches snapshot 1`] = `
 <styled.ul>
-  <Component
+  <ResultListItem
     index={0}
     item={
       Object {
@@ -15,7 +15,7 @@ exports[`ResultList matches snapshot 1`] = `
     onClick={[Function]}
     selected={true}
   />
-  <Component
+  <ResultListItem
     index={1}
     item={
       Object {
