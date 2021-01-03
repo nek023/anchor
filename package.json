@@ -9,8 +9,8 @@
     "build": "webpack --mode production",
     "clean": "rimraf build",
     "dev": "webpack --mode development --watch",
-    "dist": "yarn run clean && yarn run build && zip -r anchor.zip build",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "pack": "yarn run clean && yarn run build && zip -r anchor.zip build",
     "test": "jest"
   },
   "dependencies": {
