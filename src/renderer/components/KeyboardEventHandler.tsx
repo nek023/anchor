@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect } from "react";
 
 const KeyCode = {
   Return: 13,
@@ -7,13 +7,13 @@ const KeyCode = {
   Down: 40,
   N: 78,
   P: 80,
-} as const
+} as const;
 
 interface KeyboardEventHandlerProps {
-  onReturn: () => void
-  onEscape: () => void
-  onUp: () => void
-  onDown: () => void
+  onReturn: () => void;
+  onEscape: () => void;
+  onUp: () => void;
+  onDown: () => void;
 }
 
 export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
@@ -27,50 +27,50 @@ export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
     (event: KeyboardEvent) => {
       switch (event.keyCode) {
         case KeyCode.Return:
-          event.preventDefault()
-          onReturn()
-          break
+          event.preventDefault();
+          onReturn();
+          break;
 
         case KeyCode.Escape:
-          event.preventDefault()
-          onEscape()
-          break
+          event.preventDefault();
+          onEscape();
+          break;
 
         case KeyCode.Up:
-          event.preventDefault()
-          onUp()
-          break
+          event.preventDefault();
+          onUp();
+          break;
 
         case KeyCode.Down:
-          event.preventDefault()
-          onDown()
-          break
+          event.preventDefault();
+          onDown();
+          break;
 
         case KeyCode.P:
-          if (!event.ctrlKey) break
-          event.preventDefault()
-          onUp()
-          break
+          if (!event.ctrlKey) break;
+          event.preventDefault();
+          onUp();
+          break;
 
         case KeyCode.N:
-          if (!event.ctrlKey) break
-          event.preventDefault()
-          onDown()
-          break
+          if (!event.ctrlKey) break;
+          event.preventDefault();
+          onDown();
+          break;
 
         default:
-          break
+          break;
       }
     },
     [onDown, onEscape, onReturn, onUp]
-  )
+  );
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [handleKeyDown])
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
-  return <React.Fragment>{children}</React.Fragment>
-}
+  return <React.Fragment>{children}</React.Fragment>;
+};

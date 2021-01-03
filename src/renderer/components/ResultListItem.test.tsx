@@ -1,20 +1,20 @@
-import { shallow } from 'enzyme'
-import React from 'react'
-import { BookmarkItem, ItemType } from '../../common/types'
-import { ResultListItem } from './ResultListItem'
+import { shallow } from "enzyme";
+import React from "react";
+import { BookmarkItem, ItemType } from "../../common/types";
+import { ResultListItem } from "./ResultListItem";
 
-describe('ResultListItem', () => {
-  let item: BookmarkItem
+describe("ResultListItem", () => {
+  let item: BookmarkItem;
 
   beforeEach(() => {
     item = {
       type: ItemType.Bookmark,
-      title: 'example',
-      url: 'https://example.com',
-    }
-  })
+      title: "example",
+      url: "https://example.com",
+    };
+  });
 
-  it('matches snapshot', () => {
+  it("matches snapshot", () => {
     const wrapper = shallow(
       <ResultListItem
         index={0}
@@ -22,13 +22,13 @@ describe('ResultListItem', () => {
         onClick={() => {}}
         selected={false}
       />
-    )
+    );
 
-    expect(wrapper).toMatchSnapshot()
-  })
+    expect(wrapper).toMatchSnapshot();
+  });
 
-  it('calls onClick when mouse has been clicked', () => {
-    const handleClick = jest.fn()
+  it("calls onClick when mouse has been clicked", () => {
+    const handleClick = jest.fn();
     const wrapper = shallow(
       <ResultListItem
         index={0}
@@ -36,12 +36,12 @@ describe('ResultListItem', () => {
         onClick={handleClick}
         selected={false}
       />
-    )
+    );
 
-    expect(handleClick).not.toHaveBeenCalled()
+    expect(handleClick).not.toHaveBeenCalled();
 
-    wrapper.simulate('click')
+    wrapper.simulate("click");
 
-    expect(handleClick).toHaveBeenCalledTimes(1)
-  })
-})
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});

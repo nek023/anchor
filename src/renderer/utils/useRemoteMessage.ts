@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { Message } from '../../common/ipc'
+import { useEffect } from "react";
+import { Message } from "../../common/ipc";
 
 export const useRemoteMessage = (
   callback: (
@@ -10,7 +10,7 @@ export const useRemoteMessage = (
   ) => void
 ) => {
   useEffect(() => {
-    chrome.runtime.onMessage.addListener(callback)
-    return () => chrome.runtime.onMessage.removeListener(callback)
-  }, [callback])
-}
+    chrome.runtime.onMessage.addListener(callback);
+    return () => chrome.runtime.onMessage.removeListener(callback);
+  }, [callback]);
+};

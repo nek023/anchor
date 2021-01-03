@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react'
-import styled from 'styled-components'
-import { Item } from '../../common/types'
-import { ResultListItem } from './ResultListItem'
+import React, { useCallback } from "react";
+import styled from "styled-components";
+import { Item } from "../../common/types";
+import { ResultListItem } from "./ResultListItem";
 
 const Container = styled.ul`
   width: 100%;
@@ -14,12 +14,12 @@ const Container = styled.ul`
   overflow-y: auto;
   white-space: nowrap;
   cursor: default;
-`
+`;
 
 interface ResultListProps {
-  items: Item[]
-  onItemClick: (index: number) => void
-  selectedItemIndex: number
+  items: Item[];
+  onItemClick: (index: number) => void;
+  selectedItemIndex: number;
 }
 
 export const ResultList: React.FC<ResultListProps> = ({
@@ -29,7 +29,7 @@ export const ResultList: React.FC<ResultListProps> = ({
 }) => {
   const handleClick = useCallback((index: number) => onItemClick(index), [
     onItemClick,
-  ])
+  ]);
 
   return (
     <Container>
@@ -43,5 +43,5 @@ export const ResultList: React.FC<ResultListProps> = ({
         />
       ))}
     </Container>
-  )
-}
+  );
+};

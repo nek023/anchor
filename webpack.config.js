@@ -1,41 +1,41 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-const CopyPlugin = require('copy-webpack-plugin')
-const path = require('path')
+const CopyPlugin = require("copy-webpack-plugin");
+const path = require("path");
 
 const config = {
   entry: {
-    background: './src/background/index.ts',
-    renderer: './src/renderer/index.tsx',
+    background: "./src/background/index.ts",
+    renderer: "./src/renderer/index.tsx",
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'build'),
+    filename: "[name].js",
+    path: path.resolve(__dirname, "build"),
   },
   plugins: [
     new CopyPlugin({
-      patterns: ['public'],
+      patterns: ["public"],
     }),
   ],
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: [".js", ".ts", ".tsx"],
   },
-}
+};
 
 module.exports = (env, argv) => {
-  if (argv.mode === 'production') {
-    config.devtool = false
+  if (argv.mode === "production") {
+    config.devtool = false;
   } else {
-    config.devtool = 'inline-source-map'
+    config.devtool = "inline-source-map";
   }
-  return config
-}
+  return config;
+};
