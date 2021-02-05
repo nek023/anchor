@@ -9,7 +9,8 @@
     "build": "webpack --mode production",
     "clean": "rimraf build",
     "dev": "webpack --mode development --watch",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "format": "prettier --write src",
+    "lint": "eslint --ext .ts,.tsx src",
     "pack": "yarn run clean && yarn run build && zip -r anchor.zip build",
     "test": "jest"
   },
@@ -30,7 +31,6 @@
     "enzyme-to-json": "^3.4.4",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.2",
     "fuse.js": "^6.4.6",
