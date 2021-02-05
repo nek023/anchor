@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
+
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
@@ -13,7 +14,10 @@ const config = {
       {
         test: /\.tsx?$/,
         use: "ts-loader",
-        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -21,13 +25,9 @@ const config = {
     filename: "[name].js",
     path: path.resolve(__dirname, "build"),
   },
-  plugins: [
-    new CopyPlugin({
-      patterns: ["public"],
-    }),
-  ],
+  plugins: [new CopyPlugin({ patterns: ["public"] })],
   resolve: {
-    extensions: [".js", ".ts", ".tsx"],
+    extensions: [".ts", ".tsx", ".js"],
   },
 };
 
