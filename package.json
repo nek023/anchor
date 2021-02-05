@@ -42,7 +42,6 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-use": "^17.1.0",
-    "rimraf": "^3.0.2",
     "scroll-into-view-if-needed": "^2.2.24",
     "styled-components": "^5.1.0",
     "ts-jest": "^26.5.0",
