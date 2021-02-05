@@ -1,6 +1,11 @@
 # Change Log
 
-## [3.0.0](https://github.com/questbeat/anchor/tree/v2.3.0) (2020-05-23)
+## [3.0.1](https://github.com/questbeat/anchor/tree/v3.0.1) (2021-02-06)
+
+- Update packages
+
+
+## [3.0.0](https://github.com/questbeat/anchor/tree/v3.0.0) (2020-05-23)
 
 - Delete Redux
 - Update packages
