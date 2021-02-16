@@ -1,6 +1,6 @@
-import { DisplayManager } from "./utils/DisplayManager";
+import { DisplayManager } from "./lib/DisplayManager";
 import { Message, MessageType, sendMessage, setQuery } from "../common/ipc";
-import { ItemManager } from "./utils/ItemManager";
+import { ItemManager } from "./lib/ItemManager";
 
 const Command = {
   ToggleTab: "toggle-anchor",
