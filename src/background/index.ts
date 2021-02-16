@@ -1,6 +1,6 @@
-import { DisplayManager } from "./utils/DisplayManager";
+import { DisplayManager } from "./lib/DisplayManager";
 import { Message, MessageType, sendMessage, setQuery } from "../common/ipc";
-import { ItemManager } from "./utils/ItemManager";
+import { ItemManager } from "./lib/ItemManager";
 
 const Command = {
   ToggleTab: "toggle-anchor",
@@ -105,7 +105,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 chrome.runtime.onMessage.addListener(
   (message: Message, sender, sendResponse) => {
-    if (message.type === MessageType.QUERY_ITEMS) {
+    if (message.type === MessageType.QueryItems) {
       sendResponse(itemManager.queryItems(message.payload.query));
     }
   }

@@ -5,10 +5,10 @@ import { ResultList } from "./ResultList";
 import { SearchBar } from "./SearchBar";
 import { KeyboardEventHandler } from "./KeyboardEventHandler";
 import { Item } from "../../common/types";
-import { closeWindow } from "../utils/closeWindow";
-import { openItem } from "../utils/openItem";
-import { useRemoteQuery } from "../utils/useRemoteQuery";
-import { useQueryResults } from "../utils/useQueryResults";
+import { closeWindow } from "../lib/closeWindow";
+import { openItem } from "../lib/openItem";
+import { useRemoteQuery } from "../lib/useRemoteQuery";
+import { useQueryResults } from "../lib/useQueryResults";
 
 const Container = styled.div`
   padding: 8px;

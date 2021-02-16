@@ -1,6 +1,6 @@
-/.vscode
-/build
-/node_modules
+.vscode/
+build/
+node_modules/
 
 npm-*.log
 yarn-*.log

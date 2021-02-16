@@ -9,21 +9,21 @@ const config = {
     background: "./src/background/index.ts",
     renderer: "./src/renderer/index.tsx",
   },
+  output: {
+    filename: "[name].js",
+    path: path.resolve(__dirname, "build"),
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        loader: "ts-loader",
       },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
     ],
-  },
-  output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "build"),
   },
   plugins: [new CopyPlugin({ patterns: ["public"] })],
   resolve: {
@@ -32,10 +32,8 @@ const config = {
 };
 
 module.exports = (env, argv) => {
-  if (argv.mode === "production") {
-    config.devtool = false;
-  } else {
-    config.devtool = "inline-source-map";
+  if (argv.mode !== "production") {
+    config.devtool = "source-map";
   }
   return config;
 };
