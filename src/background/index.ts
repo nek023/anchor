@@ -105,7 +105,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 chrome.runtime.onMessage.addListener(
   (message: Message, sender, sendResponse) => {
-    if (message.type === MessageType.QUERY_ITEMS) {
+    if (message.type === MessageType.QueryItems) {
       sendResponse(itemManager.queryItems(message.payload.query));
     }
   }

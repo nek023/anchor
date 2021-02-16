@@ -3,7 +3,7 @@ import { MessageType } from "../../common/ipc";
 
 export const useRemoteQuery = (callback: (query: string) => void) => {
   useRemoteMessage((message, sender, sendResponse) => {
-    if (message.type === MessageType.SET_QUERY) {
+    if (message.type === MessageType.SetQuery) {
       callback(message.payload.query);
       sendResponse(true);
     }
