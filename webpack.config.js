@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 const config = {
@@ -25,7 +26,13 @@ const config = {
       },
     ],
   },
-  plugins: [new CopyPlugin({ patterns: ["public"] })],
+  plugins: [
+    new CopyPlugin({ patterns: ["public"] }),
+    new HtmlWebpackPlugin({
+      chunks: ["renderer"],
+      template: "./src/index.html",
+    }),
+  ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
