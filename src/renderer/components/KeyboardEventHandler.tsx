@@ -10,7 +10,7 @@ const Code = {
 };
 
 interface KeyboardEventHandlerProps {
-  onReturn: () => void;
+  onEnter: () => void;
   onEscape: () => void;
   onUp: () => void;
   onDown: () => void;
@@ -18,7 +18,7 @@ interface KeyboardEventHandlerProps {
 
 export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
   children,
-  onReturn,
+  onEnter,
   onEscape,
   onUp,
   onDown,
@@ -38,7 +38,7 @@ export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
 
         case Code.Enter:
           event.preventDefault();
-          onReturn();
+          onEnter();
           break;
 
         case Code.Escape:
@@ -62,7 +62,7 @@ export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
           break;
       }
     },
-    [onDown, onEscape, onReturn, onUp]
+    [onDown, onEnter, onEscape, onUp]
   );
 
   useEffect(() => {

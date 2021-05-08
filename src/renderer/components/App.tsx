@@ -28,7 +28,7 @@ export const App: React.FC = () => {
     useCallback((items) => setItems(items.slice(0, 100)), [])
   );
 
-  const handleReturn = useCallback(() => {
+  const handleEnter = useCallback(() => {
     if (items.length === 0) return;
     openItem(items[selectedItemIndex]);
     closeWindow();
@@ -59,7 +59,7 @@ export const App: React.FC = () => {
 
   return (
     <KeyboardEventHandler
-      onReturn={handleReturn}
+      onEnter={handleEnter}
       onEscape={closeWindow}
       onUp={handleUp}
       onDown={handleDown}

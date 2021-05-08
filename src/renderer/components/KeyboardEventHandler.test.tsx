@@ -8,7 +8,7 @@ describe("KeyboardEventHandler", () => {
       <KeyboardEventHandler
         onDown={() => {}}
         onEscape={() => {}}
-        onReturn={() => {}}
+        onEnter={() => {}}
         onUp={() => {}}
       />
     );
@@ -25,7 +25,7 @@ describe("KeyboardEventHandler", () => {
       <KeyboardEventHandler
         onDown={handleDown}
         onEscape={handleEscape}
-        onReturn={handleReturn}
+        onEnter={handleReturn}
         onUp={handleUp}
       >
         <input type="text" />
