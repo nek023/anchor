@@ -1,21 +1,17 @@
-import { shallow } from "enzyme";
 import React from "react";
+import { fireEvent, render } from "@testing-library/react";
 import { BookmarkItem, ItemType } from "../../common/types";
 import { ResultListItem } from "./ResultListItem";
 
 describe("ResultListItem", () => {
-  let item: BookmarkItem;
+  const item: BookmarkItem = {
+    type: ItemType.Bookmark,
+    title: "test",
+    url: "https://example.com",
+  };
 
-  beforeEach(() => {
-    item = {
-      type: ItemType.Bookmark,
-      title: "example",
-      url: "https://example.com",
-    };
-  });
-
-  it("matches snapshot", () => {
-    const wrapper = shallow(
+  test("matches snapshot", () => {
+    const { asFragment } = render(
       <ResultListItem
         index={0}
         item={item}
@@ -24,12 +20,12 @@ describe("ResultListItem", () => {
       />
     );
 
-    expect(wrapper).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 
-  it("calls onClick when mouse has been clicked", () => {
+  test("calls onClick when it has been clicked", () => {
     const handleClick = jest.fn();
-    const wrapper = shallow(
+    const { getByText } = render(
       <ResultListItem
         index={0}
         item={item}
@@ -38,10 +34,7 @@ describe("ResultListItem", () => {
       />
     );
 
-    expect(handleClick).not.toHaveBeenCalled();
-
-    wrapper.simulate("click");
-
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    fireEvent.click(getByText("test"));
+    expect(handleClick).toBeCalledWith(0);
   });
 });

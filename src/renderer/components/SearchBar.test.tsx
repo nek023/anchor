@@ -1,24 +1,26 @@
-import { shallow } from "enzyme";
 import React from "react";
+import { fireEvent, render } from "@testing-library/react";
 import { SearchBar } from "./SearchBar";
 
 describe("SearchBar", () => {
-  it("matches snapshot", () => {
-    const wrapper = shallow(<SearchBar value="" onValueChange={() => {}} />);
-
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it("calls onValueChanged when value has changed", () => {
-    const handleValueChange = jest.fn();
-    const wrapper = shallow(
-      <SearchBar value={"test value"} onValueChange={handleValueChange} />
+  test("matches snapshot", () => {
+    const { asFragment } = render(
+      <SearchBar value="test" onValueChange={() => {}} />
     );
 
-    expect(handleValueChange).not.toHaveBeenCalled();
+    expect(asFragment()).toMatchSnapshot();
+  });
 
-    wrapper.simulate("change", { target: { value: "new value" } });
+  test("calls onValueChanged when the value has changed", () => {
+    const handleValueChange = jest.fn();
+    const { container } = render(
+      <SearchBar value="test" onValueChange={handleValueChange} />
+    );
 
-    expect(handleValueChange).toHaveBeenCalledTimes(1);
+    const firstChild = container.firstChild;
+    if (firstChild == null) throw "failed to get firstChild";
+
+    fireEvent.change(firstChild, { target: { value: "new value" } });
+    expect(handleValueChange).toBeCalledWith("new value");
   });
 });
