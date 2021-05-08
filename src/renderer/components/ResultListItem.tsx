@@ -1,17 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import scrollIntoView from "scroll-into-view-if-needed";
 import styled, { css } from "styled-components";
-import { Item, ItemType } from "../../common/types";
-
-const getFavIconUrl = (item: Item) => {
-  if (item.type === ItemType.Tab && item.favIconUrl) {
-    if (item.favIconUrl.startsWith("chrome://theme/")) {
-      return "chrome://favicon";
-    }
-    return item.favIconUrl;
-  }
-  return `chrome://favicon/${item.url}`;
-};
+import { Item } from "../../common/types";
+import { getFavIconUrl } from "../lib/getFavIconUrl";
 
 const ItemLeft = styled.div`
   width: 30px;
