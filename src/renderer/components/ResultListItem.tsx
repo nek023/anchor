@@ -81,8 +81,8 @@ const ItemContainer = styled.li<{ selected: boolean }>`
 interface ResultListItemProps {
   index: number;
   item: Item;
-  onClick: (index: number) => void;
   selected: boolean;
+  onClick?: (index: number) => void;
 }
 
 export const ResultListItem: React.FC<ResultListItemProps> = ({
@@ -91,13 +91,16 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
   onClick,
   selected,
 }) => {
-  const listItemContainerRef = useRef<HTMLLIElement>(null);
+  const itemContainerRef = useRef<HTMLLIElement>(null);
 
-  const handleClick = useCallback(() => onClick(index), [index, onClick]);
+  const handleClick = useCallback(() => {
+    if (onClick == null) return;
+    onClick(index);
+  }, [index, onClick]);
 
   useEffect(() => {
-    if (selected && listItemContainerRef?.current) {
-      scrollIntoView(listItemContainerRef?.current, {
+    if (selected && itemContainerRef?.current) {
+      scrollIntoView(itemContainerRef?.current, {
         block: "nearest",
         inline: "nearest",
         scrollMode: "if-needed",
@@ -109,7 +112,7 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
     () => (
       <ItemContainer
         onClick={handleClick}
-        ref={listItemContainerRef}
+        ref={itemContainerRef}
         selected={selected}
       >
         <ItemLeft>

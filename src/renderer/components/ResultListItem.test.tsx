@@ -12,12 +12,7 @@ describe("ResultListItem", () => {
 
   test("matches snapshot", () => {
     const { asFragment } = render(
-      <ResultListItem
-        index={0}
-        item={item}
-        onClick={() => {}}
-        selected={false}
-      />
+      <ResultListItem index={0} item={item} selected={false} />
     );
 
     expect(asFragment()).toMatchSnapshot();
@@ -29,8 +24,8 @@ describe("ResultListItem", () => {
       <ResultListItem
         index={0}
         item={item}
-        onClick={handleClick}
         selected={false}
+        onClick={handleClick}
       />
     );
 
