@@ -5,7 +5,7 @@ import { ResultList } from "./ResultList";
 import { SearchBar } from "./SearchBar";
 import { KeyboardEventHandler } from "./KeyboardEventHandler";
 import { Item } from "../../common/types";
-import { closeWindow } from "../lib/closeWindow";
+import { closeCurrentWindow } from "../lib/closeCurrentWindow";
 import { openItem } from "../lib/openItem";
 import { useRemoteQuery } from "../lib/useRemoteQuery";
 import { useQueryResults } from "../lib/useQueryResults";
@@ -31,7 +31,7 @@ export const App: React.FC = () => {
   const handleEnter = useCallback(() => {
     if (items.length === 0) return;
     openItem(items[selectedItemIndex]);
-    closeWindow();
+    closeCurrentWindow();
   }, [items, selectedItemIndex]);
 
   const handleUp = useCallback(() => {
@@ -48,7 +48,7 @@ export const App: React.FC = () => {
     (index: number) => {
       setSelectedItemIndex(index);
       openItem(items[index]);
-      closeWindow();
+      closeCurrentWindow();
     },
     [items]
   );
@@ -60,7 +60,7 @@ export const App: React.FC = () => {
   return (
     <KeyboardEventHandler
       onEnter={handleEnter}
-      onEscape={closeWindow}
+      onEscape={closeCurrentWindow}
       onUp={handleUp}
       onDown={handleDown}
     >
