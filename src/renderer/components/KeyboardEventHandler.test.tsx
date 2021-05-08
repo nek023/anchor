@@ -37,25 +37,25 @@ describe("KeyboardEventHandler", () => {
     fireEvent.focus(inputElement);
 
     // https://testing-library.com/docs/guide-events/#keydown
-    const fireKeyDown = (options: { keyCode: number; ctrlKey?: boolean }) =>
+    const fireKeyDown = (options: { code: string; ctrlKey?: boolean }) =>
       fireEvent.keyDown(document.activeElement || document.body, options);
 
-    fireKeyDown({ keyCode: 40 });
+    fireKeyDown({ code: "ArrowDown" });
     expect(handleDown).toBeCalledTimes(1);
 
-    fireKeyDown({ keyCode: 78, ctrlKey: true });
+    fireKeyDown({ code: "KeyN", ctrlKey: true });
     expect(handleDown).toBeCalledTimes(2);
 
-    fireKeyDown({ keyCode: 38 });
+    fireKeyDown({ code: "ArrowUp" });
     expect(handleUp).toBeCalledTimes(1);
 
-    fireKeyDown({ keyCode: 80, ctrlKey: true });
+    fireKeyDown({ code: "KeyP", ctrlKey: true });
     expect(handleUp).toBeCalledTimes(2);
 
-    fireKeyDown({ keyCode: 13 });
+    fireKeyDown({ code: "Enter" });
     expect(handleReturn).toBeCalledTimes(1);
 
-    fireKeyDown({ keyCode: 27 });
+    fireKeyDown({ code: "Escape" });
     expect(handleEscape).toBeCalledTimes(1);
   });
 });

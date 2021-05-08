@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 
-const KeyCode = {
-  Return: 13,
-  Escape: 27,
-  Up: 38,
-  Down: 40,
-  N: 78,
-  P: 80,
-} as const;
+const Code = {
+  ArrowDown: "ArrowDown",
+  ArrowUp: "ArrowUp",
+  Enter: "Enter",
+  Escape: "Escape",
+  KeyN: "KeyN",
+  KeyP: "KeyP",
+};
 
 interface KeyboardEventHandlerProps {
   onReturn: () => void;
@@ -25,37 +25,37 @@ export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
 }) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      switch (event.keyCode) {
-        case KeyCode.Return:
+      switch (event.code) {
+        case Code.ArrowDown:
+          event.preventDefault();
+          onDown();
+          break;
+
+        case Code.ArrowUp:
+          event.preventDefault();
+          onUp();
+          break;
+
+        case Code.Enter:
           event.preventDefault();
           onReturn();
           break;
 
-        case KeyCode.Escape:
+        case Code.Escape:
           event.preventDefault();
           onEscape();
           break;
 
-        case KeyCode.Up:
-          event.preventDefault();
-          onUp();
-          break;
-
-        case KeyCode.Down:
-          event.preventDefault();
-          onDown();
-          break;
-
-        case KeyCode.P:
-          if (!event.ctrlKey) break;
-          event.preventDefault();
-          onUp();
-          break;
-
-        case KeyCode.N:
+        case Code.KeyN:
           if (!event.ctrlKey) break;
           event.preventDefault();
           onDown();
+          break;
+
+        case Code.KeyP:
+          if (!event.ctrlKey) break;
+          event.preventDefault();
+          onUp();
           break;
 
         default:
