@@ -5,18 +5,21 @@ export const ItemType = {
 } as const;
 
 export interface BookmarkItem {
+  id: string;
   type: typeof ItemType.Bookmark;
   title?: string;
   url?: string;
 }
 
 export interface HistoryItem {
+  id: string;
   type: typeof ItemType.History;
   title?: string;
   url?: string;
 }
 
 export interface TabItem {
+  id: string;
   type: typeof ItemType.Tab;
   favIconUrl?: string;
   title?: string;

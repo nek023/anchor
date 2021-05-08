@@ -28,6 +28,7 @@ export class TabManager extends EventEmitter {
   private updateItems = () => {
     chrome.tabs.query({ windowType: "normal" }, (items) => {
       this._items = items.map((item) => ({
+        id: `tab-${item.id}`,
         type: ItemType.Tab,
         favIconUrl: item.favIconUrl,
         title: item.title,

@@ -6,11 +6,13 @@ import { ResultList } from "./ResultList";
 describe("ResultList", () => {
   const items: BookmarkItem[] = [
     {
+      id: "bookmark-1",
       type: ItemType.Bookmark,
       title: "item1",
       url: "https://example.com",
     },
     {
+      id: "bookmark-2",
       type: ItemType.Bookmark,
       title: "item2",
       url: "https://example.com",

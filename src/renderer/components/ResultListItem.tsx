@@ -70,14 +70,12 @@ const ItemContainer = styled.li<{ selected: boolean }>`
 `;
 
 interface ResultListItemProps {
-  index: number;
   item: Item;
   selected: boolean;
-  onClick?: (index: number) => void;
+  onClick?: (item: Item) => void;
 }
 
 export const ResultListItem: React.FC<ResultListItemProps> = ({
-  index,
   item,
   onClick,
   selected,
@@ -86,8 +84,8 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
 
   const handleClick = useCallback(() => {
     if (onClick == null) return;
-    onClick(index);
-  }, [index, onClick]);
+    onClick(item);
+  }, [item, onClick]);
 
   useEffect(() => {
     if (selected && itemContainerRef?.current) {

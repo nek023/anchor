@@ -28,20 +28,20 @@ export const ResultList: React.FC<ResultListProps> = ({
   selectedItemIndex,
 }) => {
   const handleClick = useCallback(
-    (index: number) => {
+    (item: Item) => {
       if (onItemClick == null) return;
+      const index = items.findIndex((i) => i.id === item.id);
       onItemClick(index);
     },
-    [onItemClick]
+    [items, onItemClick]
   );
 
   return (
     <Container>
       {items.map((item, index) => (
         <ResultListItem
-          index={index}
-          item={item}
           key={index}
+          item={item}
           selected={index === selectedItemIndex}
           onClick={handleClick}
         />

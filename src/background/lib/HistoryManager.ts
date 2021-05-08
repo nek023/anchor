@@ -35,6 +35,7 @@ export class HistoryManager extends EventEmitter {
       },
       (items) => {
         this._items = items.map((item) => ({
+          id: `history-${item.id}`,
           type: ItemType.History,
           title: item.title,
           url: item.url,
