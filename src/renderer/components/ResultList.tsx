@@ -18,8 +18,8 @@ const Container = styled.ul`
 
 interface ResultListProps {
   items: Item[];
-  onItemClick: (index: number) => void;
   selectedItemIndex: number;
+  onItemClick?: (index: number) => void;
 }
 
 export const ResultList: React.FC<ResultListProps> = ({
@@ -27,9 +27,13 @@ export const ResultList: React.FC<ResultListProps> = ({
   onItemClick,
   selectedItemIndex,
 }) => {
-  const handleClick = useCallback((index: number) => onItemClick(index), [
-    onItemClick,
-  ]);
+  const handleClick = useCallback(
+    (index: number) => {
+      if (onItemClick == null) return;
+      onItemClick(index);
+    },
+    [onItemClick]
+  );
 
   return (
     <Container>
@@ -38,8 +42,8 @@ export const ResultList: React.FC<ResultListProps> = ({
           index={index}
           item={item}
           key={index}
-          onClick={handleClick}
           selected={index === selectedItemIndex}
+          onClick={handleClick}
         />
       ))}
     </Container>
