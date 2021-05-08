@@ -4,14 +4,7 @@ import { KeyboardEventHandler } from "./KeyboardEventHandler";
 
 describe("KeyboardEventHandler", () => {
   test("matches snapshot", () => {
-    const { asFragment } = render(
-      <KeyboardEventHandler
-        onDown={() => {}}
-        onEscape={() => {}}
-        onEnter={() => {}}
-        onUp={() => {}}
-      />
-    );
+    const { asFragment } = render(<KeyboardEventHandler />);
 
     expect(asFragment()).toMatchInlineSnapshot(`<DocumentFragment />`);
   });

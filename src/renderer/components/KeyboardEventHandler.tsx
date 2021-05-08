@@ -10,50 +10,54 @@ const Code = {
 };
 
 interface KeyboardEventHandlerProps {
-  onEnter: () => void;
-  onEscape: () => void;
-  onUp: () => void;
-  onDown: () => void;
+  onDown?: () => void;
+  onEnter?: () => void;
+  onEscape?: () => void;
+  onUp?: () => void;
 }
 
 export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
   children,
+  onDown,
   onEnter,
   onEscape,
   onUp,
-  onDown,
 }) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       switch (event.code) {
         case Code.ArrowDown:
+          if (onDown == null) break;
           event.preventDefault();
           onDown();
           break;
 
         case Code.ArrowUp:
+          if (onUp == null) break;
           event.preventDefault();
           onUp();
           break;
 
         case Code.Enter:
+          if (onEnter == null) break;
           event.preventDefault();
           onEnter();
           break;
 
         case Code.Escape:
+          if (onEscape == null) break;
           event.preventDefault();
           onEscape();
           break;
 
         case Code.KeyN:
-          if (!event.ctrlKey) break;
+          if (onDown == null || !event.ctrlKey) break;
           event.preventDefault();
           onDown();
           break;
 
         case Code.KeyP:
-          if (!event.ctrlKey) break;
+          if (onUp == null || !event.ctrlKey) break;
           event.preventDefault();
           onUp();
           break;
@@ -72,5 +76,5 @@ export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
     };
   }, [handleKeyDown]);
 
-  return <React.Fragment>{children}</React.Fragment>;
+  return <>{children}</>;
 };
