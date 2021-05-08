@@ -4,9 +4,7 @@ import { SearchBar } from "./SearchBar";
 
 describe("SearchBar", () => {
   test("matches snapshot", () => {
-    const { asFragment } = render(
-      <SearchBar value="test" onValueChange={() => {}} />
-    );
+    const { asFragment } = render(<SearchBar value="test" />);
 
     expect(asFragment()).toMatchSnapshot();
   });
@@ -22,5 +20,17 @@ describe("SearchBar", () => {
 
     fireEvent.change(firstChild, { target: { value: "new value" } });
     expect(handleValueChange).toBeCalledWith("new value");
+  });
+
+  test("has always been focused", () => {
+    const { container } = render(<SearchBar value="test" />);
+
+    const firstChild = container.firstChild;
+    if (firstChild == null) throw "failed to get firstChild";
+
+    expect(firstChild).toHaveFocus();
+
+    fireEvent.blur(firstChild);
+    expect(firstChild).toHaveFocus();
   });
 });

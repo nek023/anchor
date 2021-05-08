@@ -40,6 +40,7 @@ export class BookmarkManager extends EventEmitter {
   private updateItems = () => {
     chrome.bookmarks.getRecent(MAX_BOOKMARKS, (items) => {
       this._items = items.map((item) => ({
+        id: `bookmark-${item.id}`,
         type: ItemType.Bookmark,
         title: item.title,
         url: item.url,

@@ -1,68 +1,72 @@
 import React, { useCallback, useEffect } from "react";
 
-const KeyCode = {
-  Return: 13,
-  Escape: 27,
-  Up: 38,
-  Down: 40,
-  N: 78,
-  P: 80,
-} as const;
+const Code = {
+  ArrowDown: "ArrowDown",
+  ArrowUp: "ArrowUp",
+  Enter: "Enter",
+  Escape: "Escape",
+  KeyN: "KeyN",
+  KeyP: "KeyP",
+};
 
 interface KeyboardEventHandlerProps {
-  onReturn: () => void;
-  onEscape: () => void;
-  onUp: () => void;
-  onDown: () => void;
+  onDown?: () => void;
+  onEnter?: () => void;
+  onEscape?: () => void;
+  onUp?: () => void;
 }
 
 export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
   children,
-  onReturn,
+  onDown,
+  onEnter,
   onEscape,
   onUp,
-  onDown,
 }) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      switch (event.keyCode) {
-        case KeyCode.Return:
+      switch (event.code) {
+        case Code.ArrowDown:
+          if (onDown == null) break;
           event.preventDefault();
-          onReturn();
+          onDown();
           break;
 
-        case KeyCode.Escape:
+        case Code.ArrowUp:
+          if (onUp == null) break;
+          event.preventDefault();
+          onUp();
+          break;
+
+        case Code.Enter:
+          if (onEnter == null) break;
+          event.preventDefault();
+          onEnter();
+          break;
+
+        case Code.Escape:
+          if (onEscape == null) break;
           event.preventDefault();
           onEscape();
           break;
 
-        case KeyCode.Up:
-          event.preventDefault();
-          onUp();
-          break;
-
-        case KeyCode.Down:
+        case Code.KeyN:
+          if (onDown == null || !event.ctrlKey) break;
           event.preventDefault();
           onDown();
           break;
 
-        case KeyCode.P:
-          if (!event.ctrlKey) break;
+        case Code.KeyP:
+          if (onUp == null || !event.ctrlKey) break;
           event.preventDefault();
           onUp();
-          break;
-
-        case KeyCode.N:
-          if (!event.ctrlKey) break;
-          event.preventDefault();
-          onDown();
           break;
 
         default:
           break;
       }
     },
-    [onDown, onEscape, onReturn, onUp]
+    [onDown, onEnter, onEscape, onUp]
   );
 
   useEffect(() => {
@@ -72,5 +76,5 @@ export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
     };
   }, [handleKeyDown]);
 
-  return <React.Fragment>{children}</React.Fragment>;
+  return <>{children}</>;
 };

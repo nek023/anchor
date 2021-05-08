@@ -1,17 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import scrollIntoView from "scroll-into-view-if-needed";
 import styled, { css } from "styled-components";
-import { Item, ItemType } from "../../common/types";
-
-const getFavIconUrl = (item: Item) => {
-  if (item.type === ItemType.Tab && item.favIconUrl) {
-    if (item.favIconUrl.startsWith("chrome://theme/")) {
-      return "chrome://favicon";
-    }
-    return item.favIconUrl;
-  }
-  return `chrome://favicon/${item.url}`;
-};
+import { Item } from "../../common/types";
+import { getFavIconUrl } from "../lib/getFavIconUrl";
 
 const ItemLeft = styled.div`
   width: 30px;
@@ -79,25 +70,26 @@ const ItemContainer = styled.li<{ selected: boolean }>`
 `;
 
 interface ResultListItemProps {
-  index: number;
   item: Item;
-  onClick: (index: number) => void;
   selected: boolean;
+  onClick?: (item: Item) => void;
 }
 
 export const ResultListItem: React.FC<ResultListItemProps> = ({
-  index,
   item,
   onClick,
   selected,
 }) => {
-  const listItemContainerRef = useRef<HTMLLIElement>(null);
+  const itemContainerRef = useRef<HTMLLIElement>(null);
 
-  const handleClick = useCallback(() => onClick(index), [index, onClick]);
+  const handleClick = useCallback(() => {
+    if (onClick == null) return;
+    onClick(item);
+  }, [item, onClick]);
 
   useEffect(() => {
-    if (selected && listItemContainerRef?.current) {
-      scrollIntoView(listItemContainerRef?.current, {
+    if (selected && itemContainerRef?.current) {
+      scrollIntoView(itemContainerRef?.current, {
         block: "nearest",
         inline: "nearest",
         scrollMode: "if-needed",
@@ -109,7 +101,7 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
     () => (
       <ItemContainer
         onClick={handleClick}
-        ref={listItemContainerRef}
+        ref={itemContainerRef}
         selected={selected}
       >
         <ItemLeft>

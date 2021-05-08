@@ -17,7 +17,7 @@ const SearchBarInput = styled.input`
 
 interface SearchBarProps {
   value: string;
-  onValueChange: (value: string) => void;
+  onValueChange?: (value: string) => void;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
@@ -29,13 +29,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const handleBlur = useCallback(() => inputRef?.current?.focus(), []);
 
   const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) =>
-      onValueChange(event.target.value),
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (onValueChange == null) return;
+      onValueChange(event.target.value);
+    },
     [onValueChange]
   );
 
   useEffect(
-    () => inputRef?.current?.setSelectionRange(value.length, value.length),
+    () => {
+      // Move cursor to the end
+      inputRef?.current?.setSelectionRange(value.length, value.length);
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );

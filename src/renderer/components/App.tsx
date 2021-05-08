@@ -4,11 +4,12 @@ import { useThrottle } from "react-use";
 import { ResultList } from "./ResultList";
 import { SearchBar } from "./SearchBar";
 import { KeyboardEventHandler } from "./KeyboardEventHandler";
+import { MessageType } from "../../common/ipc";
 import { Item } from "../../common/types";
-import { closeWindow } from "../lib/closeWindow";
+import { closeCurrentWindow } from "../lib/closeCurrentWindow";
 import { openItem } from "../lib/openItem";
-import { useRemoteQuery } from "../lib/useRemoteQuery";
 import { useQueryResults } from "../lib/useQueryResults";
+import { useExtensionMessage } from "../lib/useExtensionMessage";
 
 const Container = styled.div`
   padding: 8px;
@@ -21,17 +22,20 @@ export const App: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
-  useRemoteQuery(useCallback((query) => setQuery(query), []));
+  useExtensionMessage((message, sender, sendResponse) => {
+    if (message.type === MessageType.SetQuery) {
+      setQuery(message.payload.query);
+      sendResponse(true);
+    }
+  });
 
-  useQueryResults(
-    useThrottle(query, 50),
-    useCallback((items) => setItems(items.slice(0, 100)), [])
-  );
+  const throttledQuery = useThrottle(query, 50);
+  useQueryResults(throttledQuery, (items) => setItems(items.slice(0, 100)));
 
-  const handleReturn = useCallback(() => {
+  const handleEnter = useCallback(() => {
     if (items.length === 0) return;
     openItem(items[selectedItemIndex]);
-    closeWindow();
+    closeCurrentWindow();
   }, [items, selectedItemIndex]);
 
   const handleUp = useCallback(() => {
@@ -48,7 +52,7 @@ export const App: React.FC = () => {
     (index: number) => {
       setSelectedItemIndex(index);
       openItem(items[index]);
-      closeWindow();
+      closeCurrentWindow();
     },
     [items]
   );
@@ -59,8 +63,8 @@ export const App: React.FC = () => {
 
   return (
     <KeyboardEventHandler
-      onReturn={handleReturn}
-      onEscape={closeWindow}
+      onEnter={handleEnter}
+      onEscape={closeCurrentWindow}
       onUp={handleUp}
       onDown={handleDown}
     >

@@ -5,6 +5,7 @@ import { ResultListItem } from "./ResultListItem";
 
 describe("ResultListItem", () => {
   const item: BookmarkItem = {
+    id: "bookmark-1",
     type: ItemType.Bookmark,
     title: "test",
     url: "https://example.com",
@@ -12,12 +13,7 @@ describe("ResultListItem", () => {
 
   test("matches snapshot", () => {
     const { asFragment } = render(
-      <ResultListItem
-        index={0}
-        item={item}
-        onClick={() => {}}
-        selected={false}
-      />
+      <ResultListItem item={item} selected={false} />
     );
 
     expect(asFragment()).toMatchSnapshot();
@@ -26,15 +22,10 @@ describe("ResultListItem", () => {
   test("calls onClick when it has been clicked", () => {
     const handleClick = jest.fn();
     const { getByText } = render(
-      <ResultListItem
-        index={0}
-        item={item}
-        onClick={handleClick}
-        selected={false}
-      />
+      <ResultListItem item={item} selected={false} onClick={handleClick} />
     );
 
     fireEvent.click(getByText("test"));
-    expect(handleClick).toBeCalledWith(0);
+    expect(handleClick).toBeCalledWith(item);
   });
 });
