@@ -1,11 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SearchBar matches snapshot 1`] = `
-<styled.input
-  autoFocus={true}
-  onBlur={[Function]}
-  onChange={[Function]}
-  type="text"
-  value=""
-/>
+<DocumentFragment>
+  .c0 {
+  width: 100%;
+  height: 40px;
+  margin: 0;
+  padding: 5px;
+  font-size: 26px;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+<input
+    class="c0"
+    type="text"
+    value="test"
+  />
+</DocumentFragment>
 `;
