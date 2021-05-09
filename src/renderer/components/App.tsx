@@ -8,8 +8,11 @@ import { MessageType } from "../../common/ipc";
 import { Item } from "../../common/types";
 import { closeCurrentWindow } from "../lib/closeCurrentWindow";
 import { openItem } from "../lib/openItem";
-import { useQueryResults } from "../lib/useQueryResults";
-import { useExtensionMessage } from "../lib/useExtensionMessage";
+import {
+  ExtensionMessageCallback,
+  useExtensionMessage,
+} from "../lib/useExtensionMessage";
+import { QueryResultsCallback, useQueryResults } from "../lib/useQueryResults";
 
 const Container = styled.div`
   padding: 8px;
@@ -22,15 +25,23 @@ export const App: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
-  useExtensionMessage((message, sender, sendResponse) => {
-    if (message.type === MessageType.SetQuery) {
-      setQuery(message.payload.query);
-      sendResponse(true);
-    }
-  });
+  const handleExtensionMessage = useCallback<ExtensionMessageCallback>(
+    (message, sender, sendResponse) => {
+      if (message.type === MessageType.SetQuery) {
+        setQuery(message.payload.query);
+        sendResponse(true);
+      }
+    },
+    []
+  );
+  useExtensionMessage(handleExtensionMessage);
 
   const throttledQuery = useThrottle(query, 50);
-  useQueryResults(throttledQuery, (items) => setItems(items.slice(0, 100)));
+  const handleQueryResults = useCallback<QueryResultsCallback>(
+    (items) => setItems(items.slice(0, 100)),
+    []
+  );
+  useQueryResults(throttledQuery, handleQueryResults);
 
   const handleEnter = useCallback(() => {
     if (items.length === 0) return;
