@@ -9,24 +9,22 @@ export const HistoryManagerEvent = {
 } as const;
 
 export class HistoryManager extends EventEmitter {
-  private _items: HistoryItem[];
+  private _items: HistoryItem[] = [];
 
   constructor() {
     super();
 
-    this._items = [];
+    chrome.history.onVisited.addListener(() => this.updateItems());
+    chrome.history.onVisitRemoved.addListener(() => this.updateItems());
 
     this.updateItems();
-
-    chrome.history.onVisited.addListener(this.updateItems);
-    chrome.history.onVisitRemoved.addListener(this.updateItems);
   }
 
-  get items(): HistoryItem[] {
+  get items() {
     return this._items;
   }
 
-  private updateItems = () => {
+  private updateItems() {
     chrome.history.search(
       {
         text: "",
@@ -43,5 +41,5 @@ export class HistoryManager extends EventEmitter {
         this.emit(HistoryManagerEvent.Update);
       }
     );
-  };
+  }
 }

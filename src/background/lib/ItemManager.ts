@@ -5,44 +5,38 @@ import { HistoryManager, HistoryManagerEvent } from "./HistoryManager";
 import { TabManager, TabManagerEvent } from "./TabManager";
 
 export class ItemManager {
-  private _bookmarkManager: BookmarkManager;
-  private _historyManager: HistoryManager;
-  private _tabManager: TabManager;
-  private _filter: string;
-  private _items: Item[];
-  private _fuse: Fuse<Item>;
+  private _bookmarkManager: BookmarkManager = new BookmarkManager();
+  private _historyManager: HistoryManager = new HistoryManager();
+  private _tabManager: TabManager = new TabManager();
+  private _filter = "";
+  private _items: Item[] = [];
 
-  constructor(
-    bookmarkManager: BookmarkManager = new BookmarkManager(),
-    historyManager: HistoryManager = new HistoryManager(),
-    tabManager: TabManager = new TabManager()
-  ) {
-    this._bookmarkManager = bookmarkManager;
-    this._historyManager = historyManager;
-    this._tabManager = tabManager;
-    this._filter = "";
-    this._items = [];
-    this._fuse = new Fuse(this.items, {
-      keys: [
-        {
-          name: "title",
-          weight: 0.7,
-        },
-        {
-          name: "url",
-          weight: 0.3,
-        },
-      ],
-    });
+  private _fuse: Fuse<Item> = new Fuse([], {
+    keys: [
+      {
+        name: "title",
+        weight: 0.7,
+      },
+      {
+        name: "url",
+        weight: 0.3,
+      },
+    ],
+  });
+
+  constructor() {
+    this._bookmarkManager.on(BookmarkManagerEvent.Update, () =>
+      this.updateItems()
+    );
+    this._historyManager.on(HistoryManagerEvent.Update, () =>
+      this.updateItems()
+    );
+    this._tabManager.on(TabManagerEvent.Update, () => this.updateItems());
 
     this.updateItems();
-
-    this._bookmarkManager.on(BookmarkManagerEvent.Update, this.updateItems);
-    this._historyManager.on(HistoryManagerEvent.Update, this.updateItems);
-    this._tabManager.on(TabManagerEvent.Update, this.updateItems);
   }
 
-  get items(): Item[] {
+  get items() {
     return this._items;
   }
 
@@ -69,7 +63,7 @@ export class ItemManager {
     return { filter, keyword };
   }
 
-  private updateItems = () => {
+  private updateItems() {
     let items: Item[] = [];
     let matched = false;
 
@@ -87,5 +81,5 @@ export class ItemManager {
 
     this._items = items;
     this._fuse.setCollection(items);
-  };
+  }
 }
