@@ -88,7 +88,7 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
   }, [item, onClick]);
 
   useEffect(() => {
-    if (selected && itemContainerRef?.current) {
+    if (selected && itemContainerRef?.current != null) {
       scrollIntoView(itemContainerRef?.current, {
         block: "nearest",
         inline: "nearest",

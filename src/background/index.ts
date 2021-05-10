@@ -17,7 +17,7 @@ const itemManager = new ItemManager();
 let mainWindow: chrome.windows.Window | undefined;
 
 const openWindow = (query: string) => {
-  if (mainWindow && mainWindow.focused) {
+  if (mainWindow != null && mainWindow.focused) {
     chrome.windows.remove(mainWindow.id, () => {
       mainWindow = undefined;
     });
@@ -26,7 +26,7 @@ const openWindow = (query: string) => {
       const display =
         displayManager.displayContainsWindow(currentWindow) ||
         displayManager.primaryDisplay;
-      if (display === undefined) return;
+      if (display == null) return;
 
       const bounds = {
         width: WINDOW_WIDTH,
@@ -39,7 +39,7 @@ const openWindow = (query: string) => {
           Math.round((display.bounds.height - WINDOW_HEIGHT) * 0.5),
       };
 
-      if (mainWindow) {
+      if (mainWindow != null) {
         chrome.windows.update(
           mainWindow.id,
           {
@@ -67,7 +67,7 @@ const openWindow = (query: string) => {
 };
 
 chrome.windows.onRemoved.addListener((windowId) => {
-  if (!mainWindow) return;
+  if (mainWindow == null) return;
 
   if (windowId === mainWindow.id) {
     mainWindow = undefined;
@@ -75,7 +75,7 @@ chrome.windows.onRemoved.addListener((windowId) => {
 });
 
 chrome.windows.onFocusChanged.addListener((windowId) => {
-  if (!mainWindow) return;
+  if (mainWindow == null) return;
 
   if (windowId === mainWindow.id) {
     mainWindow.focused = true;
