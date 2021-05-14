@@ -1,36 +1,29 @@
 export class DisplayManager {
   private _displays: chrome.system.display.DisplayInfo[] = [];
-  private _primaryDisplay: chrome.system.display.DisplayInfo | undefined;
+  private _primaryDisplay?: chrome.system.display.DisplayInfo;
 
   constructor() {
-    chrome.system.display.onDisplayChanged.addListener(() => {
-      this.updateDisplays();
-    });
+    chrome.system.display.onDisplayChanged.addListener(() =>
+      this.updateDisplays()
+    );
 
     this.updateDisplays();
   }
 
-  get displays(): chrome.system.display.DisplayInfo[] {
+  get displays() {
     return this._displays;
   }
 
-  get primaryDisplay(): chrome.system.display.DisplayInfo | undefined {
+  get primaryDisplay() {
     return this._primaryDisplay;
   }
 
-  public displayContainsWindow(
+  displayContainsWindow(
     window: chrome.windows.Window
   ): chrome.system.display.DisplayInfo | undefined {
     const { left, top, width, height } = window;
-
-    if (
-      typeof left !== "number" ||
-      typeof top !== "number" ||
-      typeof width !== "number" ||
-      typeof height !== "number"
-    ) {
+    if (left == null || top == null || width == null || height == null)
       return undefined;
-    }
 
     const displays = this.displays.filter((display) => {
       const b = display.bounds;
@@ -49,7 +42,7 @@ export class DisplayManager {
   private updateDisplays() {
     chrome.system.display.getInfo((displays) => {
       this._displays = displays;
-      this._primaryDisplay = displays.filter((d) => d.isPrimary)[0];
+      this._primaryDisplay = displays.find((d) => d.isPrimary);
     });
   }
 }

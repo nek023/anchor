@@ -1,32 +1,23 @@
-import { EventEmitter } from "events";
 import { HistoryItem, ItemType } from "../../common/types";
 
 const MAX_HISTORIES = 1000;
 const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30; // 30 days
 
-export const HistoryManagerEvent = {
-  Update: "update",
-} as const;
-
-export class HistoryManager extends EventEmitter {
-  private _items: HistoryItem[];
+export class HistoryManager {
+  private _items: HistoryItem[] = [];
 
   constructor() {
-    super();
-
-    this._items = [];
+    chrome.history.onVisited.addListener(() => this.updateItems());
+    chrome.history.onVisitRemoved.addListener(() => this.updateItems());
 
     this.updateItems();
-
-    chrome.history.onVisited.addListener(this.updateItems);
-    chrome.history.onVisitRemoved.addListener(this.updateItems);
   }
 
-  get items(): HistoryItem[] {
+  get items() {
     return this._items;
   }
 
-  private updateItems = () => {
+  private updateItems() {
     chrome.history.search(
       {
         text: "",
@@ -40,8 +31,7 @@ export class HistoryManager extends EventEmitter {
           title: item.title,
           url: item.url,
         }));
-        this.emit(HistoryManagerEvent.Update);
       }
     );
-  };
+  }
 }
