@@ -1,19 +1,12 @@
-import { EventEmitter } from "events";
 import { BookmarkItem, ItemType } from "../../common/types";
 
 const MAX_BOOKMARKS = 1000;
 
-export const BookmarkManagerEvent = {
-  Update: "update",
-} as const;
-
-export class BookmarkManager extends EventEmitter {
+export class BookmarkManager {
   private _items: BookmarkItem[] = [];
   private _importing = false;
 
   constructor() {
-    super();
-
     chrome.bookmarks.onImportBegan.addListener(() => {
       this._importing = true;
     });
@@ -43,7 +36,6 @@ export class BookmarkManager extends EventEmitter {
         title: item.title,
         url: item.url,
       }));
-      this.emit(BookmarkManagerEvent.Update);
     });
   }
 }

@@ -1,16 +1,9 @@
-import { EventEmitter } from "events";
 import { ItemType, TabItem } from "../../common/types";
 
-export const TabManagerEvent = {
-  Update: "update",
-} as const;
-
-export class TabManager extends EventEmitter {
+export class TabManager {
   private _items: TabItem[] = [];
 
   constructor() {
-    super();
-
     chrome.tabs.onCreated.addListener(() => this.updateItems());
     chrome.tabs.onRemoved.addListener(() => this.updateItems());
     chrome.tabs.onReplaced.addListener(() => this.updateItems());
@@ -34,7 +27,6 @@ export class TabManager extends EventEmitter {
         tabIndex: item.index,
         windowId: item.windowId,
       }));
-      this.emit(TabManagerEvent.Update);
     });
   }
 }
