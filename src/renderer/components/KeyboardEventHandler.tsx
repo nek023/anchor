@@ -10,13 +10,14 @@ const Code = {
 };
 
 interface KeyboardEventHandlerProps {
+  children?: React.ReactNode;
   onDown?: () => void;
   onEnter?: () => void;
   onEscape?: () => void;
   onUp?: () => void;
 }
 
-export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
+export const KeyboardEventHandler: React.VFC<KeyboardEventHandlerProps> = ({
   children,
   onDown,
   onEnter,
