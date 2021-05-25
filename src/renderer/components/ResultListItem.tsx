@@ -75,7 +75,7 @@ interface ResultListItemProps {
   onClick?: (item: Item) => void;
 }
 
-export const ResultListItem: React.FC<ResultListItemProps> = ({
+export const ResultListItem: React.VFC<ResultListItemProps> = ({
   item,
   onClick,
   selected,
