@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.1.0](https://github.com/questbeat/anchor/tree/v3.1.0) (2021-05-26)
+
+- Update packages
+- Refactoring
+
+
 ## [3.0.1](https://github.com/questbeat/anchor/tree/v3.0.1) (2021-02-06)
 
 - Update packages
