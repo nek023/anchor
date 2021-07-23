@@ -26,6 +26,8 @@ export const KeyboardEventHandler: React.VFC<KeyboardEventHandlerProps> = ({
 }) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
+      if (event.isComposing) return;
+
       switch (event.code) {
         case Code.ArrowDown:
           if (onDown == null) break;
