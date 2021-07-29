@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.2.0](https://github.com/questbeat/anchor/tree/v3.2.0) (2021-07-30)
+
+- Update packages
+- Ignore keyboard event during text composition
+
+
 ## [3.1.0](https://github.com/questbeat/anchor/tree/v3.1.0) (2021-05-26)
 
 - Update packages

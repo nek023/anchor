@@ -1,7 +1,7 @@
 {
   "name": "anchor",
   "description": "Tab switcher for Google Chrome",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "main": "build/index.js",
   "author": "Katsuma Tanaka",
   "license": "MIT",
