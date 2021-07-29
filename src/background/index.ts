@@ -17,7 +17,7 @@ const itemManager = new ItemManager();
 let mainWindow: chrome.windows.Window | undefined;
 
 const openWindow = (query: string) => {
-  if (mainWindow != null && mainWindow.focused) {
+  if (mainWindow?.id != null && mainWindow.focused) {
     chrome.windows.remove(mainWindow.id, () => {
       mainWindow = undefined;
     });
@@ -39,7 +39,7 @@ const openWindow = (query: string) => {
           Math.round((display.bounds.height - WINDOW_HEIGHT) * 0.5),
       };
 
-      if (mainWindow != null) {
+      if (mainWindow?.id != null) {
         chrome.windows.update(
           mainWindow.id,
           {

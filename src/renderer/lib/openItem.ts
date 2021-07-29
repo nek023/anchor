@@ -7,7 +7,11 @@ export const openItem = (item: Item) => {
         tabs: item.tabIndex,
         windowId: item.windowId,
       },
-      (window) => chrome.windows.update(window.id, { focused: true })
+      (window) => {
+        if (window.id != null) {
+          chrome.windows.update(window.id, { focused: true });
+        }
+      }
     );
   } else {
     chrome.tabs.create({ url: item.url });
