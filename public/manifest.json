@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "anchor",
   "description": "Tab switcher for Google Chrome",
   "version": "3.2.1",
@@ -24,13 +24,7 @@
     }
   },
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
-  "permissions": [
-    "bookmarks",
-    "chrome://favicon/*",
-    "history",
-    "system.display",
-    "tabs"
-  ]
+  "permissions": ["bookmarks", "history", "system.display", "tabs"]
 }

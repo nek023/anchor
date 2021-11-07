@@ -19,7 +19,7 @@ exports[`ResultList matches snapshot 1`] = `
   justify-content: center;
 }
 
-.c4 {
+.c3 {
   margin-left: 8px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -34,12 +34,7 @@ exports[`ResultList matches snapshot 1`] = `
   flex: 1;
 }
 
-.c3 {
-  width: 24px;
-  height: 24px;
-}
-
-.c6 {
+.c5 {
   color: #333333;
   font-size: 15px;
   overflow: hidden;
@@ -50,7 +45,7 @@ exports[`ResultList matches snapshot 1`] = `
   flex: 1;
 }
 
-.c8 {
+.c7 {
   color: #9999aa;
   margin-top: 2px;
   font-size: 13px;
@@ -79,15 +74,15 @@ exports[`ResultList matches snapshot 1`] = `
   background-color: #0067ff;
 }
 
-.c1 .c5 {
+.c1 .c4 {
   color: #fafafa;
 }
 
-.c1 .c7 {
+.c1 .c6 {
   color: #bcd5fb;
 }
 
-.c9 {
+.c8 {
   width: 100%;
   height: 46px;
   padding: 3px;
@@ -123,48 +118,38 @@ exports[`ResultList matches snapshot 1`] = `
     >
       <div
         class="c2"
-      >
-        <img
-          class="c3"
-          src="chrome://favicon/https://example.com"
-        />
-      </div>
+      />
       <div
-        class="c4"
+        class="c3"
       >
         <div
-          class="c5 c6"
+          class="c4 c5"
         >
           item1
         </div>
         <div
-          class="c7 c8"
+          class="c6 c7"
         >
           https://example.com
         </div>
       </div>
     </li>
     <li
-      class="c9"
+      class="c8"
     >
       <div
         class="c2"
-      >
-        <img
-          class="c3"
-          src="chrome://favicon/https://example.com"
-        />
-      </div>
+      />
       <div
-        class="c4"
+        class="c3"
       >
         <div
-          class="c5 c6"
+          class="c4 c5"
         >
           item2
         </div>
         <div
-          class="c7 c8"
+          class="c6 c7"
         >
           https://example.com
         </div>

@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import scrollIntoView from "scroll-into-view-if-needed";
 import styled, { css } from "styled-components";
-import { Item } from "../../common/types";
-import { getFavIconUrl } from "../lib/getFavIconUrl";
+import { Item, ItemType } from "../../common/types";
 
 const ItemLeft = styled.div`
   width: 30px;
@@ -97,6 +96,17 @@ export const ResultListItem: React.VFC<ResultListItemProps> = ({
     }
   }, [selected]);
 
+  const itemImage = useMemo(() => {
+    if (
+      item.type !== ItemType.Tab ||
+      item.favIconUrl == null ||
+      item.favIconUrl === ""
+    ) {
+      return null;
+    }
+    return <ItemImage src={item.favIconUrl} />;
+  }, [item]);
+
   return useMemo(
     () => (
       <ItemContainer
@@ -104,15 +114,13 @@ export const ResultListItem: React.VFC<ResultListItemProps> = ({
         ref={itemContainerRef}
         selected={selected}
       >
-        <ItemLeft>
-          <ItemImage src={getFavIconUrl(item)} />
-        </ItemLeft>
+        <ItemLeft>{itemImage}</ItemLeft>
         <ItemRight>
           <ItemTitle>{item.title}</ItemTitle>
           <ItemUrl>{item.url}</ItemUrl>
         </ItemRight>
       </ItemContainer>
     ),
-    [handleClick, item, selected]
+    [handleClick, item, itemImage, selected]
   );
 };
