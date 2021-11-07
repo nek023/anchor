@@ -1,59 +1,26 @@
 name: Release
-
 on:
   push:
     tags:
-      - v*
-
+      - "v*.*.*"
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js environment
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12'
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
+          node-version: "16"
+      - id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache yarn dependencies
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
-
-      - name: Install yarn dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Build
-        run: yarn run build
-
-      - name: Package
-        run: yarn run pack
-
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn run build
+      - run: yarn run pack
+      - uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-
-      - name: Upload release asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./anchor.zip
-          asset_name: anchor.zip
-          asset_content_type: application/zip
+          files: anchor.zip
