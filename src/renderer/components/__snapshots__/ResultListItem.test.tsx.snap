@@ -19,7 +19,7 @@ exports[`ResultListItem matches snapshot 1`] = `
   justify-content: center;
 }
 
-.c3 {
+.c2 {
   margin-left: 8px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -34,12 +34,7 @@ exports[`ResultListItem matches snapshot 1`] = `
   flex: 1;
 }
 
-.c2 {
-  width: 24px;
-  height: 24px;
-}
-
-.c4 {
+.c3 {
   color: #333333;
   font-size: 15px;
   overflow: hidden;
@@ -50,7 +45,7 @@ exports[`ResultListItem matches snapshot 1`] = `
   flex: 1;
 }
 
-.c5 {
+.c4 {
   color: #9999aa;
   margin-top: 2px;
   font-size: 13px;
@@ -83,22 +78,17 @@ exports[`ResultListItem matches snapshot 1`] = `
   >
     <div
       class="c1"
-    >
-      <img
-        class="c2"
-        src="chrome://favicon/https://example.com"
-      />
-    </div>
+    />
     <div
-      class="c3"
+      class="c2"
     >
       <div
-        class="c4"
+        class="c3"
       >
         test
       </div>
       <div
-        class="c5"
+        class="c4"
       >
         https://example.com
       </div>
