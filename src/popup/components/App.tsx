@@ -4,8 +4,8 @@ import { useThrottle } from "react-use";
 import { ResultList } from "./ResultList";
 import { SearchBar } from "./SearchBar";
 import { KeyboardEventHandler } from "./KeyboardEventHandler";
-import { MessageType } from "../../common/ipc";
-import { Item } from "../../common/types";
+import { MessageType } from "../../lib/ipc";
+import { Item } from "../../lib/types";
 import { closeCurrentWindow } from "../lib/closeCurrentWindow";
 import { openItem } from "../lib/openItem";
 import {
@@ -68,9 +68,10 @@ export const App: React.VFC = () => {
     [items]
   );
 
-  const handleValueChange = useCallback((query: string) => setQuery(query), [
-    setQuery,
-  ]);
+  const handleValueChange = useCallback(
+    (query: string) => setQuery(query),
+    [setQuery]
+  );
 
   return (
     <KeyboardEventHandler

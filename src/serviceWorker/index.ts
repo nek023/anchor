@@ -1,5 +1,5 @@
 import { DisplayManager } from "./lib/DisplayManager";
-import { Message, MessageType, sendMessage, setQuery } from "../common/ipc";
+import { Message, MessageType, sendMessage, setQuery } from "../lib/ipc";
 import { ItemManager } from "./lib/ItemManager";
 
 const Command = {
@@ -49,7 +49,7 @@ const openWindow = (query: string) => {
           () => sendMessage(setQuery(query))
         );
       } else {
-        const url = chrome.runtime.getURL("index.html") + `?q=${query}`;
+        const url = chrome.runtime.getURL("popup.html") + `?q=${query}`;
         chrome.windows.create(
           {
             ...bounds,

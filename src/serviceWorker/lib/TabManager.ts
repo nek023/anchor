@@ -1,4 +1,4 @@
-import { ItemType, TabItem } from "../../common/types";
+import { ItemType, TabItem } from "../../lib/types";
 
 export class TabManager {
   private _items: TabItem[] = [];

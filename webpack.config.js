@@ -7,8 +7,8 @@ const path = require("path");
 
 const config = {
   entry: {
-    background: "./src/background/index.ts",
-    renderer: "./src/renderer/index.tsx",
+    popup: "./src/popup/index.tsx",
+    serviceWorker: "./src/serviceWorker/index.ts",
   },
   output: {
     filename: "[name].js",
@@ -29,8 +29,9 @@ const config = {
   plugins: [
     new CopyPlugin({ patterns: ["public"] }),
     new HtmlWebpackPlugin({
-      chunks: ["renderer"],
-      template: "./src/index.html",
+      chunks: ["popup"],
+      filename: "popup.html",
+      template: "./src/popup/index.html",
     }),
   ],
   resolve: {
