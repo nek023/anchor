@@ -30,7 +30,8 @@ const config = {
     new CopyPlugin({ patterns: ["public"] }),
     new HtmlWebpackPlugin({
       chunks: ["popup"],
-      template: "./src/index.html",
+      filename: "popup.html",
+      template: "./src/popup/index.html",
     }),
   ],
   resolve: {
