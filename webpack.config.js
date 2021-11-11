@@ -7,8 +7,8 @@ const path = require("path");
 
 const config = {
   entry: {
-    background: "./src/background/index.ts",
     popup: "./src/popup/index.tsx",
+    serviceWorker: "./src/serviceWorker/index.ts",
   },
   output: {
     filename: "[name].js",

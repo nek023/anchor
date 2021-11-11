@@ -24,7 +24,7 @@
     }
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "serviceWorker.js"
   },
   "permissions": ["bookmarks", "history", "system.display", "tabs"]
 }
