@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Message } from "../../common/ipc";
+import { Message } from "../../lib/ipc";
 
 export type ExtensionMessageCallback = (
   message: Message,

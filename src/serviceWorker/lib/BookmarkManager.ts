@@ -1,4 +1,4 @@
-import { BookmarkItem, ItemType } from "../../common/types";
+import { BookmarkItem, ItemType } from "../../lib/types";
 
 const MAX_BOOKMARKS = 1000;
 

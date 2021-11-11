@@ -1,5 +1,5 @@
 import { DisplayManager } from "./lib/DisplayManager";
-import { Message, MessageType, sendMessage, setQuery } from "../common/ipc";
+import { Message, MessageType, sendMessage, setQuery } from "../lib/ipc";
 import { ItemManager } from "./lib/ItemManager";
 
 const Command = {

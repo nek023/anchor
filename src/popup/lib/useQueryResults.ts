@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Item } from "../../common/types";
-import { queryItems, sendMessage } from "../../common/ipc";
+import { Item } from "../../lib/types";
+import { queryItems, sendMessage } from "../../lib/ipc";
 
 export type QueryResultsCallback = (items: Item[]) => void;
 
