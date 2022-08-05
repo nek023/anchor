@@ -11,7 +11,7 @@
     "dev": "webpack --mode development --watch",
     "format": "prettier --write src",
     "lint": "eslint --ext .ts,.tsx src",
-    "pack": "yarn run clean && yarn run build && zip -r anchor.zip build",
+    "pack": "npm run clean && npm run build && zip -r anchor.zip build",
     "test": "jest"
   },
   "dependencies": {
