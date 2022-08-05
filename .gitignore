@@ -1,8 +1,5 @@
 .vscode/
+anchor.zip
 build/
 node_modules/
-
 npm-*.log
-yarn-*.log
-
-anchor.zip

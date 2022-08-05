@@ -20,8 +20,8 @@ After installing, open Chrome extension settings and setup keyboard shortcut fro
 ### Build manually
 
 ```sh
-yarn install
-yarn run build
+npm install
+npm run build
 ```
 
 Then open Chrome extension settings and drag & drop `build` directory.
