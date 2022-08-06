@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.3.0](https://github.com/questbeat/anchor/tree/v3.3.0) (2022-08-06)
+
+- Migrate to manifest v3
+- Update packages
+
+
 ## [3.2.1](https://github.com/questbeat/anchor/tree/v3.2.1) (2021-09-01)
 
 - Update packages
