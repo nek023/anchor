@@ -3,7 +3,7 @@
 ![Build](https://github.com/questbeat/anchor/workflows/Build/badge.svg)
 ![Release](https://github.com/questbeat/anchor/workflows/Release/badge.svg)
 
-Tab switcher for Google Chrome
+Tab switcher for Google Chrome.
 
 ![](screenshot.png)
 
@@ -12,35 +12,35 @@ Tab switcher for Google Chrome
 
 ### Download from Chrome Web Store
 
-Go to the [Chrome Web Store](https://chrome.google.com/webstore/detail/anchor/hgnlmkibblofcjgcljofkcdofkplhlgb) and install extension.
+Go to the [Chrome Web Store](https://chrome.google.com/webstore/detail/anchor/hgnlmkibblofcjgcljofkcdofkplhlgb) and install the extension.
 
-After installing, open Chrome extension settings and setup keyboard shortcut from the bottom right link.
+After installation, select "Keyboard shortcuts" from the menu in the Chrome extension settings and setup the shortcuts.
 
 
 ### Build manually
 
 ```sh
+asdf install
 npm install
 npm run build
 ```
 
-Then open Chrome extension settings and drag & drop `build` directory.
+After the build is complete, activate "Developer mode" from the Chrome extension settings, select "Load unpacked" and choose the `build` directory.
 
 
 ## Usage
 
-Launch anchor with keyboard shortcut and input any keywords.
-Anchor shows the list of tabs matched to the keywords.
+Launch anchor and enter search words in the input field. A list of tabs matching the search word will be displayed.
 
-It's also possible to find pages from bookmarks or histories by using following filters.
+You can also search for pages from your bookmarks or history by using the following filters.
 
 * `t:(keyword)` - Find from tabs.
 * `b:(keyword)` - Find from bookmarks.
 * `h:(keyword)` - Find from histories.
 
-If no filters are specified, it's same as `t:` is specified.
+If no filter is specified, it works the same as if `t:` were specified.
 
-Filters can be combined, for example:
+Filters can also be combined. For example:
 
 * `tb:`  - Find from tabs and bookmarks.
 * `tbh:` - Find from tabs, bookmarks and histories.
@@ -48,4 +48,4 @@ Filters can be combined, for example:
 
 ## License
 
-anchor is [MIT Licensed](LICENSE).
+anchor is licensed under the [MIT License](LICENSE).
