@@ -20,7 +20,7 @@ interface SearchBarProps {
   onValueChange?: (value: string) => void;
 }
 
-export const SearchBar: React.VFC<SearchBarProps> = ({
+export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onValueChange,
 }) => {

@@ -20,7 +20,7 @@ const Container = styled.div`
 
 const initialQuery = new URL(document.URL).searchParams.get("q") || "";
 
-export const App: React.VFC = () => {
+export const App: React.FC = () => {
   const [query, setQuery] = useState(initialQuery);
   const [items, setItems] = useState<Item[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
