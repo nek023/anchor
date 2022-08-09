@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.4.0](https://github.com/questbeat/anchor/tree/v3.4.0) (2022-08-10)
+
+- Add workaround for missing favicon API
+- Fix for React 18
+
+
 ## [3.3.0](https://github.com/questbeat/anchor/tree/v3.3.0) (2022-08-06)
 
 - Migrate to manifest v3
