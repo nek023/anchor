@@ -17,7 +17,7 @@ interface KeyboardEventHandlerProps {
   onUp?: () => void;
 }
 
-export const KeyboardEventHandler: React.VFC<KeyboardEventHandlerProps> = ({
+export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
   children,
   onDown,
   onEnter,

@@ -22,7 +22,7 @@ interface ResultListProps {
   onItemClick?: (index: number) => void;
 }
 
-export const ResultList: React.VFC<ResultListProps> = ({
+export const ResultList: React.FC<ResultListProps> = ({
   items,
   onItemClick,
   selectedItemIndex,
