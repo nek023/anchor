@@ -97,14 +97,15 @@ export const ResultListItem: React.VFC<ResultListItemProps> = ({
   }, [selected]);
 
   const itemImage = useMemo(() => {
-    if (
-      item.type !== ItemType.Tab ||
-      item.favIconUrl == null ||
-      item.favIconUrl === ""
-    ) {
-      return null;
+    // Favicon API is not yet implemented in Manifest V3, so temporarily fetch from Google.
+    // https://bugs.chromium.org/p/chromium/issues/detail?id=104102
+    let favIconUrl: string | undefined = undefined;
+    if (item.type === ItemType.Tab) favIconUrl = item.favIconUrl;
+    if (favIconUrl == null && item.url != null) {
+      const url = new URL(item.url);
+      favIconUrl = `https://www.google.com/s2/favicons?domain=${url.host}&sz=48`;
     }
-    return <ItemImage src={item.favIconUrl} />;
+    return <ItemImage src={favIconUrl} />;
   }, [item]);
 
   return useMemo(
