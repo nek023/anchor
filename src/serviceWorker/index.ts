@@ -1,6 +1,10 @@
 import { DisplayManager } from "./lib/DisplayManager";
 import { Message, MessageType, sendMessage, setQuery } from "../lib/ipc";
+import { parseQuery } from "./lib/parseQuery";
 import { ItemManager } from "./lib/ItemManager";
+import { BookmarkLoader } from "./lib/BookmarkLoader";
+import { HistoryLoader } from "./lib/HistoryLoader";
+import { TabLoader } from "./lib/TabLoader";
 
 const Command = {
   ToggleTab: "toggle-anchor",
@@ -12,7 +16,11 @@ const WINDOW_WIDTH = 600;
 const WINDOW_HEIGHT = 496 + 22;
 
 const displayManager = new DisplayManager();
-const itemManager = new ItemManager();
+const itemManager = new ItemManager({
+  b: new BookmarkLoader(),
+  h: new HistoryLoader(),
+  t: new TabLoader(),
+});
 
 let mainWindow: chrome.windows.Window | undefined;
 
@@ -106,7 +114,12 @@ chrome.commands.onCommand.addListener((command) => {
 chrome.runtime.onMessage.addListener(
   (message: Message, sender, sendResponse) => {
     if (message.type === MessageType.QueryItems) {
-      sendResponse(itemManager.queryItems(message.payload.query));
+      const { filter, pattern } = parseQuery(message.payload.query);
+      const items = itemManager.searchItems(
+        filter !== "" ? filter : "t",
+        pattern
+      );
+      sendResponse(items);
     }
   }
 );

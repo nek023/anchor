@@ -1,6 +1,6 @@
 import { ItemType, TabItem } from "../../lib/types";
 
-export class TabManager {
+export class TabLoader {
   private _items: TabItem[] = [];
 
   constructor() {
@@ -12,7 +12,7 @@ export class TabManager {
     this.updateItems();
   }
 
-  get items() {
+  load() {
     return this._items;
   }
 

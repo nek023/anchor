@@ -2,7 +2,7 @@ import { BookmarkItem, ItemType } from "../../lib/types";
 
 const MAX_BOOKMARKS = 1000;
 
-export class BookmarkManager {
+export class BookmarkLoader {
   private _items: BookmarkItem[] = [];
   private _importing = false;
 
@@ -24,7 +24,7 @@ export class BookmarkManager {
     this.updateItems();
   }
 
-  get items() {
+  load() {
     return this._items;
   }
 

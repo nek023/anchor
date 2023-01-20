@@ -3,7 +3,7 @@ import { HistoryItem, ItemType } from "../../lib/types";
 const MAX_HISTORIES = 1000;
 const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30; // 30 days
 
-export class HistoryManager {
+export class HistoryLoader {
   private _items: HistoryItem[] = [];
 
   constructor() {
@@ -13,7 +13,7 @@ export class HistoryManager {
     this.updateItems();
   }
 
-  get items() {
+  load() {
     return this._items;
   }
 
