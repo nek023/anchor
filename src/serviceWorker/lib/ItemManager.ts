@@ -7,6 +7,8 @@ export interface Loader {
 
 export class ItemManager {
   private _loaders: Record<string, Loader>;
+  private _lastFilter?: string;
+  private _items: Item[] = [];
 
   private _fuse = new Fuse<Item>([], {
     keys: [
@@ -26,11 +28,14 @@ export class ItemManager {
   }
 
   searchItems(filter: string, pattern: string): Item[] {
-    const items = this.loadItems(filter);
+    if (this._lastFilter == null || filter !== this._lastFilter) {
+      this._items = this.loadItems(filter);
+      this._fuse.setCollection(this._items);
+    }
+    this._lastFilter = filter;
 
-    if (pattern === "") return items;
+    if (pattern === "") return this._items;
 
-    this._fuse.setCollection(items);
     return this._fuse.search(pattern).map((result) => result.item);
   }
 
