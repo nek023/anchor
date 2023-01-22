@@ -58,7 +58,7 @@ describe("HistoryLoader", () => {
       // update() will be called internally
       loader = new HistoryLoader();
 
-      expect(loader.load()).toEqual([
+      expect(loader.items).toEqual([
         {
           id: "history-1",
           type: ItemType.History,
@@ -69,15 +69,15 @@ describe("HistoryLoader", () => {
     });
 
     test("onVisited", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onVisitedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
 
     test("onVisitRemoved", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onVisitRemovedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
   });
 });

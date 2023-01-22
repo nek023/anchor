@@ -1,12 +1,12 @@
 import Fuse from "fuse.js";
 import { Item } from "../../lib/types";
 
-export interface Loader {
-  load(): Item[];
+export interface ItemLoader {
+  get items(): Item[];
 }
 
 export class ItemManager {
-  private _loaders: Record<string, Loader>;
+  private _loaders: Record<string, ItemLoader>;
   private _lastFilter?: string;
   private _items: Item[] = [];
 
@@ -23,7 +23,7 @@ export class ItemManager {
     ],
   });
 
-  constructor(loaders: Record<string, Loader>) {
+  constructor(loaders: Record<string, ItemLoader>) {
     this._loaders = loaders;
   }
 
@@ -42,7 +42,7 @@ export class ItemManager {
   private loadItems(filter: string): Item[] {
     return Object.entries(this._loaders)
       .map(([key, loader]) => {
-        return filter.includes(key) ? loader.load() : [];
+        return filter.includes(key) ? loader.items : [];
       })
       .flat();
   }

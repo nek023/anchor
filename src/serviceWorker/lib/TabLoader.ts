@@ -12,7 +12,7 @@ export class TabLoader {
     this.updateItems();
   }
 
-  load() {
+  get items() {
     return this._items;
   }
 

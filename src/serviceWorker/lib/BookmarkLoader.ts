@@ -24,7 +24,7 @@ export class BookmarkLoader {
     this.updateItems();
   }
 
-  load() {
+  get items() {
     return this._items;
   }
 

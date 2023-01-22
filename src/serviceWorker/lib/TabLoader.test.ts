@@ -81,7 +81,7 @@ describe("TabLoader", () => {
       // update() will be called internally
       loader = new TabLoader();
 
-      expect(loader.load()).toEqual([
+      expect(loader.items).toEqual([
         {
           id: "tab-1",
           type: ItemType.Tab,
@@ -95,27 +95,27 @@ describe("TabLoader", () => {
     });
 
     test("onCreated", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onCreatedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
 
     test("onRemoved", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onRemovedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
 
     test("onReplaced", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onReplacedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
 
     test("onUpdated", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onUpdatedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
   });
 });

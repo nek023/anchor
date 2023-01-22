@@ -3,7 +3,7 @@ import { ItemManager } from "./ItemManager";
 
 describe("ItemManager", () => {
   const bookmarkLoaderMock = {
-    load(): Item[] {
+    get items(): Item[] {
       return [
         {
           id: "bookmark-1",
@@ -16,7 +16,7 @@ describe("ItemManager", () => {
   };
 
   const historyLoaderMock = {
-    load(): Item[] {
+    get items(): Item[] {
       return [
         {
           id: "history-1",

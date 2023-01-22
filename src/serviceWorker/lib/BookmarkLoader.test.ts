@@ -76,7 +76,7 @@ describe("BookmarkLoader", () => {
       // update() will be called internally
       loader = new BookmarkLoader();
 
-      expect(loader.load()).toEqual([
+      expect(loader.items).toEqual([
         {
           id: "bookmark-1",
           type: ItemType.Bookmark,
@@ -87,31 +87,31 @@ describe("BookmarkLoader", () => {
     });
 
     test("onCreated", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onCreatedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
 
     test("onCreated during import", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onImportBeganCallback();
       onCreatedCallback();
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onImportEndedCallback();
       onCreatedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
 
     test("onChanged", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onChangedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
 
     test("onRemoved", () => {
-      expect(loader.load()).toHaveLength(0);
+      expect(loader.items).toHaveLength(0);
       onRemovedCallback();
-      expect(loader.load()).toHaveLength(1);
+      expect(loader.items).toHaveLength(1);
     });
   });
 });

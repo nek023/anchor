@@ -13,7 +13,7 @@ export class HistoryLoader {
     this.updateItems();
   }
 
-  load() {
+  get items() {
     return this._items;
   }
 
