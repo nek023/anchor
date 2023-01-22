@@ -10,10 +10,6 @@ export class DisplayManager {
     this.updateDisplays();
   }
 
-  get displays() {
-    return this._displays;
-  }
-
   get primaryDisplay() {
     return this._primaryDisplay;
   }
@@ -25,7 +21,7 @@ export class DisplayManager {
     if (left == null || top == null || width == null || height == null)
       return undefined;
 
-    const displays = this.displays.filter((display) => {
+    const displays = this._displays.filter((display) => {
       const b = display.bounds;
 
       return (
