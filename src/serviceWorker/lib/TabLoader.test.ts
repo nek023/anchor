@@ -6,7 +6,18 @@ describe("TabLoader", () => {
   let onRemovedCallback: () => void;
   let onReplacedCallback: () => void;
   let onUpdatedCallback: () => void;
-  const queryMock = jest.fn();
+  const queryFunc = jest.fn();
+
+  const mockQuery = (results: chrome.tabs.Tab[]) => {
+    queryFunc.mockImplementation(
+      (
+        numberOfItems: number,
+        callback: (results: chrome.tabs.Tab[]) => void
+      ) => {
+        callback(results);
+      }
+    );
+  };
 
   beforeEach(() => {
     global.chrome = {
@@ -31,56 +42,33 @@ describe("TabLoader", () => {
             onUpdatedCallback = callback;
           },
         },
-        query: queryMock,
+        query: queryFunc,
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any;
   });
 
   afterEach(() => {
-    queryMock.mockReset();
+    queryFunc.mockReset();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (global as any).chrome;
   });
 
   describe("load", () => {
-    let loader: TabLoader;
-
-    beforeEach(() => {
-      loader = new TabLoader();
-
-      queryMock.mockImplementation(
-        (
-          numberOfItems: number,
-          callback: (results: chrome.tabs.Tab[]) => void
-        ) => {
-          callback([
-            {
-              id: 1,
-              title: "test",
-              url: "https://example.com",
-              favIconUrl: "https://example.com/favicon.ico",
-              index: 1,
-              windowId: 1,
-              pinned: false,
-              highlighted: false,
-              active: false,
-              incognito: false,
-              selected: false,
-              discarded: false,
-              autoDiscardable: false,
-              groupId: 1,
-            },
-          ]);
-        }
-      );
-    });
-
-    test("returns an array of items", () => {
-      // update() will be called internally
-      loader = new TabLoader();
-
+    test("returns items", () => {
+      mockQuery([
+        {
+          id: 1,
+          title: "test",
+          url: "https://example.com",
+          favIconUrl: "https://example.com/favicon.ico",
+          index: 1,
+          windowId: 1,
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ] as any);
+      const loader = new TabLoader();
       expect(loader.items).toEqual([
         {
           id: "tab-1",
@@ -93,27 +81,87 @@ describe("TabLoader", () => {
         },
       ]);
     });
+  });
 
-    test("onCreated", () => {
+  describe("handling onCreated events", () => {
+    test("items will be updated when onCreated event occurred", () => {
+      const loader = new TabLoader();
+      mockQuery([
+        {
+          id: 1,
+          title: "test",
+          url: "https://example.com",
+          favIconUrl: "https://example.com/favicon.ico",
+          index: 1,
+          windowId: 1,
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ] as any);
       expect(loader.items).toHaveLength(0);
+
       onCreatedCallback();
       expect(loader.items).toHaveLength(1);
     });
+  });
 
-    test("onRemoved", () => {
+  describe("handling onRemoved events", () => {
+    test("items will be updated when onRemoved event occurred", () => {
+      const loader = new TabLoader();
+      mockQuery([
+        {
+          id: 1,
+          title: "test",
+          url: "https://example.com",
+          favIconUrl: "https://example.com/favicon.ico",
+          index: 1,
+          windowId: 1,
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ] as any);
       expect(loader.items).toHaveLength(0);
+
       onRemovedCallback();
       expect(loader.items).toHaveLength(1);
     });
+  });
 
-    test("onReplaced", () => {
+  describe("handling onReplaced events", () => {
+    test("items will be updated when onReplaced event occurred", () => {
+      const loader = new TabLoader();
+      mockQuery([
+        {
+          id: 1,
+          title: "test",
+          url: "https://example.com",
+          favIconUrl: "https://example.com/favicon.ico",
+          index: 1,
+          windowId: 1,
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ] as any);
       expect(loader.items).toHaveLength(0);
+
       onReplacedCallback();
       expect(loader.items).toHaveLength(1);
     });
+  });
 
-    test("onUpdated", () => {
+  describe("handling onUpdated events", () => {
+    test("items will be updated when onUpdated event occurred", () => {
+      const loader = new TabLoader();
+      mockQuery([
+        {
+          id: 1,
+          title: "test",
+          url: "https://example.com",
+          favIconUrl: "https://example.com/favicon.ico",
+          index: 1,
+          windowId: 1,
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ] as any);
       expect(loader.items).toHaveLength(0);
+
       onUpdatedCallback();
       expect(loader.items).toHaveLength(1);
     });

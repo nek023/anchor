@@ -7,7 +7,18 @@ describe("BookmarkLoader", () => {
   let onCreatedCallback: () => void;
   let onChangedCallback: () => void;
   let onRemovedCallback: () => void;
-  const getRecentMock = jest.fn();
+  const getRecentFunc = jest.fn();
+
+  const mockGetRecent = (results: chrome.bookmarks.BookmarkTreeNode[]) => {
+    getRecentFunc.mockImplementation(
+      (
+        numberOfItems: number,
+        callback: (results: chrome.bookmarks.BookmarkTreeNode[]) => void
+      ) => {
+        callback(results);
+      }
+    );
+  };
 
   beforeEach(() => {
     global.chrome = {
@@ -37,45 +48,29 @@ describe("BookmarkLoader", () => {
             onRemovedCallback = callback;
           },
         },
-        getRecent: getRecentMock,
+        getRecent: getRecentFunc,
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any;
   });
 
   afterEach(() => {
-    getRecentMock.mockReset();
+    getRecentFunc.mockReset();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (global as any).chrome;
   });
 
   describe("load", () => {
-    let loader: BookmarkLoader;
-
-    beforeEach(() => {
-      loader = new BookmarkLoader();
-
-      getRecentMock.mockImplementation(
-        (
-          numberOfItems: number,
-          callback: (results: chrome.bookmarks.BookmarkTreeNode[]) => void
-        ) => {
-          callback([
-            {
-              id: "1",
-              title: "test",
-              url: "https://example.com",
-            },
-          ]);
-        }
-      );
-    });
-
-    test("returns an array of items", () => {
-      // update() will be called internally
-      loader = new BookmarkLoader();
-
+    test("returns items", () => {
+      mockGetRecent([
+        {
+          id: "1",
+          title: "test",
+          url: "https://example.com",
+        },
+      ]);
+      const loader = new BookmarkLoader();
       expect(loader.items).toEqual([
         {
           id: "bookmark-1",
@@ -85,31 +80,74 @@ describe("BookmarkLoader", () => {
         },
       ]);
     });
+  });
 
-    test("onCreated", () => {
+  describe("handling onCreated events", () => {
+    test("items will be updated when onCreated event occurred", () => {
+      const loader = new BookmarkLoader();
+      mockGetRecent([
+        {
+          id: "1",
+          title: "test",
+          url: "https://example.com",
+        },
+      ]);
       expect(loader.items).toHaveLength(0);
+
       onCreatedCallback();
       expect(loader.items).toHaveLength(1);
     });
 
-    test("onCreated during import", () => {
+    test("items will not be updated when onCreated event occured during import", () => {
+      const loader = new BookmarkLoader();
+      mockGetRecent([
+        {
+          id: "1",
+          title: "test",
+          url: "https://example.com",
+        },
+      ]);
       expect(loader.items).toHaveLength(0);
+
       onImportBeganCallback();
       onCreatedCallback();
       expect(loader.items).toHaveLength(0);
+
       onImportEndedCallback();
       onCreatedCallback();
       expect(loader.items).toHaveLength(1);
     });
+  });
 
-    test("onChanged", () => {
+  describe("handling onChanged events", () => {
+    test("items will be updated when onChanged event occurred", () => {
+      const loader = new BookmarkLoader();
+      mockGetRecent([
+        {
+          id: "1",
+          title: "test",
+          url: "https://example.com",
+        },
+      ]);
       expect(loader.items).toHaveLength(0);
+
       onChangedCallback();
       expect(loader.items).toHaveLength(1);
     });
+  });
 
-    test("onRemoved", () => {
+  describe("handling onRemoved events", () => {
+    test("items will be updated when onRemoved event occurred", () => {
+      const loader = new BookmarkLoader();
+      mockGetRecent([
+        {
+          id: "1",
+          title: "test",
+          url: "https://example.com",
+        },
+      ]);
       expect(loader.items).toHaveLength(0);
+
       onRemovedCallback();
       expect(loader.items).toHaveLength(1);
     });
