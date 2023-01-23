@@ -12,7 +12,10 @@ import {
   ExtensionMessageCallback,
   useExtensionMessage,
 } from "../lib/useExtensionMessage";
-import { QueryResultsCallback, useQueryResults } from "../lib/useQueryResults";
+import {
+  UseSearchResultsCallback,
+  useSearchResults,
+} from "../lib/useQueryResults";
 
 const Container = styled.div`
   padding: 8px;
@@ -37,11 +40,11 @@ export const App: React.FC = () => {
   useExtensionMessage(handleExtensionMessage);
 
   const throttledQuery = useThrottle(query, 50);
-  const handleQueryResults = useCallback<QueryResultsCallback>(
+  const handleQueryResults = useCallback<UseSearchResultsCallback>(
     (items) => setItems(items.slice(0, 100)),
     []
   );
-  useQueryResults(throttledQuery, handleQueryResults);
+  useSearchResults(throttledQuery, handleQueryResults);
 
   const handleEnter = useCallback(() => {
     if (items.length === 0) return;

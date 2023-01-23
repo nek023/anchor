@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { Item } from "../../lib/types";
 import { searchItems, sendMessage } from "../../lib/ipc";
 
-export type QueryResultsCallback = (items: Item[]) => void;
+export type UseSearchResultsCallback = (items: Item[]) => void;
 
-export const useQueryResults = (
+export const useSearchResults = (
   query: string,
-  callback: QueryResultsCallback
+  callback: UseSearchResultsCallback
 ) => {
   useEffect(() => {
     (async () => {
