@@ -113,7 +113,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 chrome.runtime.onMessage.addListener(
   (message: Message, sender, sendResponse) => {
-    if (message.type === MessageType.QueryItems) {
+    if (message.type === MessageType.SearchItems) {
       const { filter, pattern } = parseQuery(message.payload.query);
       const items = itemManager.searchItems(
         filter !== "" ? filter : "t",

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Item } from "../../lib/types";
-import { queryItems, sendMessage } from "../../lib/ipc";
+import { searchItems, sendMessage } from "../../lib/ipc";
 
 export type QueryResultsCallback = (items: Item[]) => void;
 
@@ -10,7 +10,7 @@ export const useQueryResults = (
 ) => {
   useEffect(() => {
     (async () => {
-      const items = (await sendMessage(queryItems(query))) as Item[];
+      const items = (await sendMessage(searchItems(query))) as Item[];
       callback(items);
     })();
   }, [callback, query]);

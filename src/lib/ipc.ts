@@ -1,10 +1,10 @@
 export const MessageType = {
-  QueryItems: "QUERY_ITEMS",
+  SearchItems: "SEARCH_ITEMS",
   SetQuery: "SET_QUERY",
 } as const;
 
-export const queryItems = (query: string) => ({
-  type: MessageType.QueryItems,
+export const searchItems = (query: string) => ({
+  type: MessageType.SearchItems,
   payload: { query },
 });
 
@@ -13,7 +13,7 @@ export const setQuery = (query: string) => ({
   payload: { query },
 });
 
-export type Message = ReturnType<typeof queryItems | typeof setQuery>;
+export type Message = ReturnType<typeof searchItems | typeof setQuery>;
 
 export const sendMessage = (message: Message) =>
   new Promise((resolve, reject) => {
