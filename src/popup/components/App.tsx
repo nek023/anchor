@@ -4,8 +4,8 @@ import { useThrottle } from "react-use";
 import { ResultList } from "./ResultList";
 import { SearchBar } from "./SearchBar";
 import { KeyboardEventHandler } from "./KeyboardEventHandler";
-import { MessageType } from "../../lib/ipc";
-import { Item } from "../../lib/types";
+import { MessageType } from "../../shared/ipc";
+import { Item } from "../../shared/types";
 import { closeCurrentWindow } from "../lib/closeCurrentWindow";
 import { openItem } from "../lib/openItem";
 import {

@@ -1,4 +1,4 @@
-import { ItemType } from "../../lib/types";
+import { ItemType } from "../../shared/types";
 import { HistoryLoader } from "./HistoryLoader";
 
 describe("HistoryLoader", () => {

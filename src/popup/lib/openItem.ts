@@ -1,4 +1,4 @@
-import { Item, ItemType } from "../../lib/types";
+import { Item, ItemType } from "../../shared/types";
 
 export const openItem = (item: Item) => {
   if (item.type === ItemType.Tab) {

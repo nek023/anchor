@@ -1,5 +1,5 @@
 import { DisplayManager } from "./lib/DisplayManager";
-import { Message, MessageType, sendMessage, setQuery } from "../lib/ipc";
+import { Message, MessageType, sendMessage, setQuery } from "../shared/ipc";
 import { parseQuery } from "./lib/parseQuery";
 import { ItemManager } from "./lib/ItemManager";
 import { BookmarkLoader } from "./lib/BookmarkLoader";

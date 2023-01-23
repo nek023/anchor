@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Item } from "../../lib/types";
-import { searchItems, sendMessage } from "../../lib/ipc";
+import { Item } from "../../shared/types";
+import { searchItems, sendMessage } from "../../shared/ipc";
 
 export type UseSearchResultsCallback = (items: Item[]) => void;
 

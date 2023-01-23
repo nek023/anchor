@@ -1,4 +1,4 @@
-import { ItemType } from "../../lib/types";
+import { ItemType } from "../../shared/types";
 import { BookmarkLoader } from "./BookmarkLoader";
 
 describe("BookmarkLoader", () => {

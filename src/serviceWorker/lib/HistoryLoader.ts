@@ -1,4 +1,4 @@
-import { HistoryItem, ItemType } from "../../lib/types";
+import { HistoryItem, ItemType } from "../../shared/types";
 
 const MAX_HISTORIES = 1000;
 const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30; // 30 days

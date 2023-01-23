@@ -1,4 +1,4 @@
-import { Item, ItemType } from "../../lib/types";
+import { Item, ItemType } from "../../shared/types";
 import { ItemManager } from "./ItemManager";
 
 describe("ItemManager", () => {

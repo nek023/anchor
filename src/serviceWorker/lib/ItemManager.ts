@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { Item } from "../../lib/types";
+import { Item } from "../../shared/types";
 
 export interface ItemLoader {
   get items(): Item[];
