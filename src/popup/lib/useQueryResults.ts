@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import { Item } from "../../lib/types";
-import { queryItems, sendMessage } from "../../lib/ipc";
+import { Item } from "../../shared/types";
+import { searchItems, sendMessage } from "../../shared/ipc";
 
-export type QueryResultsCallback = (items: Item[]) => void;
+export type UseSearchResultsCallback = (items: Item[]) => void;
 
-export const useQueryResults = (
+export const useSearchResults = (
   query: string,
-  callback: QueryResultsCallback
+  callback: UseSearchResultsCallback
 ) => {
   useEffect(() => {
     (async () => {
-      const items = (await sendMessage(queryItems(query))) as Item[];
+      const items = (await sendMessage(searchItems(query))) as Item[];
       callback(items);
     })();
   }, [callback, query]);
