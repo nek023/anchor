@@ -1,8 +1,6 @@
 import Fuse from "fuse.js";
 import { Item } from "../../shared/types";
 
-const MAX_ITEMS = 100;
-
 export interface ItemLoader {
   get items(): Item[];
 }
@@ -13,6 +11,7 @@ export class ItemManager {
   private _lastFilter?: string;
   private _lastUpdateDate = Date.now();
   private _cacheTtl = 1000 * 10; // 10 seconds
+  private _maxItems = 100;
 
   private _fuse = new Fuse<Item>([], {
     keys: [
@@ -43,10 +42,10 @@ export class ItemManager {
     }
     this._lastFilter = filter;
 
-    if (pattern === "") return this._items.slice(0, MAX_ITEMS);
+    if (pattern === "") return this._items.slice(0, this._maxItems);
 
     return this._fuse
-      .search(pattern, { limit: MAX_ITEMS })
+      .search(pattern, { limit: this._maxItems })
       .map((result) => result.item);
   }
 
