@@ -1,6 +1,8 @@
 import Fuse from "fuse.js";
 import { Item } from "../../shared/types";
 
+const MAX_ITEMS = 100;
+
 export interface ItemLoader {
   get items(): Item[];
 }
@@ -34,9 +36,11 @@ export class ItemManager {
     }
     this._lastFilter = filter;
 
-    if (pattern === "") return this._items;
+    if (pattern === "") return this._items.slice(0, MAX_ITEMS);
 
-    return this._fuse.search(pattern).map((result) => result.item);
+    return this._fuse
+      .search(pattern, { limit: MAX_ITEMS })
+      .map((result) => result.item);
   }
 
   private loadItems(filter: string): Item[] {
