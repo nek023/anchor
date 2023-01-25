@@ -1,5 +1,13 @@
 # Change Log
 
+## [3.5.0](https://github.com/questbeat/anchor/tree/v3.5.0) (2023-01-25)
+
+- Reduce item loading frequency
+- Add tests for items loaders
+- Update packages
+- Refactoring
+
+
 ## [3.4.0](https://github.com/questbeat/anchor/tree/v3.4.0) (2022-08-10)
 
 - Add workaround for missing favicon API
