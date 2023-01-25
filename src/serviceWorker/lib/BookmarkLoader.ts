@@ -1,10 +1,9 @@
 import { BookmarkItem, ItemType } from "../../shared/types";
 
-const MAX_BOOKMARKS = 1000;
-
 export class BookmarkLoader {
   private _items: BookmarkItem[] = [];
   private _importing = false;
+  private _maxItems = 1000;
 
   constructor() {
     chrome.bookmarks.onImportBegan.addListener(() => {
@@ -29,7 +28,7 @@ export class BookmarkLoader {
   }
 
   private updateItems() {
-    chrome.bookmarks.getRecent(MAX_BOOKMARKS, (items) => {
+    chrome.bookmarks.getRecent(this._maxItems, (items) => {
       this._items = items.map((item) => ({
         id: `bookmark-${item.id}`,
         type: ItemType.Bookmark,

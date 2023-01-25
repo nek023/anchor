@@ -1,10 +1,9 @@
 import { HistoryItem, ItemType } from "../../shared/types";
 
-const MAX_HISTORIES = 1000;
-const HISTORY_RANGE = 1000 * 60 * 60 * 24 * 30; // 30 days
-
 export class HistoryLoader {
   private _items: HistoryItem[] = [];
+  private _maxItems = 1000;
+  private _searchRange = 1000 * 60 * 60 * 24 * 30; // 30 days
 
   constructor() {
     chrome.history.onVisited.addListener(() => this.updateItems());
@@ -21,8 +20,8 @@ export class HistoryLoader {
     chrome.history.search(
       {
         text: "",
-        maxResults: MAX_HISTORIES,
-        startTime: Date.now() - HISTORY_RANGE,
+        maxResults: this._maxItems,
+        startTime: Date.now() - this._searchRange,
       },
       (items) => {
         this._items = items.map((item) => ({
