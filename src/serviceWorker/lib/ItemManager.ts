@@ -9,8 +9,10 @@ export interface ItemLoader {
 
 export class ItemManager {
   private _loaders: Record<string, ItemLoader>;
-  private _lastFilter?: string;
   private _items: Item[] = [];
+  private _lastFilter?: string;
+  private _lastUpdateDate = Date.now();
+  private _cacheTtl = 1000 * 10; // 10 seconds
 
   private _fuse = new Fuse<Item>([], {
     keys: [
@@ -30,8 +32,13 @@ export class ItemManager {
   }
 
   searchItems(filter: string, pattern: string): Item[] {
-    if (this._lastFilter == null || filter !== this._lastFilter) {
+    if (
+      this._lastFilter == null ||
+      filter !== this._lastFilter ||
+      Date.now() - this._lastUpdateDate > this._cacheTtl
+    ) {
       this._items = this.loadItems(filter);
+      this._lastUpdateDate = Date.now();
       this._fuse.setCollection(this._items);
     }
     this._lastFilter = filter;
