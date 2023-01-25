@@ -40,11 +40,11 @@ export const App: React.FC = () => {
   useExtensionMessage(handleExtensionMessage);
 
   const throttledQuery = useThrottle(query, 50);
-  const handleQueryResults = useCallback<UseSearchResultsCallback>(
-    (items) => setItems(items.slice(0, 100)),
+  const handleSearchResults = useCallback<UseSearchResultsCallback>(
+    (items) => setItems(items),
     []
   );
-  useSearchResults(throttledQuery, handleQueryResults);
+  useSearchResults(throttledQuery, handleSearchResults);
 
   const handleEnter = useCallback(() => {
     if (items.length === 0) return;
