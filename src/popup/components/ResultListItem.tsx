@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import scrollIntoView from "scroll-into-view-if-needed";
 import styled, { css } from "styled-components";
 import { Item, ItemType } from "../../shared/types";
+import { getFaviconUrl } from "../lib/getFaviconUrl";
 
 const ItemLeft = styled.div`
   width: 30px;
@@ -97,14 +98,10 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
   }, [selected]);
 
   const itemImage = useMemo(() => {
-    // Favicon API is not yet implemented in Manifest V3, so temporarily fetch from Google.
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=104102
     let favIconUrl: string | undefined = undefined;
     if (item.type === ItemType.Tab) favIconUrl = item.favIconUrl;
-    if (favIconUrl == null && item.url != null) {
-      const url = new URL(item.url);
-      favIconUrl = `https://www.google.com/s2/favicons?domain=${url.host}&sz=48`;
-    }
+    if (favIconUrl == null && item.url != null)
+      favIconUrl = getFaviconUrl(item.url);
     return <ItemImage src={favIconUrl} />;
   }, [item]);
 

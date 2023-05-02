@@ -11,6 +11,17 @@ describe("ResultListItem", () => {
     url: "https://example.com",
   };
 
+  beforeEach(() => {
+    global.chrome = {
+      runtime: {
+        getURL: (path: string) => {
+          return `chrome-extension://EXTENSION_ID${path}`;
+        },
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+  });
+
   test("matches snapshot", () => {
     const { asFragment } = render(
       <ResultListItem item={item} selected={false} />

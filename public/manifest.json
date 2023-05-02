@@ -26,5 +26,5 @@
   "background": {
     "service_worker": "serviceWorker.js"
   },
-  "permissions": ["bookmarks", "history", "system.display", "tabs"]
+  "permissions": ["bookmarks", "favicon", "history", "system.display", "tabs"]
 }
