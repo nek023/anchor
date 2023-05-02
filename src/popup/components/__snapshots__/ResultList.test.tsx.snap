@@ -126,7 +126,7 @@ exports[`ResultList matches snapshot 1`] = `
       >
         <img
           class="c3"
-          src="https://www.google.com/s2/favicons?domain=example.com&sz=48"
+          src="chrome-extension://EXTENSION_ID/_favicon/?pageUrl=https%3A%2F%2Fexample.com&size=32"
         />
       </div>
       <div
@@ -152,7 +152,7 @@ exports[`ResultList matches snapshot 1`] = `
       >
         <img
           class="c3"
-          src="https://www.google.com/s2/favicons?domain=example.com&sz=48"
+          src="chrome-extension://EXTENSION_ID/_favicon/?pageUrl=https%3A%2F%2Fexample.com&size=32"
         />
       </div>
       <div

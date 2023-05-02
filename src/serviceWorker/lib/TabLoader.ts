@@ -21,7 +21,7 @@ export class TabLoader {
       this._items = items.map((item) => ({
         id: `tab-${item.id}`,
         type: ItemType.Tab,
-        favIconUrl: item.favIconUrl,
+        faviconUrl: item.favIconUrl,
         title: item.title,
         url: item.url,
         tabIndex: item.index,

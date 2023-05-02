@@ -21,7 +21,7 @@ export interface HistoryItem {
 export interface TabItem {
   id: string;
   type: typeof ItemType.Tab;
-  favIconUrl?: string;
+  faviconUrl?: string;
   title?: string;
   url?: string;
   tabIndex: number;
