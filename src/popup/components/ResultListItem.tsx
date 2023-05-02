@@ -98,11 +98,11 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
   }, [selected]);
 
   const itemImage = useMemo(() => {
-    let favIconUrl: string | undefined = undefined;
-    if (item.type === ItemType.Tab) favIconUrl = item.favIconUrl;
-    if (favIconUrl == null && item.url != null)
-      favIconUrl = getFaviconUrl(item.url);
-    return <ItemImage src={favIconUrl} />;
+    let faviconUrl: string | undefined = undefined;
+    if (item.type === ItemType.Tab) faviconUrl = item.faviconUrl;
+    if (faviconUrl == null && item.url != null)
+      faviconUrl = getFaviconUrl(item.url);
+    return <ItemImage src={faviconUrl} />;
   }, [item]);
 
   return useMemo(

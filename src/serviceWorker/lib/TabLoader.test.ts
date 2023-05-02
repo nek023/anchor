@@ -73,7 +73,7 @@ describe("TabLoader", () => {
         {
           id: "tab-1",
           type: ItemType.Tab,
-          favIconUrl: "https://example.com/favicon.ico",
+          faviconUrl: "https://example.com/favicon.ico",
           title: "test",
           url: "https://example.com",
           tabIndex: 1,
