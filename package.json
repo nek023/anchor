@@ -6,7 +6,7 @@
   "author": "Katsuma Tanaka",
   "license": "MIT",
   "scripts": {
-    "build": "esbuild src/popup/index.tsx src/serviceWorker/index.ts --bundle --minify --outdir=dist",
+    "build": "esbuild src/popup/index.tsx src/service_worker/index.ts --bundle --minify --outdir=dist",
     "clean": "rimraf dist",
     "dev": "npm run build -- --watch",
     "format": "prettier --write src",

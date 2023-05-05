@@ -24,7 +24,7 @@
     }
   },
   "background": {
-    "service_worker": "dist/serviceWorker/index.js"
+    "service_worker": "dist/service_worker/index.js"
   },
   "permissions": ["bookmarks", "favicon", "history", "system.display", "tabs"]
 }
