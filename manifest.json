@@ -4,9 +4,9 @@
   "description": "Tab switcher for Google Chrome.",
   "version": "3.6.0",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "public/icons/icon16.png",
+    "48": "public/icons/icon48.png",
+    "128": "public/icons/icon128.png"
   },
   "commands": {
     "toggle-anchor": {
@@ -24,7 +24,7 @@
     }
   },
   "background": {
-    "service_worker": "serviceWorker.js"
+    "service_worker": "dist/serviceWorker/index.js"
   },
   "permissions": ["bookmarks", "favicon", "history", "system.display", "tabs"]
 }
