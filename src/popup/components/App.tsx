@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useThrottle } from "react-use";
 import { ResultList } from "./ResultList";
 import { SearchBar } from "./SearchBar";
 import { KeyboardEventHandler } from "./KeyboardEventHandler";
@@ -8,6 +7,7 @@ import { MessageType } from "../../shared/ipc";
 import { Item } from "../../shared/types";
 import { closeCurrentWindow } from "../lib/closeCurrentWindow";
 import { openItem } from "../lib/openItem";
+import { useThrottle } from "../lib/useThrottle";
 import {
   ExtensionMessageCallback,
   useExtensionMessage,
