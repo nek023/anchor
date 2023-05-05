@@ -25,7 +25,7 @@ npm install
 npm run build
 ```
 
-After the build is complete, activate "Developer mode" from the Chrome extension settings, select "Load unpacked" and choose the `build` directory.
+After the build is complete, activate "Developer mode" from the Chrome extension settings, select "Load unpacked" and choose the project root directory.
 
 
 ## Usage

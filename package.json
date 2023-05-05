@@ -6,12 +6,12 @@
   "author": "Katsuma Tanaka",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production",
-    "clean": "rimraf build",
-    "dev": "webpack --mode development --watch",
+    "build": "esbuild src/popup/index.tsx src/service_worker/index.ts --bundle --minify --outdir=dist",
+    "clean": "rimraf dist",
+    "dev": "npm run build -- --watch",
     "format": "prettier --write src",
     "lint": "eslint --ext .ts,.tsx src",
-    "pack": "npm run clean && npm run build && zip -r anchor.zip build",
+    "pack": "npm run clean && npm run build && zip -r anchor.zip dist public manifest.json",
     "test": "jest"
   },
   "dependencies": {
@@ -33,23 +33,17 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
-    "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.3",
+    "esbuild": "^0.17.18",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "html-webpack-plugin": "^5.5.1",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "jest-styled-components": "^7.1.1",
     "npm-check-updates": "^16.10.9",
     "prettier": "^2.8.8",
-    "style-loader": "^3.3.2",
     "ts-jest": "^29.1.0",
-    "ts-loader": "^9.4.2",
-    "typescript": "^5.0.4",
-    "webpack": "^5.81.0",
-    "webpack-cli": "^5.0.2"
+    "typescript": "^5.0.4"
   }
 }
