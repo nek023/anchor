@@ -1,10 +1,7 @@
 {
   "name": "anchor",
-  "description": "Tab switcher for Google Chrome.",
+  "private": true,
   "version": "3.6.0",
-  "main": "build/index.js",
-  "author": "Katsuma Tanaka",
-  "license": "MIT",
   "scripts": {
     "build": "run-p build:css build:js",
     "build:css": "tailwindcss -i src/popup/index.css -o dist/popup/index.css --minify",
