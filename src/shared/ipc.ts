@@ -1,7 +1,7 @@
 export const MessageType = {
   searchItems: "SEARCH_ITEMS",
   setQuery: "SET_QUERY",
-} as const;
+};
 
 export const searchItems = (query: string) => ({
   type: MessageType.searchItems,

@@ -10,7 +10,7 @@ const Command = {
   toggleTab: "toggle-anchor",
   toggleBookmark: "toggle-anchor-with-bookmark-mode",
   toggleHistory: "toggle-anchor-with-history-mode",
-} as const;
+};
 
 const WindowSize = {
   width: 600,
