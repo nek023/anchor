@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.7.0](https://github.com/questbeat/anchor/tree/v3.7.0) (2023-05-06)
+
+- Migrate from webpack to esbuild
+- Migrate from styled-components to tailwindcss
+- Reset row selection when query is updated
+
 ## [3.6.0](https://github.com/questbeat/anchor/tree/v3.6.0) (2023-05-03)
 
 - Migrate to Manifest V3 favicon API

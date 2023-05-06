@@ -1,7 +1,7 @@
 {
   "name": "anchor",
   "private": true,
-  "version": "3.6.0",
+  "version": "3.7.0",
   "scripts": {
     "build": "run-p build:css build:js",
     "build:css": "tailwindcss -i src/popup/index.css -o dist/popup/index.css --minify",
