@@ -1,19 +1,4 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import styled from "styled-components";
-
-const SearchBarInput = styled.input`
-  width: 100%;
-  height: 40px;
-  margin: 0;
-  padding: 5px;
-  font-size: 26px;
-  border-radius: 4px;
-  border: 1px solid #cccccc;
-
-  &:focus {
-    outline: none;
-  }
-`;
 
 interface SearchBarProps {
   value: string;
@@ -46,8 +31,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   );
 
   return (
-    <SearchBarInput
+    <input
+      className="w-full p-1 rounded border border-gray-300 text-2xl focus:outline-none"
       type="text"
+      title="query"
       value={value}
       ref={inputRef}
       autoFocus={true}

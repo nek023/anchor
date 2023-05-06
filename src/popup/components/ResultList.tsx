@@ -1,20 +1,6 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
 import { Item } from "../../shared/types";
 import { ResultListItem } from "./ResultListItem";
-
-const Container = styled.ul`
-  width: 100%;
-  height: 432px; /* (46 + 2) * 9 */
-  padding: 0;
-  margin: 8px 0 0;
-  display: block;
-  list-style: none;
-  overflow-x: hidden;
-  overflow-y: auto;
-  white-space: nowrap;
-  cursor: default;
-`;
 
 interface ResultListProps {
   items: Item[];
@@ -37,7 +23,7 @@ export const ResultList: React.FC<ResultListProps> = ({
   );
 
   return (
-    <Container>
+    <div className="w-full flex flex-col grow overflow-y-auto">
       {items.map((item, index) => (
         <ResultListItem
           key={index}
@@ -46,6 +32,6 @@ export const ResultList: React.FC<ResultListProps> = ({
           onClick={handleClick}
         />
       ))}
-    </Container>
+    </div>
   );
 };

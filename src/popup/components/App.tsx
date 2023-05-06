@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react";
-import styled from "styled-components";
 import { ResultList } from "./ResultList";
 import { SearchBar } from "./SearchBar";
 import { KeyboardEventHandler } from "./KeyboardEventHandler";
@@ -16,10 +15,6 @@ import {
   UseSearchResultsCallback,
   useSearchResults,
 } from "../lib/useQueryResults";
-
-const Container = styled.div`
-  padding: 8px;
-`;
 
 const initialQuery = new URL(document.URL).searchParams.get("q") || "";
 
@@ -83,14 +78,14 @@ export const App: React.FC = () => {
       onUp={handleUp}
       onDown={handleDown}
     >
-      <Container>
+      <div className="w-screen h-screen p-2 flex flex-col gap-2">
         <SearchBar value={query} onValueChange={handleValueChange} />
         <ResultList
           items={items}
           onItemClick={handleItemClick}
           selectedItemIndex={selectedItemIndex}
         />
-      </Container>
+      </div>
     </KeyboardEventHandler>
   );
 };
