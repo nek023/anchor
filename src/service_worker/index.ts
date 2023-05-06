@@ -7,13 +7,15 @@ import { HistoryLoader } from "./lib/HistoryLoader";
 import { TabLoader } from "./lib/TabLoader";
 
 const Command = {
-  ToggleTab: "toggle-anchor",
-  ToggleBookmark: "toggle-anchor-with-bookmark-mode",
-  ToggleHistory: "toggle-anchor-with-history-mode",
+  toggleTab: "toggle-anchor",
+  toggleBookmark: "toggle-anchor-with-bookmark-mode",
+  toggleHistory: "toggle-anchor-with-history-mode",
 } as const;
 
-const WINDOW_WIDTH = 600;
-const WINDOW_HEIGHT = 526;
+const WindowSize = {
+  width: 600,
+  height: 526,
+};
 
 const displayManager = new DisplayManager();
 const itemManager = new ItemManager({
@@ -37,14 +39,14 @@ const openWindow = (query: string) => {
       if (display == null) return;
 
       const bounds = {
-        width: WINDOW_WIDTH,
-        height: WINDOW_HEIGHT,
+        width: WindowSize.width,
+        height: WindowSize.height,
         left:
           display.bounds.left +
-          Math.round((display.bounds.width - WINDOW_WIDTH) * 0.5),
+          Math.round((display.bounds.width - WindowSize.width) * 0.5),
         top:
           display.bounds.top +
-          Math.round((display.bounds.height - WINDOW_HEIGHT) * 0.5),
+          Math.round((display.bounds.height - WindowSize.height) * 0.5),
       };
 
       if (mainWindow?.id != null) {
@@ -94,15 +96,15 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
 
 chrome.commands.onCommand.addListener((command) => {
   switch (command) {
-    case Command.ToggleTab:
+    case Command.toggleTab:
       openWindow("");
       break;
 
-    case Command.ToggleBookmark:
+    case Command.toggleBookmark:
       openWindow("b:");
       break;
 
-    case Command.ToggleHistory:
+    case Command.toggleHistory:
       openWindow("h:");
       break;
 
@@ -113,7 +115,7 @@ chrome.commands.onCommand.addListener((command) => {
 
 chrome.runtime.onMessage.addListener(
   (message: Message, sender, sendResponse) => {
-    if (message.type === MessageType.SearchItems) {
+    if (message.type === MessageType.searchItems) {
       const { filter, pattern } = parseQuery(message.payload.query);
       const items = itemManager.searchItems(
         filter !== "" ? filter : "t",

@@ -25,7 +25,7 @@ export const App: React.FC = () => {
 
   const handleExtensionMessage = useCallback<ExtensionMessageCallback>(
     (message, sender, sendResponse) => {
-      if (message.type === MessageType.SetQuery) {
+      if (message.type === MessageType.setQuery) {
         setQuery(message.payload.query);
         sendResponse(true);
       }

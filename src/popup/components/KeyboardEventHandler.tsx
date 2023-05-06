@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect } from "react";
 
 const Code = {
-  ArrowDown: "ArrowDown",
-  ArrowUp: "ArrowUp",
-  Enter: "Enter",
-  Escape: "Escape",
-  KeyN: "KeyN",
-  KeyP: "KeyP",
+  arrowDown: "ArrowDown",
+  arrowUp: "ArrowUp",
+  enter: "Enter",
+  escape: "Escape",
+  keyN: "KeyN",
+  keyP: "KeyP",
 };
 
 interface KeyboardEventHandlerProps {
@@ -29,37 +29,37 @@ export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
       if (event.isComposing) return;
 
       switch (event.code) {
-        case Code.ArrowDown:
+        case Code.arrowDown:
           if (onDown == null) break;
           event.preventDefault();
           onDown();
           break;
 
-        case Code.ArrowUp:
+        case Code.arrowUp:
           if (onUp == null) break;
           event.preventDefault();
           onUp();
           break;
 
-        case Code.Enter:
+        case Code.enter:
           if (onEnter == null) break;
           event.preventDefault();
           onEnter();
           break;
 
-        case Code.Escape:
+        case Code.escape:
           if (onEscape == null) break;
           event.preventDefault();
           onEscape();
           break;
 
-        case Code.KeyN:
+        case Code.keyN:
           if (onDown == null || !event.ctrlKey) break;
           event.preventDefault();
           onDown();
           break;
 
-        case Code.KeyP:
+        case Code.keyP:
           if (onUp == null || !event.ctrlKey) break;
           event.preventDefault();
           onUp();

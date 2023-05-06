@@ -1,15 +1,15 @@
 export const MessageType = {
-  SearchItems: "SEARCH_ITEMS",
-  SetQuery: "SET_QUERY",
+  searchItems: "SEARCH_ITEMS",
+  setQuery: "SET_QUERY",
 } as const;
 
 export const searchItems = (query: string) => ({
-  type: MessageType.SearchItems,
+  type: MessageType.searchItems,
   payload: { query },
 });
 
 export const setQuery = (query: string) => ({
-  type: MessageType.SetQuery,
+  type: MessageType.setQuery,
   payload: { query },
 });
 
