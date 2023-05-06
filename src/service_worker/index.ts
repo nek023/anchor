@@ -13,7 +13,7 @@ const Command = {
 } as const;
 
 const WINDOW_WIDTH = 600;
-const WINDOW_HEIGHT = 496 + 22;
+const WINDOW_HEIGHT = 526;
 
 const displayManager = new DisplayManager();
 const itemManager = new ItemManager({
