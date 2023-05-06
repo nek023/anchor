@@ -2,22 +2,9 @@
 
 exports[`SearchBar matches snapshot 1`] = `
 <DocumentFragment>
-  .c0 {
-  width: 100%;
-  height: 40px;
-  margin: 0;
-  padding: 5px;
-  font-size: 26px;
-  border-radius: 4px;
-  border: 1px solid #cccccc;
-}
-
-.c0:focus {
-  outline: none;
-}
-
-<input
-    class="c0"
+  <input
+    class="w-full p-1 rounded border border-gray-300 text-2xl focus:outline-none"
+    title="query"
     type="text"
     value="test"
   />

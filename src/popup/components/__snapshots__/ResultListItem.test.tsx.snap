@@ -2,107 +2,32 @@
 
 exports[`ResultListItem matches snapshot 1`] = `
 <DocumentFragment>
-  .c1 {
-  width: 30px;
-  min-width: 30px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c3 {
-  margin-left: 8px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  overflow: hidden;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.c2 {
-  width: 24px;
-  height: 24px;
-}
-
-.c4 {
-  color: #333333;
-  font-size: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.c5 {
-  color: #9999aa;
-  margin-top: 2px;
-  font-size: 13px;
-  font-weight: lighter;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.c0 {
-  width: 100%;
-  height: 46px;
-  padding: 3px;
-  margin-bottom: 2px;
-  overflow: hidden;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-<li
-    class="c0"
+  <div
+    class="w-full min-h-[3rem] px-1 pb-px flex flex-row items-center gap-2 "
   >
     <div
-      class="c1"
+      class="min-w-[2rem] flex justify-center"
     >
       <img
-        class="c2"
+        alt="test"
+        class="w-6 h-6"
         src="chrome-extension://EXTENSION_ID/_favicon/?pageUrl=https%3A%2F%2Fexample.com&size=32"
       />
     </div>
     <div
-      class="c3"
+      class="grow flex flex-col gap-0.5 overflow-hidden"
     >
       <div
-        class="c4"
+        class="text-sm truncate text-gray-700"
       >
         test
       </div>
       <div
-        class="c5"
+        class="text-xs font-light truncate text-gray-400"
       >
         https://example.com
       </div>
     </div>
-  </li>
+  </div>
 </DocumentFragment>
 `;
