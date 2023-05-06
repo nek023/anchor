@@ -1,7 +1,6 @@
 # anchor
 
-![Build](https://github.com/questbeat/anchor/workflows/Build/badge.svg)
-![Release](https://github.com/questbeat/anchor/workflows/Release/badge.svg)
+[![Build](https://github.com/questbeat/anchor/actions/workflows/build.yaml/badge.svg)](https://github.com/questbeat/anchor/actions/workflows/build.yaml)
 
 Tab switcher for Google Chrome.
 
