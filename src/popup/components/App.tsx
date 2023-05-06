@@ -67,7 +67,10 @@ export const App: React.FC = () => {
   );
 
   const handleValueChange = useCallback(
-    (query: string) => setQuery(query),
+    (query: string) => {
+      setQuery(query);
+      setSelectedItemIndex(0);
+    },
     [setQuery]
   );
 
