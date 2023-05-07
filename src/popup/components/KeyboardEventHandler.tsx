@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { PropsWithChildren, useCallback, useEffect } from "react";
 
 const Code = {
   arrowDown: "ArrowDown",
@@ -10,20 +10,15 @@ const Code = {
 };
 
 interface KeyboardEventHandlerProps {
-  children?: React.ReactNode;
   onDown?: () => void;
   onEnter?: () => void;
   onEscape?: () => void;
   onUp?: () => void;
 }
 
-export const KeyboardEventHandler: React.FC<KeyboardEventHandlerProps> = ({
-  children,
-  onDown,
-  onEnter,
-  onEscape,
-  onUp,
-}) => {
+export const KeyboardEventHandler: React.FC<
+  PropsWithChildren<KeyboardEventHandlerProps>
+> = ({ children, onDown, onEnter, onEscape, onUp }) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.isComposing) return;
