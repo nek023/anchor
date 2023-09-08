@@ -8,7 +8,7 @@ describe("DisplayManager", () => {
     getInfoFunc.mockImplementation(
       (callback: (info: chrome.system.display.DisplayInfo[]) => void) => {
         callback(info);
-      }
+      },
     );
   };
 

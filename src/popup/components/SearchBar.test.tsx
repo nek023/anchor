@@ -12,7 +12,7 @@ describe("SearchBar", () => {
   test("calls onValueChanged when the value has changed", () => {
     const handleValueChange = jest.fn();
     const { container } = render(
-      <SearchBar value="test" onValueChange={handleValueChange} />
+      <SearchBar value="test" onValueChange={handleValueChange} />,
     );
 
     const firstChild = container.firstChild;

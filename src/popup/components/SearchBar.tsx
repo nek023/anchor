@@ -18,7 +18,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       if (onValueChange == null) return;
       onValueChange(event.target.value);
     },
-    [onValueChange]
+    [onValueChange],
   );
 
   useEffect(
@@ -27,7 +27,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       inputRef?.current?.setSelectionRange(value.length, value.length);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   );
 
   return (

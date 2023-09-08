@@ -64,7 +64,7 @@ export const KeyboardEventHandler: React.FC<
           break;
       }
     },
-    [onDown, onEnter, onEscape, onUp]
+    [onDown, onEnter, onEscape, onUp],
   );
 
   useEffect(() => {

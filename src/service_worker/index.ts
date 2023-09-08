@@ -56,7 +56,7 @@ const openWindow = (query: string) => {
             ...bounds,
             focused: true,
           },
-          () => sendMessage(setQuery(query))
+          () => sendMessage(setQuery(query)),
         );
       } else {
         const url = chrome.runtime.getURL("public/popup.html") + `?q=${query}`;
@@ -69,7 +69,7 @@ const openWindow = (query: string) => {
           },
           (window) => {
             mainWindow = window;
-          }
+          },
         );
       }
     });
@@ -119,9 +119,9 @@ chrome.runtime.onMessage.addListener(
       const { filter, pattern } = parseQuery(message.payload.query);
       const items = itemManager.searchItems(
         filter !== "" ? filter : "t",
-        pattern
+        pattern,
       );
       sendResponse(items);
     }
-  }
+  },
 );

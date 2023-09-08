@@ -13,10 +13,10 @@ describe("BookmarkLoader", () => {
     getRecentFunc.mockImplementation(
       (
         numberOfItems: number,
-        callback: (results: chrome.bookmarks.BookmarkTreeNode[]) => void
+        callback: (results: chrome.bookmarks.BookmarkTreeNode[]) => void,
       ) => {
         callback(results);
-      }
+      },
     );
   };
 

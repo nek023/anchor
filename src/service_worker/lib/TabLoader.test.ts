@@ -12,10 +12,10 @@ describe("TabLoader", () => {
     queryFunc.mockImplementation(
       (
         numberOfItems: number,
-        callback: (results: chrome.tabs.Tab[]) => void
+        callback: (results: chrome.tabs.Tab[]) => void,
       ) => {
         callback(results);
-      }
+      },
     );
   };
 

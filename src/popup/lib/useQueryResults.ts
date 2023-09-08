@@ -6,7 +6,7 @@ export type UseSearchResultsCallback = (items: Item[]) => void;
 
 export const useSearchResults = (
   query: string,
-  callback: UseSearchResultsCallback
+  callback: UseSearchResultsCallback,
 ) => {
   useEffect(() => {
     (async () => {

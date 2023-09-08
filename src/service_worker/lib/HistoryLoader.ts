@@ -30,7 +30,7 @@ export class HistoryLoader {
           title: item.title,
           url: item.url,
         }));
-      }
+      },
     );
   }
 }

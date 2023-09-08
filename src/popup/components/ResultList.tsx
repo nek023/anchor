@@ -19,7 +19,7 @@ export const ResultList: React.FC<ResultListProps> = ({
       const index = items.findIndex((i) => i.id === item.id);
       onItemClick(index);
     },
-    [items, onItemClick]
+    [items, onItemClick],
   );
 
   return (
