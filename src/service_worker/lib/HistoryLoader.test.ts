@@ -10,10 +10,10 @@ describe("HistoryLoader", () => {
     searchFunc.mockImplementation(
       (
         numberOfItems: number,
-        callback: (results: chrome.history.HistoryItem[]) => void
+        callback: (results: chrome.history.HistoryItem[]) => void,
       ) => {
         callback(results);
-      }
+      },
     );
   };
 

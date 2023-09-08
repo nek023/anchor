@@ -32,7 +32,7 @@ describe("ResultList", () => {
 
   test("matches snapshot", () => {
     const { asFragment } = render(
-      <ResultList items={items} selectedItemIndex={0} />
+      <ResultList items={items} selectedItemIndex={0} />,
     );
 
     expect(asFragment()).toMatchSnapshot();
@@ -45,7 +45,7 @@ describe("ResultList", () => {
         items={items}
         selectedItemIndex={0}
         onItemClick={handleItemClick}
-      />
+      />,
     );
 
     fireEvent.click(getByText("item2"));

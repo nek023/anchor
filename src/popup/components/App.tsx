@@ -30,14 +30,14 @@ export const App: React.FC = () => {
         sendResponse(true);
       }
     },
-    []
+    [],
   );
   useExtensionMessage(handleExtensionMessage);
 
   const throttledQuery = useThrottle(query, 50);
   const handleSearchResults = useCallback<UseSearchResultsCallback>(
     (items) => setItems(items),
-    []
+    [],
   );
   useSearchResults(throttledQuery, handleSearchResults);
 
@@ -63,7 +63,7 @@ export const App: React.FC = () => {
       openItem(items[index]);
       closeCurrentWindow();
     },
-    [items]
+    [items],
   );
 
   const handleValueChange = useCallback(
@@ -71,7 +71,7 @@ export const App: React.FC = () => {
       setQuery(query);
       setSelectedItemIndex(0);
     },
-    [setQuery]
+    [setQuery],
   );
 
   return (

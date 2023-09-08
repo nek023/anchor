@@ -69,6 +69,6 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
         </div>
       </div>
     ),
-    [faviconUrl, handleClick, item, selected]
+    [faviconUrl, handleClick, item, selected],
   );
 };

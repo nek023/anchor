@@ -22,7 +22,7 @@ describe("KeyboardEventHandler", () => {
         onUp={handleUp}
       >
         <input type="text" />
-      </KeyboardEventHandler>
+      </KeyboardEventHandler>,
     );
 
     const inputElement = container.firstChild;
