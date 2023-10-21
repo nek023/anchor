@@ -11,7 +11,7 @@
     "clean": "rimraf dist",
     "dev": "run-p build:css:watch build:js:watch",
     "format": "prettier --write src",
-    "lint": "eslint --ext .ts,.tsx src",
+    "lint": "eslint",
     "pack": "npm run clean && npm run build && zip -r anchor.zip dist public manifest.json",
     "test": "jest"
   },
