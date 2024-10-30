@@ -28,6 +28,13 @@ describe("DisplayManager", () => {
     } as any;
   });
 
+  afterEach(() => {
+    getInfoFunc.mockReset();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    delete (global as any).chrome;
+  });
+
   describe("primaryDisplay", () => {
     test("returns primary display", () => {
       mockGetInfo([
@@ -124,7 +131,7 @@ describe("DisplayManager", () => {
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ] as any);
-      expect(manager.primaryDisplay).toBeUndefined;
+      expect(manager.primaryDisplay).toBeUndefined();
 
       onDisplayChangedCallback();
       expect(manager.primaryDisplay?.id).toBe("1");
