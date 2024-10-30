@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "fuse.js": "^6.6.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "scroll-into-view-if-needed": "^3.0.10"
   },
   "devDependencies": {
@@ -27,8 +27,8 @@
     "@types/chrome": "^0.0.245",
     "@types/jest": "^29.5.4",
     "@types/node": "^22.8.4",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
     "esbuild": "^0.19.2",
