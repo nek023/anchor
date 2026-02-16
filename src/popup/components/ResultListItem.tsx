@@ -42,13 +42,13 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
   return useMemo(
     () => (
       <div
-        className={`w-full min-h-[3rem] px-1 pb-px flex flex-row items-center gap-2 ${
+        className={`w-full min-h-12 px-1 pb-px flex flex-row items-center gap-2 ${
           selected ? "bg-blue-700" : ""
         }`}
         onClick={handleClick}
         ref={itemContainerRef}
       >
-        <div className="min-w-[2rem] flex justify-center">
+        <div className="min-w-8 flex justify-center">
           <img className="w-6 h-6" src={faviconUrl} alt={item.title} />
         </div>
         <div className="grow flex flex-col gap-0.5 overflow-hidden">

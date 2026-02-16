@@ -32,7 +32,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <input
-      className="w-full p-1 rounded border border-gray-300 text-2xl focus:outline-none"
+      className="w-full p-1 rounded-sm border border-gray-300 text-2xl focus:outline-hidden"
       type="text"
       title="query"
       value={value}
