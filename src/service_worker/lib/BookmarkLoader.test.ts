@@ -68,6 +68,7 @@ describe("BookmarkLoader", () => {
           id: "1",
           title: "test",
           url: "https://example.com",
+          syncing: false,
         },
       ]);
       const loader = new BookmarkLoader();
@@ -90,6 +91,7 @@ describe("BookmarkLoader", () => {
           id: "1",
           title: "test",
           url: "https://example.com",
+          syncing: false,
         },
       ]);
       expect(loader.items).toHaveLength(0);
@@ -105,6 +107,7 @@ describe("BookmarkLoader", () => {
           id: "1",
           title: "test",
           url: "https://example.com",
+          syncing: false,
         },
       ]);
       expect(loader.items).toHaveLength(0);
@@ -127,6 +130,7 @@ describe("BookmarkLoader", () => {
           id: "1",
           title: "test",
           url: "https://example.com",
+          syncing: false,
         },
       ]);
       expect(loader.items).toHaveLength(0);
@@ -144,6 +148,7 @@ describe("BookmarkLoader", () => {
           id: "1",
           title: "test",
           url: "https://example.com",
+          syncing: false,
         },
       ]);
       expect(loader.items).toHaveLength(0);

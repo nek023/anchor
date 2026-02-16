@@ -3,10 +3,10 @@
 exports[`ResultListItem matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="w-full min-h-[3rem] px-1 pb-px flex flex-row items-center gap-2 "
+    class="w-full min-h-12 px-1 pb-px flex flex-row items-center gap-2 "
   >
     <div
-      class="min-w-[2rem] flex justify-center"
+      class="min-w-8 flex justify-center"
     >
       <img
         alt="test"

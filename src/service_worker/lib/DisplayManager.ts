@@ -1,6 +1,6 @@
 export class DisplayManager {
-  private _displays: chrome.system.display.DisplayInfo[] = [];
-  private _primaryDisplay?: chrome.system.display.DisplayInfo;
+  private _displays: chrome.system.display.DisplayUnitInfo[] = [];
+  private _primaryDisplay?: chrome.system.display.DisplayUnitInfo;
 
   constructor() {
     chrome.system.display.onDisplayChanged.addListener(() =>
@@ -16,7 +16,7 @@ export class DisplayManager {
 
   displayContainsWindow(
     window: chrome.windows.Window,
-  ): chrome.system.display.DisplayInfo | undefined {
+  ): chrome.system.display.DisplayUnitInfo | undefined {
     const { left, top, width, height } = window;
     if (left == null || top == null || width == null || height == null)
       return undefined;

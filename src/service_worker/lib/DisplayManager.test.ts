@@ -4,9 +4,9 @@ describe("DisplayManager", () => {
   let onDisplayChangedCallback: () => void;
   const getInfoFunc = jest.fn();
 
-  const mockGetInfo = (info: chrome.system.display.DisplayInfo[]) => {
+  const mockGetInfo = (info: chrome.system.display.DisplayUnitInfo[]) => {
     getInfoFunc.mockImplementation(
-      (callback: (info: chrome.system.display.DisplayInfo[]) => void) => {
+      (callback: (info: chrome.system.display.DisplayUnitInfo[]) => void) => {
         callback(info);
       },
     );

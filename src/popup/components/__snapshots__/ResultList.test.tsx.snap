@@ -6,10 +6,10 @@ exports[`ResultList matches snapshot 1`] = `
     class="w-full flex flex-col grow overflow-y-auto"
   >
     <div
-      class="w-full min-h-[3rem] px-1 pb-px flex flex-row items-center gap-2 bg-blue-700"
+      class="w-full min-h-12 px-1 pb-px flex flex-row items-center gap-2 bg-blue-700"
     >
       <div
-        class="min-w-[2rem] flex justify-center"
+        class="min-w-8 flex justify-center"
       >
         <img
           alt="item1"
@@ -33,10 +33,10 @@ exports[`ResultList matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="w-full min-h-[3rem] px-1 pb-px flex flex-row items-center gap-2 "
+      class="w-full min-h-12 px-1 pb-px flex flex-row items-center gap-2 "
     >
       <div
-        class="min-w-[2rem] flex justify-center"
+        class="min-w-8 flex justify-center"
       >
         <img
           alt="item2"

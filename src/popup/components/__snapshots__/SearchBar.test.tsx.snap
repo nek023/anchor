@@ -3,7 +3,7 @@
 exports[`SearchBar matches snapshot 1`] = `
 <DocumentFragment>
   <input
-    class="w-full p-1 rounded border border-gray-300 text-2xl focus:outline-none"
+    class="w-full p-1 rounded-sm border border-gray-300 text-2xl focus:outline-hidden"
     title="query"
     type="text"
     value="test"
