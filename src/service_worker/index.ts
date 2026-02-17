@@ -59,7 +59,7 @@ const openWindow = (query: string) => {
           () => sendMessage(setQuery(query)),
         );
       } else {
-        const url = chrome.runtime.getURL("public/popup.html") + `?q=${query}`;
+        const url = chrome.runtime.getURL("public/popup.html") + `?q=${encodeURIComponent(query)}`;
         chrome.windows.create(
           {
             ...bounds,

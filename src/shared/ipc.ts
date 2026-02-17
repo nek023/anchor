@@ -18,10 +18,10 @@ export type Message = ReturnType<typeof searchItems | typeof setQuery>;
 export const sendMessage = (message: Message) =>
   new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(message, (response) => {
-      if (response != null) {
-        resolve(response);
-      } else {
+      if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
+      } else {
+        resolve(response);
       }
     });
   });

@@ -29,12 +29,14 @@ export class BookmarkLoader {
 
   private updateItems() {
     chrome.bookmarks.getRecent(this._maxItems, (items) => {
-      this._items = items.map((item) => ({
-        id: `bookmark-${item.id}`,
-        type: ItemType.Bookmark,
-        title: item.title,
-        url: item.url,
-      }));
+      this._items = items
+        .filter((item) => item.url != null)
+        .map((item) => ({
+          id: `bookmark-${item.id}`,
+          type: ItemType.Bookmark,
+          title: item.title,
+          url: item.url,
+        }));
     });
   }
 }
