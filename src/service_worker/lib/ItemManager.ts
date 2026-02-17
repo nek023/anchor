@@ -3,6 +3,7 @@ import { Item } from "../../shared/types";
 
 export interface ItemLoader {
   get items(): Item[];
+  onUpdate?: () => void;
 }
 
 export class ItemManager {
@@ -28,6 +29,13 @@ export class ItemManager {
 
   constructor(loaders: Record<string, ItemLoader>) {
     this._loaders = loaders;
+    for (const loader of Object.values(loaders)) {
+      loader.onUpdate = () => this.invalidateCache();
+    }
+  }
+
+  private invalidateCache() {
+    this._lastUpdateDate = 0;
   }
 
   searchItems(filter: string, pattern: string): Item[] {

@@ -5,12 +5,14 @@ import { getFaviconUrl } from "../lib/getFaviconUrl";
 
 interface ResultListItemProps {
   item: Item;
+  index: number;
   selected: boolean;
-  onClick?: (item: Item) => void;
+  onClick?: (index: number) => void;
 }
 
-export const ResultListItem: React.FC<ResultListItemProps> = ({
+const ResultListItemInner: React.FC<ResultListItemProps> = ({
   item,
+  index,
   onClick,
   selected,
 }) => {
@@ -18,8 +20,8 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
 
   const handleClick = useCallback(() => {
     if (onClick == null) return;
-    onClick(item);
-  }, [item, onClick]);
+    onClick(index);
+  }, [index, onClick]);
 
   useEffect(() => {
     if (selected && itemContainerRef?.current != null) {
@@ -39,36 +41,35 @@ export const ResultListItem: React.FC<ResultListItemProps> = ({
     return faviconUrl;
   }, [item]);
 
-  return useMemo(
-    () => (
-      <div
-        className={`w-full min-h-12 px-1 pb-px flex flex-row items-center gap-2 ${
-          selected ? "bg-blue-700" : ""
-        }`}
-        onClick={handleClick}
-        ref={itemContainerRef}
-      >
-        <div className="min-w-8 flex justify-center">
-          <img className="w-6 h-6" src={faviconUrl} alt={item.title} />
+  return (
+    <div
+      className={`w-full min-h-12 px-1 pb-px flex flex-row items-center gap-2 ${
+        selected ? "bg-blue-700" : ""
+      }`}
+      onClick={handleClick}
+      ref={itemContainerRef}
+    >
+      <div className="min-w-8 flex justify-center">
+        <img className="w-6 h-6" src={faviconUrl} alt={item.title} />
+      </div>
+      <div className="grow flex flex-col gap-0.5 overflow-hidden">
+        <div
+          className={`text-sm truncate ${
+            selected ? "text-gray-100" : "text-gray-700"
+          }`}
+        >
+          {item.title}
         </div>
-        <div className="grow flex flex-col gap-0.5 overflow-hidden">
-          <div
-            className={`text-sm truncate ${
-              selected ? "text-gray-100" : "text-gray-700"
-            }`}
-          >
-            {item.title}
-          </div>
-          <div
-            className={`text-xs font-light truncate ${
-              selected ? "text-gray-300" : "text-gray-400"
-            }`}
-          >
-            {item.url}
-          </div>
+        <div
+          className={`text-xs font-light truncate ${
+            selected ? "text-gray-300" : "text-gray-400"
+          }`}
+        >
+          {item.url}
         </div>
       </div>
-    ),
-    [faviconUrl, handleClick, item, selected],
+    </div>
   );
 };
+
+export const ResultListItem = React.memo(ResultListItemInner);

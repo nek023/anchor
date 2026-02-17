@@ -18,6 +18,7 @@ describe("HistoryLoader", () => {
   };
 
   beforeEach(() => {
+    jest.useFakeTimers();
     global.chrome = {
       history: {
         onVisited: {
@@ -37,6 +38,7 @@ describe("HistoryLoader", () => {
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     searchFunc.mockReset();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -77,6 +79,7 @@ describe("HistoryLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onVisitedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });
@@ -94,6 +97,7 @@ describe("HistoryLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onVisitRemovedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });
