@@ -21,6 +21,7 @@ describe("BookmarkLoader", () => {
   };
 
   beforeEach(() => {
+    jest.useFakeTimers();
     global.chrome = {
       bookmarks: {
         onImportBegan: {
@@ -55,6 +56,7 @@ describe("BookmarkLoader", () => {
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     getRecentFunc.mockReset();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -97,6 +99,7 @@ describe("BookmarkLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onCreatedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
 
@@ -118,6 +121,7 @@ describe("BookmarkLoader", () => {
 
       onImportEndedCallback();
       onCreatedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });
@@ -136,6 +140,7 @@ describe("BookmarkLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onChangedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });
@@ -154,6 +159,7 @@ describe("BookmarkLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onRemovedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });

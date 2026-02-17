@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Item } from "../../shared/types";
 import { ResultListItem } from "./ResultListItem";
 
@@ -13,23 +13,15 @@ export const ResultList: React.FC<ResultListProps> = ({
   onItemClick,
   selectedItemIndex,
 }) => {
-  const handleClick = useCallback(
-    (item: Item) => {
-      if (onItemClick == null) return;
-      const index = items.findIndex((i) => i.id === item.id);
-      onItemClick(index);
-    },
-    [items, onItemClick],
-  );
-
   return (
     <div className="w-full flex flex-col grow overflow-y-auto">
       {items.map((item, index) => (
         <ResultListItem
-          key={index}
+          key={item.id}
           item={item}
+          index={index}
           selected={index === selectedItemIndex}
-          onClick={handleClick}
+          onClick={onItemClick}
         />
       ))}
     </div>

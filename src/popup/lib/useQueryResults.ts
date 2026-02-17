@@ -10,7 +10,7 @@ export const useSearchResults = (
 ) => {
   useEffect(() => {
     (async () => {
-      const items = (await sendMessage(searchItems(query))) as Item[];
+      const items = await sendMessage<Item[]>(searchItems(query));
       callback(items);
     })();
   }, [callback, query]);

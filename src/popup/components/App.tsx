@@ -27,6 +27,7 @@ export const App: React.FC = () => {
     (message, sender, sendResponse) => {
       if (message.type === MessageType.setQuery) {
         setQuery(message.payload.query);
+        setSelectedItemIndex(0);
         sendResponse(true);
       }
     },
@@ -71,7 +72,7 @@ export const App: React.FC = () => {
       setQuery(query);
       setSelectedItemIndex(0);
     },
-    [setQuery],
+    [],
   );
 
   return (

@@ -25,11 +25,13 @@ const itemManager = new ItemManager({
 });
 
 let mainWindow: chrome.windows.Window | undefined;
+let mainWindowFocused = false;
 
 const openWindow = (query: string) => {
-  if (mainWindow?.id != null && mainWindow.focused) {
+  if (mainWindow?.id != null && mainWindowFocused) {
     chrome.windows.remove(mainWindow.id, () => {
       mainWindow = undefined;
+      mainWindowFocused = false;
     });
   } else {
     chrome.windows.getCurrent((currentWindow) => {
@@ -59,7 +61,7 @@ const openWindow = (query: string) => {
           () => sendMessage(setQuery(query)),
         );
       } else {
-        const url = chrome.runtime.getURL("public/popup.html") + `?q=${query}`;
+        const url = chrome.runtime.getURL("public/popup.html") + `?q=${encodeURIComponent(query)}`;
         chrome.windows.create(
           {
             ...bounds,
@@ -69,6 +71,7 @@ const openWindow = (query: string) => {
           },
           (window) => {
             mainWindow = window;
+            mainWindowFocused = true;
           },
         );
       }
@@ -81,17 +84,13 @@ chrome.windows.onRemoved.addListener((windowId) => {
 
   if (windowId === mainWindow.id) {
     mainWindow = undefined;
+    mainWindowFocused = false;
   }
 });
 
 chrome.windows.onFocusChanged.addListener((windowId) => {
   if (mainWindow == null) return;
-
-  if (windowId === mainWindow.id) {
-    mainWindow.focused = true;
-  } else {
-    mainWindow.focused = false;
-  }
+  mainWindowFocused = windowId === mainWindow.id;
 });
 
 chrome.commands.onCommand.addListener((command) => {

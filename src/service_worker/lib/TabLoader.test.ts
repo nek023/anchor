@@ -20,6 +20,7 @@ describe("TabLoader", () => {
   };
 
   beforeEach(() => {
+    jest.useFakeTimers();
     global.chrome = {
       tabs: {
         onCreated: {
@@ -49,6 +50,7 @@ describe("TabLoader", () => {
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     queryFunc.mockReset();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -100,6 +102,7 @@ describe("TabLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onCreatedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });
@@ -121,6 +124,7 @@ describe("TabLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onRemovedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });
@@ -142,6 +146,7 @@ describe("TabLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onReplacedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });
@@ -163,6 +168,7 @@ describe("TabLoader", () => {
       expect(loader.items).toHaveLength(0);
 
       onUpdatedCallback();
+      jest.advanceTimersByTime(200);
       expect(loader.items).toHaveLength(1);
     });
   });
