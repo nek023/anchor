@@ -8,6 +8,10 @@ export const openItem = (item: Item) => {
         windowId: item.windowId,
       },
       (window) => {
+        if (chrome.runtime.lastError) {
+          chrome.tabs.create({ url: item.url });
+          return;
+        }
         if (window.id != null) {
           chrome.windows.update(window.id, { focused: true });
         }

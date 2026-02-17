@@ -72,7 +72,7 @@ export const App: React.FC = () => {
       setQuery(query);
       setSelectedItemIndex(0);
     },
-    [setQuery],
+    [],
   );
 
   return (
